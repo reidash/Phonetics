@@ -1,13 +1,13 @@
 var chalk = require('chalk');
 
-var log = function (msg) {
+exports.log = function (msg) {
 	console.log(msg);
 };
 
-var success = function (msg) {
+exports.success = function (msg) {
 	console.log(chalk.green(msg));
 };
 
-var err = function (msg) {
+exports.err = function (msg) {
 	console.log(chalk.red(msg));
 };

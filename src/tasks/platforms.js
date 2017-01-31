@@ -1,5 +1,5 @@
 var packageJson = require('../package.json');
-var util = require('util.js');
+var util = require('./util');
 var exec = require('child_process').exec;
 
 util.log('Installing platforms...');
