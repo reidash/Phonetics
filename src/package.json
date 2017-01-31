@@ -9,7 +9,11 @@
 		"android",
 		"browser"
 		],
-	"plugins": [],
+	"plugins": [
+		"cordova-plugin-camera",
+		"cordova-plugin-media",
+		"parse-phonegap-plugin-push"
+	],
 	"dependencies": {
 		"cordova": ">=6.5.0"
 	},

@@ -12,5 +12,4 @@ for (var i = 0; i < packageJson.platforms.length; i++) {
 		util.err('Failed to install ' + packageJson.platforms[i]);
 	}
 }
-
 util.success('Platforms installed.');
