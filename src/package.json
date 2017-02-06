@@ -1,15 +1,26 @@
 {
-  "name": "ionic-hello-world",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+	"name": "Phonetics",
+	"version": "0.0.1",
+	"description": "Phonetics language-learning app",
+	"repository": "https://github.com/reidash/Phonetics",
   "private": true,
-  "scripts": {
-    "clean": "ionic-app-scripts clean",
-    "build": "ionic-app-scripts build",
-    "ionic:build": "ionic-app-scripts build",
-    "ionic:serve": "ionic-app-scripts serve"
-  },
-  "dependencies": {
+	"main": "index.js",
+	"platforms": [
+		"ios",
+		"android",
+		"browser"
+		],
+	"plugins": [
+		"cordova-plugin-camera",
+		"cordova-plugin-media",
+    "cordova-plugin-whitelist",
+    "cordova-plugin-console",
+    "cordova-plugin-device",
+    "cordova-plugin-splashscreen",
+    "ionic-plugin-keyboard",
+    "cordova-plugin-statusbar"
+	],
+	"dependencies": {
     "@angular/common": "2.2.1",
     "@angular/compiler": "2.2.1",
     "@angular/compiler-cli": "2.2.1",
@@ -27,18 +38,15 @@
     "zone.js": "0.6.26",
     "sw-toolbox": "3.4.0"
   },
-  "devDependencies": {
+	"devDependencies": {
+		"chalk": "1.1.1",
     "@ionic/app-scripts": "1.0.0",
     "typescript": "2.0.9"
-  },
-  "cordovaPlugins": [
-    "cordova-plugin-whitelist",
-    "cordova-plugin-console",
-    "cordova-plugin-device",
-    "cordova-plugin-splashscreen",
-    "ionic-plugin-keyboard",
-    "cordova-plugin-statusbar"
-  ],
-  "cordovaPlatforms": [],
-  "description": "phonetics: An Ionic project"
+	},
+  "scripts": {
+    "clean": "ionic-app-scripts clean",
+    "build": "ionic-app-scripts build",
+    "ionic:build": "ionic-app-scripts build",
+    "ionic:serve": "ionic-app-scripts serve"
+  }
 }
