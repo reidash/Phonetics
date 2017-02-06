@@ -8,16 +8,29 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-left></ion-icon>
-      {{item.title}}
-      <div class="item-note" item-right>
-        {{item.note}}
+  <ion-card>
+    <div class="profile-image-container">
+      <div class="profile-image-preview">
       </div>
-    </button>
-  </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
-  </div>
+      <a href="javascript:void(0);" (click)="changePicture()" role="button">Change Profile Picture</a>
+    </div>
+
+    <div class="profile-settings-container">
+      <ion-list>
+        <ion-item>
+          <ion-label floating>Profile Name</ion-label>
+          <ion-input type="text" value="{{user}}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Native Language</ion-label>
+          <ion-select [(ngModel)]="nativeLang">
+            <ion-option *ngFor="let lang of langs">{{lang}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+      <div class="button-group-container">
+        <button ion-button>Submit</button>
+      </div>
+    </div>
+  </ion-card>
 </ion-content>

@@ -23,14 +23,14 @@ export class Phonetics {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Lessons', component: PhonemeList },
-      { title: 'Edit Profile', component: ProfileSetup },
+      { title: 'Edit Profile', component: ProfileSetup},
       { title: 'Practice Goals', component: Goals }
     ];
 
   }
 
   selectRoot() {
-    console.log('test');
+    //testing now
     return ProfileSetup;
   }
 
@@ -46,6 +46,13 @@ export class Phonetics {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    let params;
+    if(page.title == 'Edit Profile') {
+      params = {
+        user: 'Test Name'
+      };
+    }
+    this.nav.setRoot(page.component, params);
+
   }
 }

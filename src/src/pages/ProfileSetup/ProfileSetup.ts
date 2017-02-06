@@ -12,6 +12,8 @@ export class ProfileSetup {
   items: Array<{title: string, note: string, icon: string}>;
   title: string = 'Profile Setup';
   user: any;
+  langs: string[] = ['Japanese', 'Mandarin'];
+  nativeLang: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.user = navParams.get('user');
@@ -20,10 +22,7 @@ export class ProfileSetup {
     }
   }
 
-  itemTapped(event, item) {
-    // That's right, we're pushing to ourselves!
-    this.navCtrl.push(ProfileSetup, {
-      item: item
-    });
+  changePicture(event, item) {
+    console.log("something");
   }
 }
