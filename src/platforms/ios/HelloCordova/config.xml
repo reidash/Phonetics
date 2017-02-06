@@ -28,6 +28,23 @@
     <feature name="PushNotification">
         <param name="ios-package" value="PushPluginParse" />
     </feature>
+    <feature name="Console">
+        <param name="ios-package" value="CDVLogger" />
+    </feature>
+    <feature name="Device">
+        <param name="ios-package" value="CDVDevice" />
+    </feature>
+    <feature name="SplashScreen">
+        <param name="ios-package" value="CDVSplashScreen" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="Keyboard">
+        <param name="ios-package" onload="true" value="IonicKeyboard" />
+    </feature>
+    <feature name="StatusBar">
+        <param name="ios-package" value="CDVStatusBar" />
+        <param name="onload" value="true" />
+    </feature>
     <name>HelloCordova</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
@@ -59,4 +76,6 @@
     <preference name="PaginationBreakingMode" value="page" />
     <preference name="PaginationMode" value="unpaginated" />
     <preference name="CameraUsesGeolocation" value="false" />
+    <preference name="StatusBarOverlaysWebView" value="true" />
+    <preference name="StatusBarStyle" value="lightcontent" />
 </widget>

@@ -228,6 +228,39 @@ module.exports = [
         "clobbers": [
             "PushNotification"
         ]
+    },
+    {
+        "id": "cordova-plugin-device.device",
+        "file": "plugins/cordova-plugin-device/www/device.js",
+        "pluginId": "cordova-plugin-device",
+        "clobbers": [
+            "device"
+        ]
+    },
+    {
+        "id": "ionic-plugin-keyboard.keyboard",
+        "file": "plugins/ionic-plugin-keyboard/www/android/keyboard.js",
+        "pluginId": "ionic-plugin-keyboard",
+        "clobbers": [
+            "cordova.plugins.Keyboard"
+        ],
+        "runs": true
+    },
+    {
+        "id": "cordova-plugin-splashscreen.SplashScreen",
+        "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+        "pluginId": "cordova-plugin-splashscreen",
+        "clobbers": [
+            "navigator.splashscreen"
+        ]
+    },
+    {
+        "id": "cordova-plugin-statusbar.statusbar",
+        "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
+        "pluginId": "cordova-plugin-statusbar",
+        "clobbers": [
+            "window.StatusBar"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -238,7 +271,12 @@ module.exports.metadata =
     "cordova-plugin-file": "4.3.1",
     "cordova-plugin-media": "2.4.1",
     "cordova-plugin-camera": "2.3.1",
-    "phonegap-plugin-push-parse": "1.2.3"
+    "phonegap-plugin-push-parse": "1.2.3",
+    "cordova-plugin-console": "1.0.5",
+    "cordova-plugin-device": "1.1.4",
+    "ionic-plugin-keyboard": "2.2.1",
+    "cordova-plugin-splashscreen": "4.0.1",
+    "cordova-plugin-statusbar": "2.2.1"
 };
 // BOTTOM OF METADATA
 });
