@@ -2,29 +2,36 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
-import { Page1 } from '../pages/page1/page1';
-import { Page2 } from '../pages/page2/page2';
+import { PhonemeList } from '../pages/PhonemeList/PhonemeList';
+import { ProfileSetup } from '../pages/ProfileSetup/ProfileSetup';
+import { Goals } from '../pages/Goals/Goals';
 
 
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp {
+export class Phonetics {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = Page1;
+  rootPage: any = this.selectRoot();
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{ title: string, component: any }>;
 
   constructor(public platform: Platform) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Page One', component: Page1 },
-      { title: 'Page Two', component: Page2 }
+      { title: 'Lessons', component: PhonemeList },
+      { title: 'Edit Profile', component: ProfileSetup },
+      { title: 'Practice Goals', component: Goals }
     ];
 
+  }
+
+  selectRoot() {
+    console.log('test');
+    return ProfileSetup;
   }
 
   initializeApp() {
