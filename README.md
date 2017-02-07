@@ -19,9 +19,10 @@
 * Aftering installing XCode, you'll need to open XCode to accept the Terms.  
 * Then run "xcode-select --install" in the terminal.  
 * Run "npm install -g ios-deploy" in the terminal.  
-2. In the terminal, navigate to the project src directory  
-3. In the terminal, run "npm install"  
-4. In the terminal, run "node project-setup"  
-5. In the terminal, run "cordova requirements"  
+2. In the terminal, run "npm install -g cordova ionic"  
+3. In the terminal, navigate to the project src directory  
+4. In the terminal, run "npm install"  
+5. In the terminal, run "node project-setup"  
+6. In the terminal, run "cordova requirements"  
 * Make sure the requirements for Android and iOS are met  
 * You might need to sync the cocoapods repo  
