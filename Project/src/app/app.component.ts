@@ -30,7 +30,8 @@ export class Phonetics {
   }
 
   selectRoot() {
-    //testing now
+    //testing for now, this should check if profile has been setup 
+    //and return ProfileSetup if it has not
     return ProfileSetup;
   }
 
@@ -47,9 +48,9 @@ export class Phonetics {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     let params;
-    if(page.title == 'Edit Profile') {
+    if(page.component == ProfileSetup) {
       params = {
-        user: 'Test Name'
+        user: 'Test Name' //obviouly this is test data
       };
     }
     this.nav.setRoot(page.component, params);

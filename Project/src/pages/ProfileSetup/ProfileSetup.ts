@@ -12,7 +12,7 @@ export class ProfileSetup {
   items: Array<{title: string, note: string, icon: string}>;
   title: string = 'Profile Setup';
   user: any;
-  langs: string[] = ['Japanese', 'Mandarin'];
+  langs: string[] = ['Japanese', 'Mandarin']; //todo: replace this with actual data
   nativeLang: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
@@ -23,6 +23,6 @@ export class ProfileSetup {
   }
 
   changePicture(event, item) {
-    console.log("something");
+    //todo
   }
 }
