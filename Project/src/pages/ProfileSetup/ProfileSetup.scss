@@ -1,0 +1,26 @@
+page-ProfileSetup {
+    ion-card {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+    }
+    .profile-image-container {
+        padding: map-get($spacings, medium);
+        margin: map-get($spacings, wide) auto;
+        text-align: center;
+    }
+
+    .profile-image-preview {
+        height: map-get($profile-image, height);
+        width: map-get($profile-image, width);
+        border-radius: map-get($profile-image, border-radius);
+        box-shadow: $box-shadow;
+        margin: map-get($spacings, medium) auto;
+        background-image: url('../../assets/images/defaultprofile.png');
+        background-size: contain;
+    }
+
+    .profile-settings-container {
+        padding: map-get($spacings, medium);
+    }
+}
