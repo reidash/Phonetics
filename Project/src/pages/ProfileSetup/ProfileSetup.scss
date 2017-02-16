@@ -16,7 +16,6 @@ page-ProfileSetup {
         border-radius: map-get($profile-image, border-radius);
         box-shadow: $box-shadow;
         margin: map-get($spacings, medium) auto;
-        background-image: url('../../assets/images/defaultprofile.png');
         background-size: contain;
     }
 

@@ -49,8 +49,14 @@ export class Phonetics {
     // we wouldn't want the back button to show in this scenario
     let params;
     if(page.component == ProfileSetup) {
+      let userObj = {
+        name: 'Test Name',
+        img: '../../assets/images/defaultprofile.png',
+        nativeLang: 'Japanese'
+      };
+      
       params = {
-        user: 'Test Name' //obviouly this is test data
+        user: userObj
       };
     }
     this.nav.setRoot(page.component, params);

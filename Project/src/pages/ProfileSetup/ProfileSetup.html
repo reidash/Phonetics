@@ -10,7 +10,7 @@
 <ion-content>
   <ion-card>
     <div class="profile-image-container">
-      <div class="profile-image-preview">
+      <div class="profile-image-preview" [ngStyle]="{'background-image': 'url(' + user.img + ')'}">
       </div>
       <a href="javascript:void(0);" (click)="changePicture()" role="button">Change Profile Picture</a>
     </div>
@@ -19,11 +19,11 @@
       <ion-list>
         <ion-item>
           <ion-label floating>Profile Name</ion-label>
-          <ion-input type="text" value="{{user}}"></ion-input>
+          <ion-input type="text" value="{{user.name}}"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Native Language</ion-label>
-          <ion-select [(ngModel)]="nativeLang">
+          <ion-select [(ngModel)]="user.nativeLang">
             <ion-option *ngFor="let lang of langs">{{lang}}</ion-option>
           </ion-select>
         </ion-item>
