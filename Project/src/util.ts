@@ -1,5 +1,5 @@
-export default class Util {
-    static shuffle(array: string[]) {
+export class Util {
+    shuffle(array: string[]) {
 
         var currentIndex = array.length, temporaryValue, randomIndex;
 

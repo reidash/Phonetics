@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import Util from '../../util';
+import { Util } from '../../util';
 
 @Component({
     selector: 'page-ListeningMode',
@@ -11,8 +11,9 @@ export class ListeningMode {
 
     constructor(public navCtrl: NavController, public navParams: NavParams) {
         //constructor code here
+        var util = new Util();
         let test = ["Saab", "Volvo", "BMW", "nissan", "lala"];
-        test = Util.shuffle(test);
+        test = util.shuffle(test);
 
         test.forEach(function (val, ind) {
             document.writeln(val);
