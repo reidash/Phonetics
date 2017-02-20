@@ -8,16 +8,13 @@ import { Util } from '../../util';
 })
 export class ListeningMode {
     title: string = 'Listening Mode'; //this should be the title of the phoneme list
+    test: string[];
 
     constructor(public navCtrl: NavController, public navParams: NavParams) {
         //constructor code here
         var util = new Util();
-        let test = ["Saab", "Volvo", "BMW", "nissan", "lala"];
-        test = util.shuffle(test);
-
-        test.forEach(function (val, ind) {
-            document.writeln(val);
-        });
+        this.test = ["Saab", "Volvo", "BMW", "nissan", "lala"];
+        this.test = util.shuffle(this.test);
     }
 }
 
