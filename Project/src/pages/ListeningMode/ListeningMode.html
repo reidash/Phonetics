@@ -8,9 +8,21 @@
 </ion-header>
 
 <ion-content>
-    <div id="test">
-        <ul>
-            <li *ngFor="let car of test">{{car}}</li>
-        </ul>
-    </div>
+    <ion-card class="content-container">
+        <h1>
+            Listening Skills
+        </h1>
+        <p class="screenUnit-instruction">
+            Press the play button to listen. Then select one of the options to indicate which word was said.
+        </p>
+        <div class="screenUnit-play">
+            <a href="javascript:void(0)" role="button" title="Play Recording" (click)="playAudio()">
+                <ion-icon name="play"></ion-icon>
+            </a>
+        </div>
+
+        <div class="button-group-container">
+            <button ion-button *ngFor="let option of screenUnit.wordOptions" (click)="chooseOption(option)">{{option}}</button>
+        </div>
+    </ion-card>
 </ion-content>

@@ -19,6 +19,12 @@ a {
     text-decoration: none;
 }
 
+.card-md h1 {
+    font-size: map-get($font-sizes, largest);
+    color: map-get($colors, primary);
+    text-transform: uppercase;
+}
+
 .toolbar-background {
     background-color: map-get($colors, dark);
 }
@@ -30,4 +36,12 @@ a {
 .button-group-container {
     padding: map-get($spacings, narrow);
     margin: map-get($spacings, narrow) 0;
+}
+
+.content-container {
+    padding: map-get($spacings, medium);
+}
+
+.card-md p {
+    font-size: map-get($font-sizes, normal);
 }
