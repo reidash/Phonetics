@@ -9,10 +9,17 @@ import { Util } from '../../util';
 export class ListeningMode {
     title: string;
     screenUnit: any;
+    currState: number;
+    state: any = {
+            init: 0,
+            right: 1,
+            wrong: 2
+        };
 
     constructor(public navCtrl: NavController, public navParams: NavParams) {
         //constructor code here
         var util = new Util();
+        this.currState = this.state.init;
 
         this.title = 'R-L Distinction';
         var screenUnits = [{
@@ -31,6 +38,7 @@ export class ListeningMode {
 
     chooseOption = function(chosen: string) {
         console.log("chosen word: " + chosen);
+        this.currState = this.state.right;
     }
 }
 

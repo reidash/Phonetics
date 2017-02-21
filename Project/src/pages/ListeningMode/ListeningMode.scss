@@ -1,4 +1,10 @@
 page-ListeningMode {
+    ion-card {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+    }
+
     .screenUnit-play {
         width: 100px;
         height: 100px;
@@ -7,11 +13,16 @@ page-ListeningMode {
         border-radius: 250px;
         border: 2px solid map-get($colors, medium);
         padding-top: 25px;
-        padding-left: 10px;
         margin: map-get($spacings, wide) auto;
 
         ion-icon {
             color: map-get($colors, medium);
+            margin-left: 10px;
+        }
+
+        ion-icon[name=checkmark] {
+            color: map-get($colors, secondary);
+            margin-left: 0;
         }
     }
 
@@ -26,5 +37,13 @@ page-ListeningMode {
     .button-group-container {
         margin: 0 auto;
         text-align: center;
+    }
+
+    .screenUnit-correct {
+        background-color: map-get($colors, correct);
+        
+        h1 {
+            color: map-get($colors, secondary);
+        }
     }
 }
