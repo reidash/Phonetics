@@ -31,7 +31,7 @@
             Correct!
         </h1>
         <p class="screenUnit-instruction">
-            The correct word was {{screenUnit.word}}.
+            The correct word was "{{screenUnit.word}}."
         </p>
         <div class="screenUnit-play">
             <ion-icon name="checkmark"></ion-icon>
@@ -43,7 +43,7 @@
             Not quite...
         </h1>
         <p class="screenUnit-instruction">
-            That wasn't quite it. Tap the play button to hear the word.
+            The correct word was "{{screenUnit.word}}." Tap the play button to hear the word again.
         </p>
         <div class="screenUnit-play">
              <a href="javascript:void(0)" role="button" title="Play Recording" (click)="playAudio()">
@@ -60,7 +60,7 @@
             Good job!
         </h1>
         <p class="screenUnit-instruction">
-            You've completed this session! You will now be directed back to the lessons list.
+            You've completed this session!
         </p>
     </ion-card>
 </ion-content>
