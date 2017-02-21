@@ -8,37 +8,58 @@ import { Util } from '../../util';
 })
 export class ListeningMode {
     title: string;
-    screenUnit: any;
-    currState: number;
-    state: any = {
-            init: 0,
-            right: 1,
-            wrong: 2
-        };
+    public screenUnit: any;
+    public currState: number;
+    public state: any = {
+        init: 0,
+        right: 1,
+        wrong: 2
+    };
+    public currIndex: number; //index of currently displayed screenUnit
+    protected screenUnits: any[];
 
     constructor(public navCtrl: NavController, public navParams: NavParams) {
         //constructor code here
-        var util = new Util();
         this.currState = this.state.init;
 
         this.title = 'R-L Distinction';
-        var screenUnits = [{
+
+        //fake data for testing
+        this.screenUnits = [{
             id: 1,
             word: 'rock',
             wordOptions: ['lock', 'rock'],
-            audioPaths: ['1.mp3','2.mp3', '3.mp3']
-        }]
+            audioPaths: ['1.mp3', '2.mp3', '3.mp3']
+        },
+        {
+            id: 2,
+            word: 'light',
+            wordOptions: ['light', 'right'],
+            audioPaths: ['1.mp3', '2.mp3', '3.mp3']
+        }];
 
-        this.screenUnit = screenUnits[0];
+        this.currIndex = 0;
+        this.screenUnit = this.screenUnits[this.currIndex];
     }
 
-    playAudio = function() {
+    playAudio = function () {
         console.log("lalalala");
     }
 
-    chooseOption = function(chosen: string) {
+    chooseOption = function (chosen: string) {
+        var util = new Util();
         console.log("chosen word: " + chosen);
         this.currState = this.state.right;
+        let ind = util.autoAdvance(this.currIndex, this.screenUnits.length);
+
+        setTimeout(() => {
+            if(ind < 0) {
+                return; //end of session, should do something here
+            }
+
+            this.currIndex = ind;
+            this.currState = this.state.init;
+            this.screenUnit = this.screenUnits[ind];
+        }, 1500);
     }
 }
-
