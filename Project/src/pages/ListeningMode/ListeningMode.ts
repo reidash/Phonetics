@@ -49,7 +49,7 @@ export class ListeningMode {
     }
 
     chooseOption = function (chosen: string) {
-        if (this.screenUnit.id === 2) {
+        if (this.screenUnit.word !== chosen) {
             this.currState = this.state.wrong;
             return;
         }
@@ -62,15 +62,20 @@ export class ListeningMode {
         let util = new Util();
         let ind = util.getNext(this.currIndex, this.screenUnits.length);
 
-        if (ind < 0) {
-            this.currState = this.state.end;
-            return; //end of session
+        let timeout = 0;
+        if (this.currState === this.state.right) {
+            timeout = 1500;
         }
 
         setTimeout(() => {
+            if (ind < 0) {
+                this.currState = this.state.end;
+                return; //end of session
+            }
+
             this.currIndex = ind;
             this.currState = this.state.init;
             this.screenUnit = this.screenUnits[ind];
-        }, 1500);
+        }, timeout);
     }
 }
