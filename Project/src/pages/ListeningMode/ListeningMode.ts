@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { PhonemeList } from '../PhonemeList/PhonemeList';
 import { Util } from '../../util';
 
 @Component({
@@ -13,7 +14,8 @@ export class ListeningMode {
     public state: any = {
         init: 0,
         right: 1,
-        wrong: 2
+        wrong: 2,
+        end: 3
     };
     public currIndex: number; //index of currently displayed screenUnit
     protected screenUnits: any[];
@@ -47,7 +49,7 @@ export class ListeningMode {
     }
 
     chooseOption = function (chosen: string) {
-        if(this.screenUnit.id === 2) {
+        if (this.screenUnit.id === 2) {
             this.currState = this.state.wrong;
             return;
         }
@@ -56,15 +58,16 @@ export class ListeningMode {
         this.autoAdvance();
     }
 
-    autoAdvance = function() {
+    autoAdvance = function () {
         let util = new Util();
         let ind = util.getNext(this.currIndex, this.screenUnits.length);
 
-        setTimeout(() => {
-            if(ind < 0) {
-                return; //end of session, should do something here
-            }
+        if (ind < 0) {
+            this.currState = this.state.end;
+            return; //end of session
+        }
 
+        setTimeout(() => {
             this.currIndex = ind;
             this.currState = this.state.init;
             this.screenUnit = this.screenUnits[ind];
