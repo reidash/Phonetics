@@ -19,7 +19,7 @@ export class Util {
         return array;
     }
 
-    autoAdvance(curr: number, length: number) {
+    getNext(curr: number, length: number) {
         curr++;
 
         if (curr >= length) {

@@ -46,4 +46,8 @@ page-ListeningMode {
             color: map-get($colors, secondary);
         }
     }
+
+    .screenUnit-incorrect {
+        background-color: map-get($colors, incorrect);
+    }
 }

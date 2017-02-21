@@ -47,10 +47,18 @@ export class ListeningMode {
     }
 
     chooseOption = function (chosen: string) {
-        var util = new Util();
-        console.log("chosen word: " + chosen);
+        if(this.screenUnit.id === 2) {
+            this.currState = this.state.wrong;
+            return;
+        }
+
         this.currState = this.state.right;
-        let ind = util.autoAdvance(this.currIndex, this.screenUnits.length);
+        this.autoAdvance();
+    }
+
+    autoAdvance = function() {
+        let util = new Util();
+        let ind = util.getNext(this.currIndex, this.screenUnits.length);
 
         setTimeout(() => {
             if(ind < 0) {

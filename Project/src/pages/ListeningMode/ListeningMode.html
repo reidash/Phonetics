@@ -8,12 +8,12 @@
 </ion-header>
 
 <ion-content>
-    <ion-card class="content-container" *ngIf="currState == state.init">
+    <ion-card class="content-container" *ngIf="currState === state.init">
         <h1>
             Listening Skills
         </h1>
         <p class="screenUnit-instruction">
-            Press the play button to listen. Then select one of the options to indicate which word was said.
+            Tap the play button to listen. Then select one of the options to indicate which word was said.
         </p>
         <div class="screenUnit-play">
             <a href="javascript:void(0)" role="button" title="Play Recording" (click)="playAudio()">
@@ -26,7 +26,7 @@
         </div>
     </ion-card>
 
-    <ion-card class="content-container screenUnit-correct" *ngIf="currState == state.right">
+    <ion-card class="content-container screenUnit-correct" *ngIf="currState === state.right">
         <h1>
             Correct!
         </h1>
@@ -35,6 +35,23 @@
         </p>
         <div class="screenUnit-play">
             <ion-icon name="checkmark"></ion-icon>
+        </div>
+    </ion-card>
+
+    <ion-card class="content-container screenUnit-incorrect" *ngIf="currState === state.wrong">
+        <h1>
+            Not quite...
+        </h1>
+        <p class="screenUnit-instruction">
+            That wasn't quite it. Tap the play button to hear the word.
+        </p>
+        <div class="screenUnit-play">
+             <a href="javascript:void(0)" role="button" title="Play Recording" (click)="playAudio()">
+                <ion-icon name="play"></ion-icon>
+            </a>
+        </div>
+        <div class="button-group-container">
+            <button ion-button (click)="autoAdvance()">Next</button>
         </div>
     </ion-card>
 </ion-content>
