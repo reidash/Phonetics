@@ -24,9 +24,9 @@ export class ListeningMode {
         //constructor code here
         this.currState = this.state.init;
 
-        this.title = 'R-L Distinction';
+        this.title = 'R-L Distinction'; //hardcoded for testing, but this needs to be passed as a nav param or something
 
-        //fake data for testing
+        //fake data for testing, again this array should be passed in
         this.screenUnits = [{
             id: 1,
             word: 'rock',
