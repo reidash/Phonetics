@@ -1,5 +1,5 @@
 export class Util {
-    shuffle(array: string[]) {
+    shuffle(array: any[]) {
 
         var currentIndex = array.length, temporaryValue, randomIndex;
 

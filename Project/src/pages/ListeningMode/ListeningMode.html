@@ -8,9 +8,17 @@
 </ion-header>
 
 <ion-content>
-    <div id="test">
-        <ul>
-            <li *ngFor="let car of test">{{car}}</li>
-        </ul>
+    <div id="question" *ngIf="currentState === 'State.Question' ">
+        <button ion-button (click)="checkAnswer(currentLeft)">{{currentLeft}}</button>
+        <button ion-button (click)="checkAnswer(currentRight)">{{currentRight}}</button>
+    </div>
+    <div id="correct" *ngIf="currentState==='State.Correct' ">
+        <ion-label floating>Correct!</ion-label>
+        <button ion-button (click)="nextQuestion()">Next</button>
+    </div>
+    <div id="Incorrect" *ngIf="currentState === 'State.Incorrect' ">
+        <ion-label floating>Incorrect!</ion-label>
+        <button ion-button (click)="playAudio()">Play Audio</button>
+        <button ion-button (click)="nextQuestion()">Next</button>
     </div>
 </ion-content>
