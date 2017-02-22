@@ -19,4 +19,13 @@ export class Util {
         return array;
     }
 
+    getNext(curr: number, length: number) {
+        curr++;
+
+        if (curr >= length) {
+            return -1; //end of session
+        }
+
+        return curr;
+    }
 }

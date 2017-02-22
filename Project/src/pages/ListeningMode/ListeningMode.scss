@@ -1,3 +1,53 @@
 page-ListeningMode {
-    //listening mode scss here
+    ion-card {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+    }
+
+    .screenUnit-play {
+        width: 100px;
+        height: 100px;
+        font-size: 40px;
+        text-align: center;
+        border-radius: 250px;
+        border: 2px solid map-get($colors, medium);
+        padding-top: 25px;
+        margin: map-get($spacings, wide) auto;
+
+        ion-icon {
+            color: map-get($colors, medium);
+            margin-left: 10px;
+        }
+
+        ion-icon[name=checkmark] {
+            color: map-get($colors, secondary);
+            margin-left: 0;
+        }
+    }
+
+    .button-md {
+        font-size: map-get($font-sizes, larger);
+        text-transform: lowercase;
+        font-weight: normal;
+        padding: map-get($spacings, medium) map-get($spacings, wide);
+        background-color: map-get($colors, medium);
+    }
+
+    .button-group-container {
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .screenUnit-correct {
+        background-color: map-get($colors, correct);
+        
+        h1 {
+            color: map-get($colors, secondary);
+        }
+    }
+
+    .screenUnit-incorrect {
+        background-color: map-get($colors, incorrect);
+    }
 }
