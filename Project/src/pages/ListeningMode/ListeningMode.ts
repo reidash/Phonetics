@@ -1,76 +1,99 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
+//import { PhonemeList } from '../PhonemeList/PhonemeList';
 import { Util } from '../../util';
 import { MediaPlugin } from 'ionic-native';
-
-interface screenUnit {
-    id : number //just an id for this screen unit, 
-    word: string //the correct/expected word
-    wordOptions: string[],  //words to be presented in the screen unit, ex [rock, lock]; only used in listening mode; speaking mode will present the "word" property
-    audioPaths: string [] //paths to audio files for this screen unit
-}
+import { screenUnit } from '../../interfaces';
 
 @Component({
     selector: 'page-ListeningMode',
     templateUrl: 'ListeningMode.html'
 })
 export class ListeningMode {
-    title: string = 'Listening Mode'; //this should be the title of the phoneme list
-    screenUnits: screenUnit[];
-    currentUnit: screenUnit;
-    currentIndex: number;
-    currentLeft: string;
-    currentRight: string;
-
-    // State control super sketchy but this is more UI than logic
-    // Replace with whatever we use to actually switch the UI
-    currentState: string;
+    title: string;
+    public currUnit: screenUnit;
+    public currState: number;
+    public state: any = {
+        init: 0,
+        right: 1,
+        wrong: 2,
+        end: 3
+    };
+    public currIndex: number; //index of currently displayed screenUnit
+    protected screenUnits: screenUnit[];
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform) {
         //constructor code here
-        var util = new Util();
+
+        this.title = navParams.get('sessionTitle'); //hardcoded for testing, but this needs to be passed as a nav param or something
         this.screenUnits = navParams.get('screenUnits');
-        this.screenUnits = util.shuffle(this.screenUnits);
-        this.currentIndex = 0;
-        this.setUpUnit();
+        let util = new Util();
+        this.screenUnits = util.shuffle(this.screenUnits); // Shuffle screenUnit order
+
+        this.currIndex = 0;
+        this.initUnit();
     }
 
-    // Call when we switch from feedback
-    nextQuestion() {
-        this.currentIndex = (this.currentIndex + 1) % this.screenUnits.length;
-        this.setUpUnit();
+    initUnit = function() {
+        // Logic for setting up a new screenUnit
+        // Maybe add statisitics tracking here?
+        this.currState = this.state.init;
+        this.currUnit = this.screenUnits[this.currIndex];
+    }
+    chooseCorrect = function() {
+        // Logic for getting a correct answer
+        // Add statistics tracking here later
+        this.currState = this.state.right;
+    }
+    chooseIncorrect = function() {
+        // Logic for getting an incorrect answer
+        // Add statistics tracking here later
+        this.currState = this.state.wrong;
+    }
+    endSession = function() {
+        // Logic for ending a session
+        // Add statistics/goal tracking here
+        this.currState = this.state.end;
     }
 
-    setUpUnit() {
-        this.currentUnit = this.screenUnits[this.currentIndex];
-        this.currentLeft = this.currentUnit.wordOptions[0];
-        this.currentRight = this.currentUnit.wordOptions[1];
-        this.switchState('State.Question');
-    }
-
-    switchState(state: string) {
-        // Replace with actual view changing code. 
-        this.currentState = state;
-    }
-
-    checkAnswer(answer: string) {
-        if(answer === this.currentUnit.word) {
-            console.log("Correct!");
-            this.switchState('State.Correct');
-        } else {
-            console.log("Incorrect, correct was: " + this.currentUnit.word);
-            this.switchState('State.Incorrect');
-        }
-    }
-
-    playAudio() {
+    playAudio = function () {
         console.log("Playing Audio!")
         this.plt.ready().then((readySource) => {
             console.log('Platform ready from', readySource);
             // Platform now ready, execute any required native code
-            var audio = new MediaPlugin(this.currentUnit.audioPaths[0])
+            var audio = new MediaPlugin(this.currUnit.audioPaths[0])
             audio.play();
         });
+
+    }
+
+    chooseOption = function (chosen: string) {
+        if (this.currUnit.word !== chosen) {
+            this.chooseIncorrect();
+            return;
+        }
+
+        this.chooseCorrect();
+        this.autoAdvance();
+    }
+
+    autoAdvance = function () {
+        let util = new Util();
+        let ind = util.getNext(this.currIndex, this.screenUnits.length);
+
+        let timeout = 0;
+        if (this.currState === this.state.right) {
+            timeout = 1500;
+        }
+
+        setTimeout(() => {
+            if (ind < 0) {
+                this.endSession();
+                return; //end of session
+            }
+
+            this.currIndex = ind;
+            this.initUnit();
+        }, timeout);
     }
 }
-

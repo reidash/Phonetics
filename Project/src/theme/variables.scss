@@ -25,10 +25,22 @@ $font-path: "../assets/fonts";
 
 $colors: (
   primary:    #ea787a,
-  secondary:  #32db64,
+  secondary:  #77ae79,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #202020
+  medium:     #444444,
+  dark:       #202020,
+  correct:    #d7e8d7,
+  incorrect:  #e0cece
+);
+
+$font-sizes: (
+  largest: 30px,
+  larger: 24px,
+  large: 18px,
+  normal: 16px,
+  small: 12px,
+  smaller: 10px
 );
 
 $spacings: (

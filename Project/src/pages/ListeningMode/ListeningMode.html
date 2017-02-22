@@ -8,17 +8,59 @@
 </ion-header>
 
 <ion-content>
-    <div id="question" *ngIf="currentState === 'State.Question' ">
-        <button ion-button (click)="checkAnswer(currentLeft)">{{currentLeft}}</button>
-        <button ion-button (click)="checkAnswer(currentRight)">{{currentRight}}</button>
-    </div>
-    <div id="correct" *ngIf="currentState==='State.Correct' ">
-        <ion-label floating>Correct!</ion-label>
-        <button ion-button (click)="nextQuestion()">Next</button>
-    </div>
-    <div id="Incorrect" *ngIf="currentState === 'State.Incorrect' ">
-        <ion-label floating>Incorrect!</ion-label>
-        <button ion-button (click)="playAudio()">Play Audio</button>
-        <button ion-button (click)="nextQuestion()">Next</button>
-    </div>
+    <ion-card class="content-container" *ngIf="currState === state.init">
+        <h1>
+            Listening Skills
+        </h1>
+        <p class="screenUnit-instruction">
+            Tap the play button to listen. Then select one of the options to indicate which word was said.
+        </p>
+        <div class="screenUnit-play">
+            <a href="javascript:void(0)" role="button" title="Play Recording" (click)="playAudio()">
+                <ion-icon name="play"></ion-icon>
+            </a>
+        </div>
+
+        <div class="button-group-container">
+            <button ion-button *ngFor="let option of currUnit.wordOptions" (click)="chooseOption(option)">{{option}}</button>
+        </div>
+    </ion-card>
+
+    <ion-card class="content-container screenUnit-correct" *ngIf="currState === state.right">
+        <h1>
+            Correct!
+        </h1>
+        <p class="screenUnit-instruction">
+            The correct word was "{{currUnit.word}}."
+        </p>
+        <div class="screenUnit-play">
+            <ion-icon name="checkmark"></ion-icon>
+        </div>
+    </ion-card>
+
+    <ion-card class="content-container screenUnit-incorrect" *ngIf="currState === state.wrong">
+        <h1>
+            Not quite...
+        </h1>
+        <p class="screenUnit-instruction">
+            The correct word was "{{currUnit.word}}." Tap the play button to hear the word again.
+        </p>
+        <div class="screenUnit-play">
+             <a href="javascript:void(0)" role="button" title="Play Recording" (click)="playAudio()">
+                <ion-icon name="play"></ion-icon>
+            </a>
+        </div>
+        <div class="button-group-container">
+            <button ion-button (click)="autoAdvance()">Next</button>
+        </div>
+    </ion-card>
+
+    <ion-card class="content-container" *ngIf="currState === state.end">
+        <h1>
+            Good job!
+        </h1>
+        <p class="screenUnit-instruction">
+            You've completed this session!
+        </p>
+    </ion-card>
 </ion-content>

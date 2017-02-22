@@ -1,6 +1,10 @@
 export class Util {
     shuffle(array: any[]) {
 
+        if(!array) {
+            return;
+        }
+
         var currentIndex = array.length, temporaryValue, randomIndex;
 
         // While there remain elements to shuffle...
@@ -19,4 +23,13 @@ export class Util {
         return array;
     }
 
+    getNext(curr: number, length: number) {
+        curr++;
+
+        if (curr >= length) {
+            return -1; //end of session
+        }
+
+        return curr;
+    }
 }

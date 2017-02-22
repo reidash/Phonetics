@@ -31,9 +31,12 @@ export class Phonetics {
   }
 
   selectRoot() {
+    //temporarily changing root to listening mode for testing ease
+    return ProfileSetup;
+    
     //testing for now, this should check if profile has been setup 
     //and return ProfileSetup if it has not
-    return ProfileSetup;
+    //return ProfileSetup;
   }
 
   initializeApp() {
@@ -68,6 +71,7 @@ export class Phonetics {
       ];
 
       params = {
+        sessionTitle: "R-L Distinction",
         screenUnits: screenUnitsObj
       };
     }
