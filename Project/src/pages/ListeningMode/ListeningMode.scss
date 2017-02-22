@@ -26,11 +26,11 @@ page-ListeningMode {
         }
     }
 
-    .button-md {
+    .button {
         font-size: map-get($font-sizes, larger);
         text-transform: lowercase;
         font-weight: normal;
-        padding: map-get($spacings, medium) map-get($spacings, wide);
+        padding: map-get($spacings, medium);
         background-color: map-get($colors, medium);
     }
 

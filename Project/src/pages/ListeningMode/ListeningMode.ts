@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { PhonemeList } from '../PhonemeList/PhonemeList';
+//import { PhonemeList } from '../PhonemeList/PhonemeList';
 import { Util } from '../../util';
 
 @Component({

@@ -19,7 +19,7 @@ a {
     text-decoration: none;
 }
 
-.card-md h1 {
+.card h1 {
     font-size: map-get($font-sizes, largest);
     color: map-get($colors, primary);
     text-transform: uppercase;
@@ -42,6 +42,6 @@ a {
     padding: map-get($spacings, medium);
 }
 
-.card-md p {
+.card p {
     font-size: map-get($font-sizes, normal);
 }
