@@ -10,9 +10,10 @@ import { screenUnit } from '../../interfaces';
     templateUrl: 'ListeningMode.html'
 })
 export class ListeningMode {
-    title: string;
-    public currUnit: screenUnit;
-    public currState: number;
+    title: string; // Title of the session
+    public currUnit: screenUnit; // Current screenUnit
+    public currAudio: MediaPlugin; // Current audio file
+    public currState: number; // Current state of UI
     public state: any = {
         init: 0,
         right: 1,
@@ -20,16 +21,15 @@ export class ListeningMode {
         end: 3
     };
     public currIndex: number; //index of currently displayed screenUnit
-    protected screenUnits: screenUnit[];
+    protected screenUnits: screenUnit[]; // Array of all screen units in the session
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform) {
         //constructor code here
 
-        this.title = navParams.get('sessionTitle'); //hardcoded for testing, but this needs to be passed as a nav param or something
+        this.title = navParams.get('sessionTitle'); 
         this.screenUnits = navParams.get('screenUnits');
         let util = new Util();
         this.screenUnits = util.shuffle(this.screenUnits); // Shuffle screenUnit order
-
         this.currIndex = 0;
         this.initUnit();
     }
@@ -37,8 +37,14 @@ export class ListeningMode {
     initUnit = function() {
         // Logic for setting up a new screenUnit
         // Maybe add statisitics tracking here?
-        this.currState = this.state.init;
-        this.currUnit = this.screenUnits[this.currIndex];
+        this.currState = this.state.init; // Go to initial state
+        this.currUnit = this.screenUnits[this.currIndex]; // Set current screenUnit
+        let randomIndex = Math.floor(Math.random() * this.currUnit.audioPaths.length); // Pick audio clip to use
+        this.plt.ready().then((readySource) => { // Make sure the platform is ready before we try to use native components
+            if(readySource !== 'dom') { // Don't try to use cordova unless we are on a device
+                this.currAudio = new MediaPlugin(this.currUnit.audioPaths[randomIndex]);
+            }
+        });
     }
     chooseCorrect = function() {
         // Logic for getting a correct answer
@@ -58,12 +64,10 @@ export class ListeningMode {
 
     playAudio = function () {
         console.log("Playing Audio!")
-        this.plt.ready().then((readySource) => {
-            console.log('Platform ready from', readySource);
-            var audio = new MediaPlugin(this.currUnit.audioPaths[0]);
-            audio.play();
-        });
-
+        if(this.currAudio) { // Only play audio if it actually exists
+            this.currAudio.stop(); // Stop if it was already playing
+            this.currAudio.play(); // Restart audio from the beginning
+        }
     }
 
     chooseOption = function (chosen: string) {
@@ -86,6 +90,10 @@ export class ListeningMode {
         }
 
         setTimeout(() => {
+            if(this.currAudio) { // Release the audio resource since we are done now
+                this.currAudio.stop(); // Make sure the audio isn't playing when we release it
+                this.currAudio.release(); 
+            }
             if (ind < 0) {
                 this.endSession();
                 return; //end of session
