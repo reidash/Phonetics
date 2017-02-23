@@ -23,7 +23,11 @@ export class ProfileSetup {
     }
   }
 
-  changePicture(event, item) {
+  changePicture = function(item) {
+    //todo
+  }
+
+  submitProfile = function() {
     //todo
   }
 }
@@ -31,7 +35,7 @@ export class ProfileSetup {
 let createUser = function () {
   return {
     name: '',
-    img: '../../assets/images/defaultprofile.png',
+    img: 'assets/images/defaultprofile.png',
     nativeLang: ''
   };
 }
