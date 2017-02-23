@@ -5,6 +5,8 @@ import { Util } from '../../util';
 import { MediaPlugin } from 'ionic-native';
 import { screenUnit } from '../../interfaces';
 
+declare var cordova: any;
+
 @Component({
     selector: 'page-ListeningMode',
     templateUrl: 'ListeningMode.html'
@@ -37,12 +39,13 @@ export class ListeningMode {
     initUnit = function() {
         // Logic for setting up a new screenUnit
         // Maybe add statisitics tracking here?
+        var path = this.plt.is('android') ? cordova.file.applicationDirectory + 'www/' : ''; //might be a hack...
         this.currState = this.state.init; // Go to initial state
         this.currUnit = this.screenUnits[this.currIndex]; // Set current screenUnit
         let randomIndex = Math.floor(Math.random() * this.currUnit.audioPaths.length); // Pick audio clip to use
         this.plt.ready().then((readySource) => { // Make sure the platform is ready before we try to use native components
             if(readySource !== 'dom') { // Don't try to use cordova unless we are on a device
-                this.currAudio = new MediaPlugin(this.currUnit.audioPaths[randomIndex]);
+                this.currAudio = new MediaPlugin(path + this.currUnit.audioPaths[randomIndex]);
             }
         });
     }
