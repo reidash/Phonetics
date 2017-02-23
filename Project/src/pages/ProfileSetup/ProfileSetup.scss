@@ -3,6 +3,7 @@ page-ProfileSetup {
         position: absolute;
         top: 0;
         bottom: 0;
+        overflow: auto;
     }
     .profile-image-container {
         padding: map-get($spacings, medium);

@@ -32,7 +32,7 @@ export class Phonetics {
 
   selectRoot() {
     //temporarily changing root to listening mode for testing ease
-    return ListeningMode;
+    return ProfileSetup;
     
     //testing for now, this should check if profile has been setup 
     //and return ProfileSetup if it has not

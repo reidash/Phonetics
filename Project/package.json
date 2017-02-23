@@ -18,7 +18,8 @@
     "cordova-plugin-device",
     "cordova-plugin-splashscreen",
     "ionic-plugin-keyboard",
-    "cordova-plugin-statusbar"
+    "cordova-plugin-statusbar",
+    "cordova-plugin-nativestorage"
 	],
 	"dependencies": {
     "@angular/common": "2.2.1",
