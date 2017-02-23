@@ -55,7 +55,7 @@ export class Phonetics {
     if(page.component == ProfileSetup) {
       let userObj = {
         name: 'Test Name',
-        img: '../../assets/images/defaultprofile.png',
+        img: 'assets/images/defaultprofile.png',
         nativeLang: 'Japanese'
       };
       
@@ -64,10 +64,10 @@ export class Phonetics {
       };
     } else if(page.component == ListeningMode) {
       let screenUnitsObj: {id: number, word: string, wordOptions: string[], audioPaths: string[]}[] = [
-        { id : 0, word: 'rock', wordOptions: ['rock', 'lock'],  audioPaths: ['../../assets/audio/rock.mp3']},
-        { id : 0, word: 'lock', wordOptions: ['rock', 'lock'],  audioPaths: ['../../assets/audio/lock.mp3']},
-        { id : 0, word: 'rare', wordOptions: ['rare', 'lair'],  audioPaths: ['../../assets/audio/rare.mp3']},
-        { id : 0, word: 'lair', wordOptions: ['rare', 'lair'],  audioPaths: ['../../assets/audio/lair.mp3']}
+        { id : 0, word: 'rock', wordOptions: ['rock', 'lock'],  audioPaths: ['assets/audio/rock.mp3']},
+        { id : 0, word: 'lock', wordOptions: ['rock', 'lock'],  audioPaths: ['assets/audio/lock.mp3']},
+        { id : 0, word: 'rare', wordOptions: ['rare', 'lair'],  audioPaths: ['assets/audio/rare.mp3']},
+        { id : 0, word: 'lair', wordOptions: ['rare', 'lair'],  audioPaths: ['assets/audio/lair.mp3']}
       ];
 
       params = {

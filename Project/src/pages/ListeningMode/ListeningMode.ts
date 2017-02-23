@@ -60,8 +60,7 @@ export class ListeningMode {
         console.log("Playing Audio!")
         this.plt.ready().then((readySource) => {
             console.log('Platform ready from', readySource);
-            // Platform now ready, execute any required native code
-            var audio = new MediaPlugin(this.currUnit.audioPaths[0])
+            var audio = new MediaPlugin(this.currUnit.audioPaths[0]);
             audio.play();
         });
 
