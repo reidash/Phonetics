@@ -27,12 +27,11 @@ export class Phonetics {
       { title: 'Practice Goals', component: Goals },
       { title: 'Listening Mode', component: ListeningMode}
     ];
-
   }
 
   selectRoot() {
     //temporarily changing root to listening mode for testing ease
-    return ProfileSetup;
+    return PhonemeList;
     
     //testing for now, this should check if profile has been setup 
     //and return ProfileSetup if it has not
