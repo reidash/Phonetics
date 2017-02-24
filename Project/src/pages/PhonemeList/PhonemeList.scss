@@ -33,7 +33,7 @@ page-phonemeList {
 
     .session-link {
         text-transform: lowercase;
-        font-size: map-get($font-sizes, large);
+        font-size: map-get($font-sizes, normal);
         margin-right: map-get($spacings, medium);
     }
 
@@ -43,7 +43,7 @@ page-phonemeList {
 
     .lesson-stats-link {
         text-transform: uppercase;
-        font-size: large;
+        font-size: normal;
         margin: map-get($spacings, wide) 0;
         font-weight: bold;
     }

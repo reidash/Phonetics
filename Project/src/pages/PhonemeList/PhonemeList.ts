@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import * as config from '../../assets/screenUnits/config.json';
+import * as config from '../../assets/screenUnits/Japanese/config.json';
 
 @Component({
   selector: 'page-phonemeList',
