@@ -7,6 +7,7 @@ page-ProfileSetup {
     }
     .profile-image-container {
         padding: map-get($spacings, medium);
+        padding-top: 0;
         margin: map-get($spacings, wide) auto;
         text-align: center;
     }
@@ -17,6 +18,7 @@ page-ProfileSetup {
         border-radius: map-get($profile-image, border-radius);
         box-shadow: $box-shadow;
         margin: map-get($spacings, medium) auto;
+        margin-top: 0;
         background-size: contain;
     }
 

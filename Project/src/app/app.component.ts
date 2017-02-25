@@ -55,7 +55,7 @@ export class Phonetics {
     if(page.component == ProfileSetup) {
       let userObj = {
         name: 'Test Name',
-        img: '../../assets/images/defaultprofile.png',
+        img: 'assets/images/defaultprofile.png',
         nativeLang: 'Japanese'
       };
       
