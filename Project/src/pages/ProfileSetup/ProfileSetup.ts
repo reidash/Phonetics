@@ -1,14 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
-import { NativeStorage } from 'ionic-native';
 
 import { PhonemeList } from '../PhonemeList/PhonemeList'; 
-
-interface userInfo {
-  name: string,
-  img: string,
-  nativeLang: string
-};
+import { profileData, ProfileInfo } from '../../profileInfo';
 
 @Component({
   selector: 'page-ProfileSetup',
@@ -19,23 +13,18 @@ export class ProfileSetup {
   icons: string[];
   items: Array<{ title: string, note: string, icon: string }>;
   title: string = 'Profile Setup';
-  user: userInfo;
+  user: profileData;
   langs: string[] = ['Japanese', 'Mandarin']; //todo: replace this with actual data
   nativeLang: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform) {
-    this.user = this.createUser();
-    this.plt.ready().then((readySource) => {
-      if(readySource !== 'dom') {
-        NativeStorage.getItem('profileData').then(
-          profileData => { // profileData found use it.
-            this.user = profileData;
-            console.log("Found user: " + JSON.stringify(this.user)); // Log for now so we know that we have the right data.
-            this.setupDone();
-          } // profileData
-        ) // then 
-      } // if
-    }); // readySource
+    this.user = this.createUser(); // Create default values so that the html doesn't break on page load
+    let profileLoader = new ProfileInfo(); 
+    profileLoader.getInfo(plt).then((data) => { // Try to get the profile data
+        console.log("Found User: " + JSON.stringify(data));
+        this.user = data; // If it is there then use it
+        this.setupDone(); // No more setup necessary if the data exists already.
+      });
   } // constructor
 
   changePicture(event, item) {
@@ -44,15 +33,9 @@ export class ProfileSetup {
 
   submitUser = function() {
     console.log("Submitting User: " + JSON.stringify(this.user));
-    this.plt.ready().then((readySource) => {
-      if(readySource !== 'dom') {
-        NativeStorage.setItem('profileData', this.user).then( // Store all user data
-          () => console.log("Stored User: " + JSON.stringify(this.user)),
-          error => console.log("Error storing user info! " + error)
-        );
-      } // if
-      this.setupDone();
-    }); // readySource
+    let profileLoader = new ProfileInfo();
+    profileLoader.storeInfo(this.user, this.plt);
+    this.setupDone();
   } // submitUser
 
   setupDone = function() {
