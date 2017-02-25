@@ -19,6 +19,12 @@ a {
     text-decoration: none;
 }
 
+.toolbar-title h1 {
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 .card h1 {
     font-size: map-get($font-sizes, largest);
     color: map-get($colors, primary);

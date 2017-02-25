@@ -27,7 +27,6 @@ export class Phonetics {
       { title: 'Practice Goals', component: Goals },
       { title: 'Listening Mode', component: ListeningMode}
     ];
-
   }
 
   selectRoot() {
@@ -61,6 +60,18 @@ export class Phonetics {
       
       params = {
         user: userObj
+      };
+    } else if(page.component == ListeningMode) {
+      let screenUnitsObj: {id: number, word: string, wordOptions: string[], audioPaths: string[]}[] = [
+        { id : 0, word: 'rock', wordOptions: ['rock', 'lock'],  audioPaths: ['assets/audio/rock.mp3']},
+        { id : 0, word: 'lock', wordOptions: ['rock', 'lock'],  audioPaths: ['assets/audio/lock.mp3']},
+        { id : 0, word: 'rare', wordOptions: ['rare', 'lair'],  audioPaths: ['assets/audio/rare.mp3']},
+        { id : 0, word: 'lair', wordOptions: ['rare', 'lair'],  audioPaths: ['assets/audio/lair.mp3']}
+      ];
+
+      params = {
+        sessionTitle: "R-L Distinction",
+        screenUnits: screenUnitsObj
       };
     }
     this.nav.setRoot(page.component, params);

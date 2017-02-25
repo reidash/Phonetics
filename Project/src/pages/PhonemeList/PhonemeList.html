@@ -3,16 +3,61 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Lessons</ion-title>
+    <ion-title>
+      <h1>Lessons</h1>
+    </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+<ion-content>
+  <ul class="lessons-list">
+    <li *ngFor="let lesson of lessons; let i = index">
+      <ion-card class="content-container">
+        <div class="lesson-container">
+          <h2>{{lesson.name}}</h2>
+          <p class="lesson-description">
+            {{lesson.description}}
+          </p>
+          <a class="lesson-stats-link" href="javascript:void(0);" role="button" title="View Performance Statistics" (click)="goToStats()">
+          View Performance Statistics
+          </a>
+          <hr />
+          <ul class="sessions-list">
+            <li>
+              <h3 class="session-header">Session Level 1</h3>
+              <div class="session-link-group">
+                <a class="session-link" (click)="startListening(i, 1)" href="javascript:void(0);" role="button" title="Start Listening Skills Session Level 1">
+          Listening Skills
+              </a>
+                <a class="session-link" (click)="startSpeaking(i, 1)" href="javascript:void(0);" role="button" title="Start Speaking Skills Session Level 1">
+          Speaking Skills
+              </a>
+              </div>
+            </li>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+            <li>
+              <h3 class="session-header">Session Level 2</h3>
+              <div class="session-link-group">
+                <a class="session-link" (click)="startListening(i, 2)" href="javascript:void(0);" role="button" title="Start Listening Skills Session Level 2">
+          Listening Skills
+              </a>
+                <a class="session-link" (click)="startSpeaking(i, 2)" href="javascript:void(0);" role="button" title="Start Speaking Skills Session Level 2">
+          Speaking Skills
+              </a>
+              </div>
+            </li>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+            <li>
+              <h3 class="session-header">Session Level 3</h3>
+              <div class="session-link-group">
+                <a class="session-link" (click)="startSpeaking(i, 3)" href="javascript:void(0);" role="button" title="Start Speaking Skills Session Level 3">
+          Speaking Skills
+              </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </ion-card>
+    </li>
+  </ul>
 </ion-content>
