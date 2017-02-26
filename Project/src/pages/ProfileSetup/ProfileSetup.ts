@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
-
 import { PhonemeList } from '../PhonemeList/PhonemeList'; 
 import { profileData, ProfileInfo } from '../../profileInfo';
 
@@ -18,13 +17,11 @@ export class ProfileSetup {
   nativeLang: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform) {
-    this.user = this.createUser(); // Create default values so that the html doesn't break on page load
-    let profileLoader = new ProfileInfo(); 
-    profileLoader.getInfo(plt).then((data) => { // Try to get the profile data
-        console.log("Found User: " + JSON.stringify(data));
-        this.user = data; // If it is there then use it
-        this.setupDone(); // No more setup necessary if the data exists already.
-      });
+    this.user = navParams.get('user');
+    console.log('got user ' + this.user);
+    if(!this.user) {
+      this.user = this.user = this.createUser(); // Create default values
+    }
   } // constructor
 
   changePicture(event, item) {
@@ -47,7 +44,7 @@ export class ProfileSetup {
   // Default user info, they will fill this stuff in.
     return {
       name: '',
-      img: '../../assets/images/defaultprofile.png',
+      img: 'assets/images/defaultprofile.png',
       nativeLang: ''
     }
   }
