@@ -38,7 +38,6 @@ export class ListeningMode {
         let tempUnits: Promise<screenUnit>[] = navParams.get('screenUnits');
 
         Promise.all(tempUnits).then((values) => {
-            console.log(JSON.stringify(values));
             this.screenUnits = values;
             this.initUnit();
         });
@@ -74,7 +73,6 @@ export class ListeningMode {
     }
 
     playAudio = function () {
-        console.log("Playing Audio!")
         if (this.currAudio) { // Only play audio if it actually exists
             this.currAudio.stop(); // Stop if it was already playing
             this.currAudio.play(); // Restart audio from the beginning

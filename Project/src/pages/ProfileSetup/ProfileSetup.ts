@@ -28,7 +28,6 @@ export class ProfileSetup {
   }
 
   submitUser = function() {
-    console.log("Submitting User: " + JSON.stringify(this.user));
     let profileLoader = new ProfileInfo();
     profileLoader.storeInfo(this.user, this.plt);
     this.setupDone();

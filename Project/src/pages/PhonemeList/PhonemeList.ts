@@ -28,7 +28,7 @@ export class PhonemeList {
     //and navigate to ListeningMode, passing the array and lessons[index].name as title
     let util = new Util();
     this.plt.ready().then(() => {
-      let path = this.plt.is('android') ? androidPath : '';
+      let path = cordova.file.applicationDirectory + 'www/';
       let lessonFolder = this.lessons[index].path;
 
       //selecting all files for now
@@ -37,7 +37,6 @@ export class PhonemeList {
         .then((files) => {
           let temparray = [];
           files.forEach((file, ind) => {
-
             temparray.push(
               File.readAsText(path + lessonFolder, file.name)
                 .then(text => {
@@ -45,7 +44,7 @@ export class PhonemeList {
                     return JSON.parse(text);
                   }
                 })
-                .catch(err => console.log(JSON.stringify(err)))
+                .catch(err => console.log(err.message))
             );
           });
 
@@ -57,7 +56,7 @@ export class PhonemeList {
           this.navCtrl.setRoot(ListeningMode, params);
         })
         .catch(err => console.log("listdir error " + err.message));
-    });
+    }); 
   };
 
   goToStats = function () {

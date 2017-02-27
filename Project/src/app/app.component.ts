@@ -20,18 +20,23 @@ export class Phonetics {
   user: any;
 
   constructor(public platform: Platform) {
-    this.initializeApp();
 
+    //this.initializeApp();
     let profileLoader = new ProfileInfo();
-    profileLoader.getInfo(this.platform).then((data) => { // Try to get the profile data
 
-      this.user = data; // If it is there then use it
-      if (this.user) {
-        this.rootPage = PhonemeList;
-      } else {
-        this.rootPage = ProfileSetup;
-      }
-    });
+    profileLoader
+      .getInfo(this.platform)
+      .then((data) => { // Try to get the profile data
+        this.user = data; // If it is there then use it
+
+        if (this.user) {
+          this.rootPage = PhonemeList;
+        } else {
+          this.rootPage = ProfileSetup;
+        }
+      })
+      .catch(err => this.rootPage = ProfileSetup);
+
 
     // used for an example of ngFor and navigation
     this.pages = [
@@ -69,7 +74,7 @@ export class Phonetics {
         user: this.user
       };
 
-    } 
+    }
     this.nav.setRoot(page.component, params);
   }
 }
