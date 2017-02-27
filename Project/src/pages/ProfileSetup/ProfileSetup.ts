@@ -18,7 +18,6 @@ export class ProfileSetup {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform) {
     this.user = navParams.get('user');
-    console.log('got user ' + this.user);
     if(!this.user) {
       this.user = this.user = this.createUser(); // Create default values
     }

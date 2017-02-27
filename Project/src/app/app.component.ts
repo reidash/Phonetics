@@ -22,6 +22,17 @@ export class Phonetics {
   constructor(public platform: Platform) {
     this.initializeApp();
 
+    let profileLoader = new ProfileInfo();
+    profileLoader.getInfo(this.platform).then((data) => { // Try to get the profile data
+
+      this.user = data; // If it is there then use it
+      if (this.user) {
+        this.rootPage = PhonemeList;
+      } else {
+        this.rootPage = ProfileSetup;
+      }
+    });
+
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Lessons', component: PhonemeList },
@@ -35,24 +46,10 @@ export class Phonetics {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      let profileLoader = new ProfileInfo();
-      profileLoader.getInfo(this.platform).then((data) => { // Try to get the profile data
-        this.setUser(data); // If it is there then use it
-      });
-
-      if (this.user) {
-        this.rootPage = PhonemeList;
-      } else {
-        this.rootPage = ProfileSetup;
-      }
 
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
-  }
-
-  setUser(user) {
-    this.user = user;
   }
 
   openPage(page) {
@@ -64,7 +61,7 @@ export class Phonetics {
       if (!this.user) {
         let profileLoader = new ProfileInfo();
         profileLoader.getInfo(this.platform).then((data) => { // Try to get the profile data
-          this.setUser(data); // If it is there then use it
+          this.user = data; // If it is there then use it
         });
       }
 
