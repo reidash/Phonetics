@@ -1,0 +1,11 @@
+{
+    "id": 2,
+    "word": "rare",
+    "wordOptions": [
+        "rare",
+        "lair"
+    ],
+    "audioPaths": [
+        "assets/audio/rare.mp3"
+    ]
+}

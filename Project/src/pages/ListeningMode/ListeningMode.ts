@@ -22,21 +22,29 @@ export class ListeningMode {
         wrong: 2,
         end: 3
     };
-    public currIndex: number; //index of currently displayed screenUnit
-    protected screenUnits: screenUnit[]; // Array of all screen units in the session
+    public currIndex: number = 0; //index of currently displayed screenUnit
+    public screenUnits: screenUnit[] = []; // Array of all screen units in the session
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform) {
         //constructor code here
+        this.currUnit = {
+            id: 0,
+            word: '',
+            wordOptions: [],
+            audioPaths: []
+        };
 
-        this.title = navParams.get('sessionTitle'); 
-        this.screenUnits = navParams.get('screenUnits');
-        let util = new Util();
-        this.screenUnits = util.shuffle(this.screenUnits); // Shuffle screenUnit order
-        this.currIndex = 0;
-        this.initUnit();
+        this.title = navParams.get('sessionTitle');
+        let tempUnits: Promise<screenUnit>[] = navParams.get('screenUnits');
+
+        Promise.all(tempUnits).then((values) => {
+            console.log(JSON.stringify(values));
+            this.screenUnits = values;
+            this.initUnit();
+        });
     }
 
-    initUnit = function() {
+    initUnit = function () {
         // Logic for setting up a new screenUnit
         // Maybe add statisitics tracking here?
         var path = this.plt.is('android') ? cordova.file.applicationDirectory + 'www/' : ''; //might be a hack...
@@ -44,22 +52,22 @@ export class ListeningMode {
         this.currUnit = this.screenUnits[this.currIndex]; // Set current screenUnit
         let randomIndex = Math.floor(Math.random() * this.currUnit.audioPaths.length); // Pick audio clip to use
         this.plt.ready().then((readySource) => { // Make sure the platform is ready before we try to use native components
-            if(readySource !== 'dom') { // Don't try to use cordova unless we are on a device
+            if (readySource !== 'dom') { // Don't try to use cordova unless we are on a device
                 this.currAudio = new MediaPlugin(path + this.currUnit.audioPaths[randomIndex]);
             }
         });
     }
-    chooseCorrect = function() {
+    chooseCorrect = function () {
         // Logic for getting a correct answer
         // Add statistics tracking here later
         this.currState = this.state.right;
     }
-    chooseIncorrect = function() {
+    chooseIncorrect = function () {
         // Logic for getting an incorrect answer
         // Add statistics tracking here later
         this.currState = this.state.wrong;
     }
-    endSession = function() {
+    endSession = function () {
         // Logic for ending a session
         // Add statistics/goal tracking here
         this.currState = this.state.end;
@@ -67,7 +75,7 @@ export class ListeningMode {
 
     playAudio = function () {
         console.log("Playing Audio!")
-        if(this.currAudio) { // Only play audio if it actually exists
+        if (this.currAudio) { // Only play audio if it actually exists
             this.currAudio.stop(); // Stop if it was already playing
             this.currAudio.play(); // Restart audio from the beginning
         }
@@ -93,9 +101,9 @@ export class ListeningMode {
         }
 
         setTimeout(() => {
-            if(this.currAudio) { // Release the audio resource since we are done now
+            if (this.currAudio) { // Release the audio resource since we are done now
                 this.currAudio.stop(); // Make sure the audio isn't playing when we release it
-                this.currAudio.release(); 
+                this.currAudio.release();
             }
             if (ind < 0) {
                 this.endSession();

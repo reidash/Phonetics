@@ -4,7 +4,7 @@
             "id": 1,
             "name": "R-L Distinction",
             "description": "A list of vocabulary words designed to help native speakers of Japanese distinguish between R and L",
-            "path": "RL"
+            "path": "assets/screenUnits/Japanese/RL/"
         }
     ]
 }
