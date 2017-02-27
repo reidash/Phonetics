@@ -20,8 +20,7 @@ export class Phonetics {
   user: any;
 
   constructor(public platform: Platform) {
-
-    //this.initializeApp();
+    this.initializeApp();
     let profileLoader = new ProfileInfo();
 
     profileLoader

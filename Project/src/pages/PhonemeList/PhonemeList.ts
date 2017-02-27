@@ -6,7 +6,6 @@ import { Util } from '../../util';
 import * as config from '../../assets/screenUnits/Japanese/config.json';
 
 declare var cordova: any;
-const androidPath: string = cordova.file.applicationDirectory + 'www/';
 
 @Component({
   selector: 'page-phonemeList',
