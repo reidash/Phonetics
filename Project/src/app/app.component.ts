@@ -4,8 +4,8 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 import { PhonemeList } from '../pages/PhonemeList/PhonemeList';
 import { ProfileSetup } from '../pages/ProfileSetup/ProfileSetup';
 import { ProfileInfo } from '../profileInfo';
-import { Goals } from '../pages/Goals/Goals';
-import { ListeningMode } from '../pages/ListeningMode/ListeningMode';
+//import { Goals } from '../pages/Goals/Goals';
+//import { ListeningMode } from '../pages/ListeningMode/ListeningMode';
 
 @Component({
   templateUrl: 'app.html'
