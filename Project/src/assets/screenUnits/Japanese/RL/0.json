@@ -1,11 +1,11 @@
 {
-    "id": 1,
-    "word": "rock",
+    "id": 0,
+    "word": "lock",
     "wordOptions": [
         "lock",
         "rock"
     ],
     "audioPaths": [
-        "00-rock-0.m4a"
+        "00-lock-0.m4a"
     ]
 }

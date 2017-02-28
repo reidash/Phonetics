@@ -1,11 +1,11 @@
 {
-    "id": 1,
-    "word": "lock",
+    "id": 2,
+    "word": "collect",
     "wordOptions": [
-        "rock",
-        "lock"
+        "collect",
+        "correct"
     ],
     "audioPaths": [
-        "assets/audio/lock.mp3"
+        "01-collect-0.m4a"
     ]
 }

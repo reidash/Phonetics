@@ -1,11 +1,11 @@
 {
-    "id": 2,
-    "word": "rare",
+    "id": 3,
+    "word": "correct",
     "wordOptions": [
-        "rare",
-        "lair"
+        "collect",
+        "correct"
     ],
     "audioPaths": [
-        "assets/audio/rare.mp3"
+        "01-correct-0.m4a"
     ]
 }
