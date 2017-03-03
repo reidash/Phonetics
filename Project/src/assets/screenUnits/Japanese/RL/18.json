@@ -1,0 +1,11 @@
+{
+    "id": 18,
+    "word": "clown",
+    "wordOptions": [
+        "clown",
+        "crown"
+    ],
+    "audioPaths": [
+        "assets/audio/09-clown-0.m4a"
+    ]
+}

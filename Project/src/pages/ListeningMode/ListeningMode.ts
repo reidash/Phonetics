@@ -1,60 +1,89 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-//import { PhonemeList } from '../PhonemeList/PhonemeList';
+import { NavController, NavParams, Platform } from 'ionic-angular';
 import { Util } from '../../util';
+import { MediaPlugin } from 'ionic-native';
+import { screenUnit } from '../../interfaces';
+
+declare var cordova: any;
 
 @Component({
     selector: 'page-ListeningMode',
     templateUrl: 'ListeningMode.html'
 })
 export class ListeningMode {
-    title: string;
-    public screenUnit: any;
-    public currState: number;
+    title: string; // Title of the session
+    public currUnit: screenUnit; // Current screenUnit
+    public currAudio: MediaPlugin; // Current audio file
+    public currState: number; // Current state of UI
     public state: any = {
         init: 0,
         right: 1,
         wrong: 2,
         end: 3
     };
-    public currIndex: number; //index of currently displayed screenUnit
-    protected screenUnits: any[];
+    public currIndex: number = 0; //index of currently displayed screenUnit
+    public screenUnits: screenUnit[] = []; // Array of all screen units in the session
 
-    constructor(public navCtrl: NavController, public navParams: NavParams) {
-        //constructor code here
-        this.currState = this.state.init;
+    constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform) {
+        this.currUnit = {
+            id: 0,
+            word: '',
+            wordOptions: [],
+            audioPaths: []
+        };
 
-        this.title = 'R-L Distinction'; //hardcoded for testing, but this needs to be passed as a nav param or something
+        this.title = navParams.get('sessionTitle');
+        let tempUnits: Promise<screenUnit>[] = navParams.get('screenUnits');
 
-        //fake data for testing, again this array should be passed in
-        this.screenUnits = [{
-            id: 1,
-            word: 'rock',
-            wordOptions: ['lock', 'rock'],
-            audioPaths: ['1.mp3', '2.mp3', '3.mp3']
-        },
-        {
-            id: 2,
-            word: 'light',
-            wordOptions: ['light', 'right'],
-            audioPaths: ['1.mp3', '2.mp3', '3.mp3']
-        }];
+        Promise.all(tempUnits).then((values) => {
+            this.screenUnits = values;
+            this.initUnit();
+        });
+    }
 
-        this.currIndex = 0;
-        this.screenUnit = this.screenUnits[this.currIndex];
+    initUnit = function () {
+        // Logic for setting up a new screenUnit
+        // Maybe add statisitics tracking here?
+        var path = this.plt.is('android') ? cordova.file.applicationDirectory + 'www/' : ''; //might be a hack...
+        this.currState = this.state.init; // Go to initial state
+        this.currUnit = this.screenUnits[this.currIndex]; // Set current screenUnit
+        let randomIndex = Math.floor(Math.random() * this.currUnit.audioPaths.length); // Pick audio clip to use
+        this.plt.ready().then((readySource) => { // Make sure the platform is ready before we try to use native components
+            if (readySource !== 'dom') { // Don't try to use cordova unless we are on a device
+                this.currAudio = new MediaPlugin(path + this.currUnit.audioPaths[randomIndex]);
+            }
+        });
+    }
+    chooseCorrect = function () {
+        // Logic for getting a correct answer
+        // Add statistics tracking here later
+        this.currState = this.state.right;
+    }
+    chooseIncorrect = function () {
+        // Logic for getting an incorrect answer
+        // Add statistics tracking here later
+        this.currState = this.state.wrong;
+    }
+    endSession = function () {
+        // Logic for ending a session
+        // Add statistics/goal tracking here
+        this.currState = this.state.end;
     }
 
     playAudio = function () {
-        console.log("lalalala");
+        if (this.currAudio) { // Only play audio if it actually exists
+            this.currAudio.stop(); // Stop if it was already playing
+            this.currAudio.play(); // Restart audio from the beginning
+        }
     }
 
     chooseOption = function (chosen: string) {
-        if (this.screenUnit.word !== chosen) {
-            this.currState = this.state.wrong;
+        if (this.currUnit.word !== chosen) {
+            this.chooseIncorrect();
             return;
         }
 
-        this.currState = this.state.right;
+        this.chooseCorrect();
         this.autoAdvance();
     }
 
@@ -68,14 +97,17 @@ export class ListeningMode {
         }
 
         setTimeout(() => {
+            if (this.currAudio) { // Release the audio resource since we are done now
+                this.currAudio.stop(); // Make sure the audio isn't playing when we release it
+                this.currAudio.release();
+            }
             if (ind < 0) {
-                this.currState = this.state.end;
+                this.endSession();
                 return; //end of session
             }
 
             this.currIndex = ind;
-            this.currState = this.state.init;
-            this.screenUnit = this.screenUnits[ind];
+            this.initUnit();
         }, timeout);
     }
 }

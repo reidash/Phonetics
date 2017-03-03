@@ -1,0 +1,11 @@
+{
+    "id": 40,
+    "word": "fly",
+    "wordOptions": [
+        "fly",
+        "fry"
+    ],
+    "audioPaths": [
+        "assets/audio/20-fly-0.m4a"
+    ]
+}

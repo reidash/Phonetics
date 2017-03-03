@@ -1,0 +1,11 @@
+{
+    "id": 4,
+    "word": "alive",
+    "wordOptions": [
+        "alive",
+        "arrive"
+    ],
+    "audioPaths": [
+        "assets/audio/02-alive-0.m4a"
+    ]
+}

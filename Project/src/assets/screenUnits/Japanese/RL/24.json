@@ -1,0 +1,11 @@
+{
+    "id": 24,
+    "word": "led",
+    "wordOptions": [
+        "led",
+        "red"
+    ],
+    "audioPaths": [
+        "assets/audio/12-led-0.m4a"
+    ]
+}

@@ -22,7 +22,7 @@
         </div>
 
         <div class="button-group-container">
-            <button ion-button *ngFor="let option of screenUnit.wordOptions" (click)="chooseOption(option)">{{option}}</button>
+            <button ion-button *ngFor="let option of currUnit.wordOptions" (click)="chooseOption(option)">{{option}}</button>
         </div>
     </ion-card>
 
@@ -31,7 +31,7 @@
             Correct!
         </h1>
         <p class="screenUnit-instruction">
-            The correct word was "{{screenUnit.word}}."
+            The correct word was "{{currUnit.word}}."
         </p>
         <div class="screenUnit-play">
             <ion-icon name="checkmark"></ion-icon>
@@ -43,7 +43,7 @@
             Not quite...
         </h1>
         <p class="screenUnit-instruction">
-            The correct word was "{{screenUnit.word}}." Tap the play button to hear the word again.
+            The correct word was "{{currUnit.word}}." Tap the play button to hear the word again.
         </p>
         <div class="screenUnit-play">
              <a href="javascript:void(0)" role="button" title="Play Recording" (click)="playAudio()">

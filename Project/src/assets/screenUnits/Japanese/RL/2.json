@@ -1,0 +1,11 @@
+{
+    "id": 2,
+    "word": "collect",
+    "wordOptions": [
+        "collect",
+        "correct"
+    ],
+    "audioPaths": [
+        "assets/audio/01-collect-0.m4a"
+    ]
+}

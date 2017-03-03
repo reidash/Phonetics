@@ -1,0 +1,11 @@
+{
+    "id": 11,
+    "word": "grow",
+    "wordOptions": [
+        "glow",
+        "grow"
+    ],
+    "audioPaths": [
+        "assets/audio/05-grow-0.m4a"
+    ]
+}
