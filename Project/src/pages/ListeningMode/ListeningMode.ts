@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
-//import { PhonemeList } from '../PhonemeList/PhonemeList';
 import { Util } from '../../util';
 import { MediaPlugin } from 'ionic-native';
 import { screenUnit } from '../../interfaces';
@@ -26,7 +25,6 @@ export class ListeningMode {
     public screenUnits: screenUnit[] = []; // Array of all screen units in the session
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform) {
-        //constructor code here
         this.currUnit = {
             id: 0,
             word: '',

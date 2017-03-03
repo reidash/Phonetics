@@ -4,8 +4,6 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 import { PhonemeList } from '../pages/PhonemeList/PhonemeList';
 import { ProfileSetup } from '../pages/ProfileSetup/ProfileSetup';
 import { ProfileInfo } from '../profileInfo';
-//import { Goals } from '../pages/Goals/Goals';
-//import { ListeningMode } from '../pages/ListeningMode/ListeningMode';
 
 @Component({
   templateUrl: 'app.html'
@@ -41,8 +39,6 @@ export class Phonetics {
     this.pages = [
       { title: 'Lessons', component: PhonemeList },
       { title: 'Edit Profile', component: ProfileSetup }
-      //{ title: 'Practice Goals', component: Goals },
-      //{ title: 'Listening Mode', component: ListeningMode }
     ];
   }
 
@@ -65,7 +61,7 @@ export class Phonetics {
         params = {
           user: this.user
         };
-        
+
         this.nav.setRoot(page.component, params);
         return;
       }
