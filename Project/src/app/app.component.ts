@@ -61,19 +61,26 @@ export class Phonetics {
     // we wouldn't want the back button to show in this scenario
     let params;
     if (page.component == ProfileSetup) {
-
-      if (!this.user) {
-        let profileLoader = new ProfileInfo();
-        profileLoader.getInfo(this.platform).then((data) => { // Try to get the profile data
-          this.user = data; // If it is there then use it
-        });
+      if (this.user) {
+        params = {
+          user: this.user
+        };
+        
+        this.nav.setRoot(page.component, params);
+        return;
       }
 
-      params = {
-        user: this.user
-      };
+      let profileLoader = new ProfileInfo();
+      profileLoader.getInfo(this.platform).then((data) => { // Try to get the profile data
+        this.user = data; // If it is there then use it
+        params = {
+          user: this.user
+        };
+        this.nav.setRoot(page.component, params);
+      });
 
+    } else {
+      this.nav.setRoot(page.component, params);
     }
-    this.nav.setRoot(page.component, params);
   }
 }
