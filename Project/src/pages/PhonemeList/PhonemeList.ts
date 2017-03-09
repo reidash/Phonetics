@@ -38,8 +38,7 @@ export class PhonemeList {
     //generate array of randomized screenUnits
     //and navigate to ListeningMode, passing the array and lessons[index].name as title
     let numUnits = 1;
-    let lessonFolder = this.lessons[index].path + '1';
-
+    let lessonFolder = this.lessons[index].path + '1'; //todo: make a "constants" file for the random magic strings and numbers like this '1'
 
     getScreenUnits(numUnits, lessonFolder)
       .then((screenUnits) =>
