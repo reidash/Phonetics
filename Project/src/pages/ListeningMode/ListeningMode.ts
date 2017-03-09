@@ -43,7 +43,7 @@ export class ListeningMode {
         }).catch(err => console.log("err1: " + err.message));
 
         this.plt.ready().then((readySource) => { // Make sure the platform is ready before we try to use native components
-            if(readySource != 'dom') {
+            if(readySource !== 'dom') {
                 this.loaded = true;
             }
         });
