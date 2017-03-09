@@ -8,8 +8,11 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
+<ion-content *ngIf="!loaded">
+  <div class="loader">Loading...</div>
+</ion-content>
 
-<ion-content>
+<ion-content *ngIf="loaded">
   <ul class="lessons-list">
     <li *ngFor="let lesson of lessons; let i = index">
       <ion-card class="content-container">

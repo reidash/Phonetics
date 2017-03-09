@@ -12,6 +12,7 @@ declare var cordova: any;
   templateUrl: 'PhonemeList.html'
 })
 export class PhonemeList {
+  loaded: boolean = false;
   lessons: any;
   mode: any = {
     listening: ListeningMode,
@@ -20,6 +21,9 @@ export class PhonemeList {
 
   constructor(public plt: Platform, public navCtrl: NavController) {
     this.lessons = config.lessons;
+    this.plt.ready().then(() => {
+      this.loaded = true;
+    });
   }
 
   startLevel3 = function (index: number, mode: any) {
@@ -36,18 +40,17 @@ export class PhonemeList {
     let numUnits = 1;
     let lessonFolder = this.lessons[index].path + '1';
 
-    this.plt.ready().then(() => {
-      getScreenUnits(numUnits, lessonFolder)
-        .then((screenUnits) =>
-          startSession(
-            this,
-            {
-              title: this.lessons[index].name,
-              screenUnits: screenUnits
-            },
-            mode)
-        )
-    });
+
+    getScreenUnits(numUnits, lessonFolder)
+      .then((screenUnits) =>
+        startSession(
+          this,
+          {
+            title: this.lessons[index].name,
+            screenUnits: screenUnits
+          },
+          mode)
+      );
   };
 
   startLevel2 = function (index: number, mode: any) {
@@ -58,18 +61,16 @@ export class PhonemeList {
     let numUnits = 20;
     let lessonFolder = this.lessons[index].path + '2';
 
-    this.plt.ready().then(() => {
-      getScreenUnits(numUnits, lessonFolder)
-        .then((screenUnits) =>
-          startSession(
-            this,
-            {
-              title: this.lessons[index].name,
-              screenUnits: screenUnits
-            },
-            mode)
-        )
-    });
+    getScreenUnits(numUnits, lessonFolder)
+      .then((screenUnits) =>
+        startSession(
+          this,
+          {
+            title: this.lessons[index].name,
+            screenUnits: screenUnits
+          },
+          mode)
+      );
   };
 
   goToStats = function () {

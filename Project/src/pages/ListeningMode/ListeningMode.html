@@ -6,8 +6,10 @@
         <ion-title>{{title}}</ion-title>
     </ion-navbar>
 </ion-header>
-
-<ion-content>
+<ion-content *ngIf="!loaded">
+  <div class="loader">Loading...</div>
+</ion-content>
+<ion-content *ngIf="loaded">
     <ion-card class="content-container" *ngIf="currState === state.init">
         <h1>
             Listening Skills

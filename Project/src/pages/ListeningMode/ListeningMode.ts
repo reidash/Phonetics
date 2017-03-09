@@ -12,6 +12,7 @@ declare var cordova: any;
     templateUrl: 'ListeningMode.html'
 })
 export class ListeningMode {
+    loaded: boolean = false;
     title: string; // Title of the session
     currUnit: screenUnit; // Current screenUnit
     currAudio: MediaPlugin; // Current audio file
@@ -40,6 +41,12 @@ export class ListeningMode {
             this.screenUnits = values;
             this.initUnit();
         }).catch(err => console.log("err1: " + err.message));
+
+        this.plt.ready().then((readySource) => { // Make sure the platform is ready before we try to use native components
+            if(readySource != 'dom') {
+                this.loaded = true;
+            }
+        });
     }
 
     initUnit = function () {
@@ -49,11 +56,7 @@ export class ListeningMode {
         this.currState = this.state.init; // Go to initial state
         this.currUnit = this.screenUnits[this.currIndex]; // Set current screenUnit
         let randomIndex = Math.floor(Math.random() * this.currUnit.audioPaths.length); // Pick audio clip to use
-        this.plt.ready().then((readySource) => { // Make sure the platform is ready before we try to use native components
-            if (readySource !== 'dom') { // Don't try to use cordova unless we are on a device
-                this.currAudio = new MediaPlugin(path + this.currUnit.audioPaths[randomIndex]);
-            }
-        });
+        this.currAudio = new MediaPlugin(path + this.currUnit.audioPaths[randomIndex]);
     };
 
     chooseCorrect = function () {
