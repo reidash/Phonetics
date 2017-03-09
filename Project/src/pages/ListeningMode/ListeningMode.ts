@@ -13,17 +13,17 @@ declare var cordova: any;
 })
 export class ListeningMode {
     title: string; // Title of the session
-    public currUnit: screenUnit; // Current screenUnit
-    public currAudio: MediaPlugin; // Current audio file
-    public currState: number; // Current state of UI
-    public state: any = {
+    currUnit: screenUnit; // Current screenUnit
+    currAudio: MediaPlugin; // Current audio file
+    currState: number; // Current state of UI
+    state: any = {
         init: 0,
         right: 1,
         wrong: 2,
         end: 3
     };
-    public currIndex: number = 0; //index of currently displayed screenUnit
-    public screenUnits: screenUnit[] = []; // Array of all screen units in the session
+    currIndex: number = 0; //index of currently displayed screenUnit
+    screenUnits: screenUnit[] = []; // Array of all screen units in the session
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform) {
         this.currUnit = {
@@ -39,7 +39,7 @@ export class ListeningMode {
         Promise.all(tempUnits).then((values) => {
             this.screenUnits = values;
             this.initUnit();
-        }).catch(err => console.log("err: " + err.message));
+        }).catch(err => console.log("err1: " + err.message));
     }
 
     initUnit = function () {
@@ -52,7 +52,6 @@ export class ListeningMode {
         this.plt.ready().then((readySource) => { // Make sure the platform is ready before we try to use native components
             if (readySource !== 'dom') { // Don't try to use cordova unless we are on a device
                 this.currAudio = new MediaPlugin(path + this.currUnit.audioPaths[randomIndex]);
-                console.log("here");
             }
         });
     };
