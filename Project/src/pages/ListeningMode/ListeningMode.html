@@ -46,7 +46,7 @@
             The correct word was "{{currUnit.word}}." Tap the play button to hear the word again.
         </p>
         <div class="screenUnit-play">
-             <a href="javascript:void(0)" role="button" title="Play Recording" (click)="playAudio()">
+            <a href="javascript:void(0)" role="button" title="Play Recording" (click)="playAudio()">
                 <ion-icon name="play"></ion-icon>
             </a>
         </div>
@@ -62,5 +62,8 @@
         <p class="screenUnit-instruction">
             You've completed this session!
         </p>
+        <div class="button-group-container">
+            <button ion-button (click)="goToLessons()">Return to Lessons</button>
+        </div>
     </ion-card>
 </ion-content>

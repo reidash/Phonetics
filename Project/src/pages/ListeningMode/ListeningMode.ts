@@ -3,6 +3,7 @@ import { NavController, NavParams, Platform } from 'ionic-angular';
 import { Util } from '../../util';
 import { MediaPlugin } from 'ionic-native';
 import { screenUnit } from '../../interfaces';
+import { PhonemeList } from '../PhonemeList/PhonemeList';
 
 declare var cordova: any;
 
@@ -38,7 +39,7 @@ export class ListeningMode {
         Promise.all(tempUnits).then((values) => {
             this.screenUnits = values;
             this.initUnit();
-        });
+        }).catch(err => console.log("err: " + err.message));
     }
 
     initUnit = function () {
@@ -51,31 +52,38 @@ export class ListeningMode {
         this.plt.ready().then((readySource) => { // Make sure the platform is ready before we try to use native components
             if (readySource !== 'dom') { // Don't try to use cordova unless we are on a device
                 this.currAudio = new MediaPlugin(path + this.currUnit.audioPaths[randomIndex]);
+                console.log("here");
             }
         });
-    }
+    };
+
     chooseCorrect = function () {
         // Logic for getting a correct answer
         // Add statistics tracking here later
         this.currState = this.state.right;
-    }
+    };
+
     chooseIncorrect = function () {
         // Logic for getting an incorrect answer
         // Add statistics tracking here later
         this.currState = this.state.wrong;
-    }
+    };
+
     endSession = function () {
         // Logic for ending a session
         // Add statistics/goal tracking here
         this.currState = this.state.end;
+    };
+
+    goToLessons = function () {
+        this.navCtrl.setRoot(PhonemeList);
     }
 
     playAudio = function () {
         if (this.currAudio) { // Only play audio if it actually exists
-            this.currAudio.stop(); // Stop if it was already playing
             this.currAudio.play(); // Restart audio from the beginning
         }
-    }
+    };
 
     chooseOption = function (chosen: string) {
         if (this.currUnit.word !== chosen) {
@@ -85,7 +93,7 @@ export class ListeningMode {
 
         this.chooseCorrect();
         this.autoAdvance();
-    }
+    };
 
     autoAdvance = function () {
         let util = new Util();
@@ -98,7 +106,6 @@ export class ListeningMode {
 
         setTimeout(() => {
             if (this.currAudio) { // Release the audio resource since we are done now
-                this.currAudio.stop(); // Make sure the audio isn't playing when we release it
                 this.currAudio.release();
             }
             if (ind < 0) {
@@ -109,5 +116,5 @@ export class ListeningMode {
             this.currIndex = ind;
             this.initUnit();
         }, timeout);
-    }
+    };
 }
