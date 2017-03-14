@@ -19,7 +19,8 @@
     "cordova-plugin-splashscreen",
     "ionic-plugin-keyboard",
     "cordova-plugin-statusbar",
-    "cordova-plugin-nativestorage"
+    "cordova-plugin-nativestorage",
+	"org.apache.cordova.speech.speechrecognition"
 	],
 	"dependencies": {
     "@angular/common": "2.2.1",
