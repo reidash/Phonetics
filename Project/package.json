@@ -20,9 +20,9 @@
     "ionic-plugin-keyboard",
     "cordova-plugin-statusbar",
     "cordova-plugin-nativestorage",
-	"org.apache.cordova.speech.speechrecognition"
-	],
-	"dependencies": {
+    "https://github.com/macdonst/SpeechRecognitionPlugin"
+  ],
+  "dependencies": {
     "@angular/common": "2.2.1",
     "@angular/compiler": "2.2.1",
     "@angular/compiler-cli": "2.2.1",
