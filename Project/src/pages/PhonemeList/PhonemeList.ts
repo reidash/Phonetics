@@ -17,7 +17,7 @@ export class PhonemeList {
   lessons: any;
   mode: any = {
     listening: ListeningMode,
-    speaking: null //to be SpeakingMode
+    speaking: SpeakingMode
   };
 
   constructor(public plt: Platform, public navCtrl: NavController) {
