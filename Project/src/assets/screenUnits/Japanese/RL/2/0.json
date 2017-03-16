@@ -1,0 +1,11 @@
+{
+    "id": 0,
+    "word": "lock",
+    "wordOptions": [
+        "lock",
+        "rock"
+    ],
+    "audioPaths": [
+        "assets/audio/00-lock-0.m4a"
+    ]
+}

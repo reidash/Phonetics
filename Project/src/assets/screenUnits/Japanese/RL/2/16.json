@@ -1,0 +1,11 @@
+{
+    "id": 16,
+    "word": "long",
+    "wordOptions": [
+        "long",
+        "wrong"
+    ],
+    "audioPaths": [
+        "assets/audio/08-long-0.m4a"
+    ]
+}
