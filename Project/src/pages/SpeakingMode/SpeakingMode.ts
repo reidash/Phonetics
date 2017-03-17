@@ -71,30 +71,19 @@ export class SpeakingMode {
             this.recognition.onresult = event => {
                 this.zone.run(() => { // <== added
                     var i = 0;
-                    if (event.results.length > 0) {
-                        console.log(event.results);
-                        //console.log('Output STT: ', event.results[0][0].transcript); 
+                    if (event.results.length > 0) {                        
                         for (i = 0; i < event.results.length; i++) {
                             //only choose words that are higher than 0.9 confidence
-                            console.log('Output of word: ', event.results[i][0].transcript.toLowerCase());
 
                             //First word is usually the correct word pronounced, but the speech recognition will not be confident sometimes
                             if (this.currUnit.word === event.results[0][0].transcript.toLowerCase()) {
-                                //this.chooseCorrect();
-                                //this.autoAdvance();	
                                 this.isCorrect = true;
-                                console.log("correct!!");
-                                //return;
                                 break;
                             }
                             //only if confidence level is over 90% for remaining words then it will accept as a right answer
                             if (event.results[i][0].confidence >= 0.9) {
                                 if (this.currUnit.word === event.results[i][0].transcript.toLowerCase()) {
-                                    //this.chooseCorrect();
-                                    //this.autoAdvance();	
-                                    console.log("correct!!");
                                     this.isCorrect = true;
-                                    //return;
                                     break;
                                 }
                             }
@@ -106,10 +95,10 @@ export class SpeakingMode {
                             this.autoAdvance();
                             return;
                         }
+						//means out of all the options, non is correct
                         this.chooseIncorrect();
 
-                        //means out of all the options, non is correct
-                        //this.chooseIncorrect(); 
+                        
                     }
                 });
             };
