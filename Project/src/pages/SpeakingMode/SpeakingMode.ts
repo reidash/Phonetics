@@ -57,12 +57,12 @@ export class SpeakingMode {
             this.recognition.lang = 'en-US';
             //the voice recognition dont uds what you are speaking -> rarely comes here
             this.recognition.onnomatch = (event => {
-                console.log('No match found.');
+               this.chooseIncorrect();
             });
 
             //either too much noise or something
             this.recognition.onerror = (event => {
-                console.log('Error happens.');
+                
                 this.presentToast("Opps. We didn't hear you correctly, please tap the microphone and pronounce the word again :)")
             });
 
