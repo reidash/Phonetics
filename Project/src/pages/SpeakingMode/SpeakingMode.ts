@@ -13,11 +13,12 @@ declare var SpeechRecognition: any;
     templateUrl: 'SpeakingMode.html'
 })
 export class SpeakingMode {
-    recognition: any;
-    platform: any;
-    title: string; // Title of the session
-    isCorrect: any;
-    public currUnit: screenUnit; // Current screenUnit
+	loaded: boolean = false;
+    private recognition: any;
+    private platform: any;
+    private title: string; // Title of the session
+    private isCorrect: any;
+    private currUnit: screenUnit; // Current screenUnit
     public currAudio: MediaPlugin; // Current audio file
     public currState: number; // Current state of UI
     public state: any = {
@@ -46,12 +47,17 @@ export class SpeakingMode {
             this.screenUnits = values;
             this.initUnit();
         });
+		
+		this.plt.ready().then((readySource) => { // Make sure the platform is ready before we try to use native components
+            if(readySource !== 'dom') {
+                this.loaded = true;
+            }
+        });
     }
 
     SpeechToText = function () {
         this.isCorrect = false;
         this.platform.ready().then(() => {
-
             this.recognition = new SpeechRecognition();
             this.recognition.start();
             this.recognition.lang = 'en-US';
@@ -61,20 +67,17 @@ export class SpeakingMode {
             });
 
             //either too much noise or something
-            this.recognition.onerror = (event => {
-                
+            this.recognition.onerror = (event => {                
                 this.presentToast("Opps. We didn't hear you correctly, please tap the microphone and pronounce the word again :)")
             });
 
             //able to pick up what you are saying
-
             this.recognition.onresult = event => {
                 this.zone.run(() => { // <== added
                     var i = 0;
                     if (event.results.length > 0) {                        
                         for (i = 0; i < event.results.length; i++) {
                             //only choose words that are higher than 0.9 confidence
-
                             //First word is usually the correct word pronounced, but the speech recognition will not be confident sometimes
                             if (this.currUnit.word === event.results[0][0].transcript.toLowerCase()) {
                                 this.isCorrect = true;
@@ -90,15 +93,12 @@ export class SpeakingMode {
                         }
 
                         if (this.isCorrect === true) {
-
                             this.chooseCorrect();
                             this.autoAdvance();
                             return;
                         }
 						//means out of all the options, non is correct
                         this.chooseIncorrect();
-
-                        
                     }
                 });
             };
@@ -120,13 +120,8 @@ export class SpeakingMode {
         var path = this.plt.is('android') ? cordova.file.applicationDirectory + 'www/' : ''; //might be a hack...
         this.currState = this.state.init; // Go to initial state
         this.currUnit = this.screenUnits[this.currIndex]; // Set current screenUnit
-
         let randomIndex = Math.floor(Math.random() * this.currUnit.audioPaths.length); // Pick audio clip to use
-        this.plt.ready().then((readySource) => { // Make sure the platform is ready before we try to use native components
-            if (readySource !== 'dom') { // Don't try to use cordova unless we are on a device
-                this.currAudio = new MediaPlugin(path + this.currUnit.audioPaths[randomIndex]);
-            }
-        });
+        this.currAudio = new MediaPlugin(path + this.currUnit.audioPaths[randomIndex]);
     }
 
     chooseCorrect = function () {
