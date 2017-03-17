@@ -132,8 +132,6 @@ export class SpeakingMode {
         this.currState = this.state.init; // Go to initial state
         this.currUnit = this.screenUnits[this.currIndex]; // Set current screenUnit
 
-        console.log("hi " + this.currUnit);
-
         let randomIndex = Math.floor(Math.random() * this.currUnit.audioPaths.length); // Pick audio clip to use
         this.plt.ready().then((readySource) => { // Make sure the platform is ready before we try to use native components
             if (readySource !== 'dom') { // Don't try to use cordova unless we are on a device
@@ -181,7 +179,6 @@ export class SpeakingMode {
 
         let timeout = 0;
         if (this.currState === this.state.right) {
-
             timeout = 1500;
         }
 
