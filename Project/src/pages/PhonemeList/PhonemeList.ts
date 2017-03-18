@@ -13,9 +13,9 @@ declare var cordova: any;
   templateUrl: 'PhonemeList.html'
 })
 export class PhonemeList {
-  loaded: boolean = false;
-  lessons: any;
-  mode: any = {
+  private loaded: boolean = false;
+  private lessons: any;
+  private mode: any = {
     listening: ListeningMode,
     speaking: SpeakingMode
   };
@@ -29,7 +29,7 @@ export class PhonemeList {
 
   startLevel3 = function (index: number, mode: any) {
     //todo
-	//generate array of randomized screenUnits
+    //generate array of randomized screenUnits
     //and navigate to ListeningMode, passing the array and lessons[index].name as title
     let util = new Util();
     this.plt.ready().then(() => {
@@ -61,7 +61,7 @@ export class PhonemeList {
           this.navCtrl.setRoot(SpeakingMode, params);
         })
         .catch(err => console.log("listdir error " + err.message));
-    }); 
+    });
   };
 
   startLevel1 = function (index: number, mode: any) {

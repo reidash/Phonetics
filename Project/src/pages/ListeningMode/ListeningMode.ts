@@ -12,19 +12,19 @@ declare var cordova: any;
     templateUrl: 'ListeningMode.html'
 })
 export class ListeningMode {
-    loaded: boolean = false;
-    title: string; // Title of the session
-    currUnit: screenUnit; // Current screenUnit
-    currAudio: MediaPlugin; // Current audio file
-    currState: number; // Current state of UI
-    state: any = {
+    private loaded: boolean = false;
+    private title: string; // Title of the session
+    private currUnit: screenUnit; // Current screenUnit
+    private currAudio: MediaPlugin; // Current audio file
+    private currState: number; // Current state of UI
+    private state: any = {
         init: 0,
         right: 1,
         wrong: 2,
         end: 3
     };
-    currIndex: number = 0; //index of currently displayed screenUnit
-    screenUnits: screenUnit[] = []; // Array of all screen units in the session
+    private currIndex: number = 0; //index of currently displayed screenUnit
+    private screenUnits: screenUnit[] = []; // Array of all screen units in the session
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform) {
         this.currUnit = {
@@ -43,7 +43,7 @@ export class ListeningMode {
         }).catch(err => console.log("err1: " + err.message));
 
         this.plt.ready().then((readySource) => { // Make sure the platform is ready before we try to use native components
-            if(readySource !== 'dom') {
+            if (readySource !== 'dom') {
                 this.loaded = true;
             }
         });

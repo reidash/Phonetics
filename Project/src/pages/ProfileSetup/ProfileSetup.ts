@@ -8,13 +8,13 @@ import { profileData, ProfileInfo } from '../../profileInfo';
   templateUrl: 'ProfileSetup.html'
 })
 export class ProfileSetup {
-  selectedItem: any;
-  icons: string[];
-  items: Array<{ title: string, note: string, icon: string }>;
-  title: string = 'Profile Setup';
-  user: profileData;
-  langs: string[] = ['Japanese', 'Mandarin']; //todo: replace this with actual data
-  nativeLang: string;
+  private selectedItem: any;
+  private icons: string[];
+  private items: Array<{ title: string, note: string, icon: string }>;
+  private title: string = 'Profile Setup';
+  private user: profileData;
+  private langs: string[] = ['Japanese', 'Mandarin']; //todo: replace this with actual data
+  private nativeLang: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform) {
     this.user = navParams.get('user');
