@@ -3,6 +3,7 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { PhonemeList } from '../pages/PhonemeList/PhonemeList';
 import { ProfileSetup } from '../pages/ProfileSetup/ProfileSetup';
+import { StatisticsTesting } from '../pages/StatisticsTesting/StatisticsTesting';
 import { ProfileInfo } from '../profileInfo';
 
 @Component({
@@ -38,7 +39,8 @@ export class Phonetics {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Lessons', component: PhonemeList },
-      { title: 'Edit Profile', component: ProfileSetup }
+      { title: 'Edit Profile', component: ProfileSetup },
+      { title: 'Statistics Testing', component: StatisticsTesting}
     ];
   }
 

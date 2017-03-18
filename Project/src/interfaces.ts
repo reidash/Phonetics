@@ -4,3 +4,8 @@ export interface screenUnit {
     wordOptions: string[],  //words to be presented in the screen unit, ex [rock, lock]; only used in listening mode; speaking mode will present the "word" property
     audioPaths: string [] //paths to audio files for this screen unit
 }
+
+export const enum LessonType {
+    Listening = 0,
+    Speaking = 1
+}

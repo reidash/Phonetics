@@ -3,6 +3,8 @@ import { NavController, Platform } from 'ionic-angular';
 import { File } from 'ionic-native';
 import { ListeningMode } from '../ListeningMode/ListeningMode';
 import { Util } from '../../util';
+import { Statistics } from '../../stats';
+import { LessonType } from '../../interfaces';
 import * as config from '../../assets/screenUnits/Japanese/config.json';
 
 declare var cordova: any;
@@ -48,7 +50,8 @@ export class PhonemeList {
             title: this.lessons[index].name,
             screenUnits: screenUnits
           },
-          mode)
+          mode,
+          1)
       );
   };
 
@@ -68,7 +71,8 @@ export class PhonemeList {
             title: this.lessons[index].name,
             screenUnits: screenUnits
           },
-          mode)
+          mode,
+          2)
       );
   };
 
@@ -111,7 +115,14 @@ function getScreenUnits(numUnits: number, sourceFolder: string) {
   );
 }
 
-function startSession(scope: PhonemeList, params: any, mode: any) {
+function startSession(scope: PhonemeList, params: any, mode: any, level: number) {
+  let type: LessonType;
+  if(mode === ListeningMode) {
+    type = LessonType.Listening;
+  } else {
+    type = LessonType.Speaking;
+  }
+  Statistics.GetStatistics().StartSession(1, type, level)
   if (!scope) {
     console.log("Err: " + "Tried to start session with no scope");
     return;

@@ -4,6 +4,7 @@ import { Util } from '../../util';
 import { MediaPlugin } from 'ionic-native';
 import { screenUnit } from '../../interfaces';
 import { PhonemeList } from '../PhonemeList/PhonemeList';
+import { Statistics } from '../../stats';
 
 declare var cordova: any;
 
@@ -51,7 +52,6 @@ export class ListeningMode {
 
     initUnit = function () {
         // Logic for setting up a new screenUnit
-        // Maybe add statisitics tracking here?
         var path = this.plt.is('android') ? cordova.file.applicationDirectory + 'www/' : ''; //might be a hack...
         this.currState = this.state.init; // Go to initial state
         this.currUnit = this.screenUnits[this.currIndex]; // Set current screenUnit
@@ -61,19 +61,19 @@ export class ListeningMode {
 
     chooseCorrect = function () {
         // Logic for getting a correct answer
-        // Add statistics tracking here later
+        Statistics.GetStatistics().Record(this.currUnit, true);
         this.currState = this.state.right;
     };
 
     chooseIncorrect = function () {
         // Logic for getting an incorrect answer
-        // Add statistics tracking here later
+        Statistics.GetStatistics().Record(this.currUnit, false);
         this.currState = this.state.wrong;
     };
 
     endSession = function () {
         // Logic for ending a session
-        // Add statistics/goal tracking here
+        Statistics.GetStatistics().EndSession();
         this.currState = this.state.end;
     };
 
