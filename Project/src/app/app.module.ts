@@ -14,7 +14,7 @@ import { SpeakingMode } from '../pages/SpeakingMode/SpeakingMode';
     ProfileSetup,
     Goals,
     ListeningMode,
-	SpeakingMode
+    SpeakingMode
   ],
   imports: [
     IonicModule.forRoot(Phonetics)
@@ -26,8 +26,8 @@ import { SpeakingMode } from '../pages/SpeakingMode/SpeakingMode';
     ProfileSetup,
     Goals,
     ListeningMode,
-	SpeakingMode
+    SpeakingMode
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }]
 })
-export class AppModule {}
+export class AppModule { }
