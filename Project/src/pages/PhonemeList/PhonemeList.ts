@@ -28,7 +28,6 @@ export class PhonemeList {
   }
 
   startLevel3 = function (index: number, mode: any) {
-    //todo
     //generate array of randomized screenUnits
     //and navigate to ListeningMode, passing the array and lessons[index].name as title
     let util = new Util();
@@ -36,8 +35,6 @@ export class PhonemeList {
       let path = cordova.file.applicationDirectory + 'www/';
       let lessonFolder = this.lessons[index].path;
 
-      //selecting all files for now
-      //todo: implement logic for each session level
       File.listDir(path, lessonFolder)
         .then((files) => {
           let temparray = [];
