@@ -1,0 +1,65 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+        <ion-title>{{title}}</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content *ngIf="!loaded">
+  <div class="loader">Loading...</div>
+</ion-content>
+<ion-content *ngIf="loaded">
+    <ion-card class="content-container" *ngIf="currState === state.init">
+        <h1>
+            Speaking Skills
+        </h1>
+        <p class="screenUnit-instruction">
+            Tap the microphone button to pronounce the given word. 
+        </p>
+		
+		{{currUnit.word}}
+		
+		<button ion-button color="primary" (click) = "SpeechToText()">
+    <ion-icon name="mic"></ion-icon>
+  </button>
+    </ion-card>
+
+    <ion-card class="content-container screenUnit-correct" *ngIf="currState === state.right">
+        <h1>
+            Correct!
+        </h1>
+        <p class="screenUnit-instruction">
+            The correct word was "{{currUnit.word}}."
+        </p>
+        <div class="screenUnit-play">
+            <ion-icon name="checkmark"></ion-icon>
+        </div>
+    </ion-card>
+
+    <ion-card class="content-container screenUnit-incorrect" *ngIf="currState === state.wrong">
+        <h1>
+            Not quite...
+        </h1>
+        <p class="screenUnit-instruction">
+            The correct word was "{{currUnit.word}}." Tap the play button to hear the word again.
+        </p>
+        <div class="screenUnit-play">
+             <a href="javascript:void(0)" role="button" title="Play Recording" (click)="playAudio()">
+                <ion-icon name="play"></ion-icon>
+            </a>
+        </div>
+        <div class="button-group-container">
+            <button ion-button (click)="autoAdvance()">Next</button>
+        </div>
+    </ion-card>
+
+    <ion-card class="content-container" *ngIf="currState === state.end">
+        <h1>
+            Good job!
+        </h1>
+        <p class="screenUnit-instruction">
+            You've completed this session!
+        </p>
+    </ion-card>
+</ion-content>

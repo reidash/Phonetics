@@ -10,11 +10,8 @@ import { ProfileInfo } from '../profileInfo';
 })
 export class Phonetics {
   @ViewChild(Nav) nav: Nav;
-
   rootPage: any;
-
   pages: Array<{ title: string, component: any }>;
-
   user: any;
 
   constructor(public platform: Platform) {

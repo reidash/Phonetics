@@ -5,6 +5,7 @@ import { PhonemeList } from '../pages/PhonemeList/PhonemeList';
 import { ProfileSetup } from '../pages/ProfileSetup/ProfileSetup';
 import { Goals } from '../pages/Goals/Goals';
 import { ListeningMode } from '../pages/ListeningMode/ListeningMode';
+import { SpeakingMode } from '../pages/SpeakingMode/SpeakingMode';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { ListeningMode } from '../pages/ListeningMode/ListeningMode';
     PhonemeList,
     ProfileSetup,
     Goals,
-    ListeningMode
+    ListeningMode,
+    SpeakingMode
   ],
   imports: [
     IonicModule.forRoot(Phonetics)
@@ -23,8 +25,9 @@ import { ListeningMode } from '../pages/ListeningMode/ListeningMode';
     PhonemeList,
     ProfileSetup,
     Goals,
-    ListeningMode
+    ListeningMode,
+    SpeakingMode
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }]
 })
-export class AppModule {}
+export class AppModule { }
