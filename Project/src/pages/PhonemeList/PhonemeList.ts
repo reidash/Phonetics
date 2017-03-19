@@ -28,7 +28,7 @@ export class PhonemeList {
       this.lessonsLoader = new LessonsLoader();
       this.lessonsLoader.getLessons(this.language)
         .then(resp => {
-          this.lessons = resp.lessons;
+          this.lessons = resp;
         })
         .catch(e => console.log(e.message));
       this.loaded = true;

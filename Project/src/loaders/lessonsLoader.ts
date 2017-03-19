@@ -12,7 +12,7 @@ export class LessonsLoader {
             File.readAsText(configPath, fileName)
                 .then(text => {
                     if (typeof text === 'string') {
-                        resolve(JSON.parse(text));
+                        resolve(JSON.parse(text).lessons);
                     }
                 })
                 .catch(err => reject(err));
