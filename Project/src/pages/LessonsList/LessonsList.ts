@@ -1,24 +1,24 @@
 import { Component } from '@angular/core';
 import { NavController, Platform, NavParams } from 'ionic-angular';
-import { ListeningMode } from '../ListeningMode/ListeningMode';
-import { SpeakingMode } from '../SpeakingMode/SpeakingMode';
+import { ListeningController } from '../ListeningController/ListeningController';
+import { SpeakingController } from '../SpeakingController/SpeakingController';
 import { LessonsLoader } from '../../loaders/lessonsLoader';
 import { lesson } from '../../interfaces';
 
 declare var cordova: any;
 
 @Component({
-  selector: 'page-phonemeList',
-  templateUrl: 'PhonemeList.html'
+  selector: 'page-lessonsList',
+  templateUrl: 'LessonsList.html'
 })
-export class PhonemeList {
+export class LessonsList {
   private language: string;
   private lessonsLoader: any;
   private loaded: boolean = false;
   private lessons: lesson[];
   private mode: any = {
-    listening: ListeningMode,
-    speaking: SpeakingMode
+    listening: ListeningController,
+    speaking: SpeakingController
   };
 
   constructor(public plt: Platform, public navCtrl: NavController, public params: NavParams) {
@@ -35,7 +35,7 @@ export class PhonemeList {
     });
   }
 
-  startLevel3 = function (index: number, mode = SpeakingMode) {
+  startLevel3 = function (index: number, mode = SpeakingController) {
     //generate array of randomized screenUnits
     //and navigate to ListeningMode, passing the array and lessons[index].name as title
     let numUnits = 20;
@@ -104,7 +104,7 @@ function getRandomIndex(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-function startSession(scope: PhonemeList, params: any, mode: any) {
+function startSession(scope: LessonsList, params: any, mode: any) {
   if (!scope) {
     console.log("Err: " + "Tried to start session with no scope");
     return;

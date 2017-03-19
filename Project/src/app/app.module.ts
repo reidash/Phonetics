@@ -1,20 +1,20 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { Phonetics } from './app.component';
-import { PhonemeList } from '../pages/PhonemeList/PhonemeList';
-import { ProfileSetup } from '../pages/ProfileSetup/ProfileSetup';
+import { LessonsList } from '../pages/LessonsList/LessonsList';
+import { ProfileManager } from '../pages/ProfileManager/ProfileManager';
 import { Goals } from '../pages/Goals/Goals';
-import { ListeningMode } from '../pages/ListeningMode/ListeningMode';
-import { SpeakingMode } from '../pages/SpeakingMode/SpeakingMode';
+import { ListeningController } from '../pages/ListeningController/ListeningController';
+import { SpeakingController } from '../pages/SpeakingController/SpeakingController';
 
 @NgModule({
   declarations: [
     Phonetics,
-    PhonemeList,
-    ProfileSetup,
+    LessonsList,
+    ProfileManager,
     Goals,
-    ListeningMode,
-    SpeakingMode
+    ListeningController,
+    SpeakingController
   ],
   imports: [
     IonicModule.forRoot(Phonetics)
@@ -22,11 +22,11 @@ import { SpeakingMode } from '../pages/SpeakingMode/SpeakingMode';
   bootstrap: [IonicApp],
   entryComponents: [
     Phonetics,
-    PhonemeList,
-    ProfileSetup,
+    LessonsList,
+    ProfileManager,
     Goals,
-    ListeningMode,
-    SpeakingMode
+    ListeningController,
+    SpeakingController
   ],
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }]
 })

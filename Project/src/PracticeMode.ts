@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
 import { Util } from './util';
 import { screenUnit } from './interfaces';
-import { PhonemeList } from './pages/PhonemeList/PhonemeList';
+import { LessonsList } from './pages/LessonsList/LessonsList';
 
 declare var cordova: any;
 
@@ -36,7 +36,7 @@ export class PracticeMode {
         Promise.all(tempUnits).then((values) => {
             this.screenUnits = values;
             this.initUnit();
-        }).catch(err => console.log("err1: " + err.message));
+        }).catch(err => console.log("err: " + err.message));
 
         this.plt.ready().then((readySource) => { // Make sure the platform is ready before we try to use native components
             if (readySource !== 'dom') {
@@ -71,7 +71,7 @@ export class PracticeMode {
     };
 
     goToLessons () {
-        this.navCtrl.setRoot(PhonemeList, this.lessonsList);
+        this.navCtrl.setRoot(LessonsList, this.lessonsList);
     }
 
     chooseOption (chosen: string) {

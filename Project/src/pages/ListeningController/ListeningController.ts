@@ -9,10 +9,10 @@ import { PracticeMode } from '../../PracticeMode';
 declare var cordova: any;
 
 @Component({
-    selector: 'page-ListeningMode',
-    templateUrl: 'ListeningMode.html'
+    selector: 'page-ListeningController',
+    templateUrl: 'ListeningController.html'
 })
-export class ListeningMode extends PracticeMode {
+export class ListeningController extends PracticeMode {
     private currAudio: MediaPlugin; // Current audio file
 
 

@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
-import { PhonemeList } from '../PhonemeList/PhonemeList'; 
+import { LessonsList } from '../LessonsList/LessonsList'; 
 import { ProfileInfo } from '../../loaders/profileInfo';
 import { profileData } from '../../interfaces';
 
 @Component({
-  selector: 'page-ProfileSetup',
-  templateUrl: 'ProfileSetup.html'
+  selector: 'page-ProfileManager',
+  templateUrl: 'ProfileManager.html'
 })
-export class ProfileSetup {
+export class ProfileManager {
   private title: string = 'Profile Setup';
   private user: profileData;
   private langs: string[] = ['Japanese', 'Mandarin']; //todo: replace this with actual data
@@ -32,7 +32,7 @@ export class ProfileSetup {
 
   setupDone = function() {
     // setRoot to avoid back button showing up. Can't go back to profile creation (instead there should be some edit profile page or something).
-    this.navCtrl.setRoot(PhonemeList, {user: this.user});
+    this.navCtrl.setRoot(LessonsList, {user: this.user});
   }
 
   createUser = function () {
