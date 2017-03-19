@@ -1,4 +1,7 @@
 import { screenUnit, LessonType } from './interfaces';
+import { File } from 'ionic-native';
+
+declare var cordova: any;
 
 interface sessionInfo {
     sessionID: number, // phonemeID of the session 
@@ -7,6 +10,13 @@ interface sessionInfo {
     sessionCorrect: number, // Number of correct screenUnits in the session
     sessionTotal: number // Number of total screenUnits in the session
     sessionTime: number // How long this session took
+}
+
+interface statisticsData {
+    sessionNumber: number; // The number of session attempts made so far
+    sessionData: sessionInfo[]; // All session data ever recorded
+    totalTime: number; // Is this a number?
+    dynamicList: screenUnit[]; // Words in the dynamicList
 }
 
 // A class that stores session statistics.
@@ -20,26 +30,53 @@ export class Statistics
     private sessionInProgress: Boolean; // Whether or not a sessions is in progress
     private sessionStart: Date; // When the last session started
     private curSessionInfo: sessionInfo; // The session info of the current session
-    private sessionNumber: number; // The number of session attempts made so far
-    private dataPromise: Promise<sessionInfo[]>; // The promise we use to load the stats
-    private sessionData: sessionInfo[]; // All session data ever recorded
-    private totalTime: number; // Is this a number?
+    private dataPromise: Promise<statisticsData>; // The promise we use to load the stats
+    private data: statisticsData; // The actual data 
     
     protected constructor()
     {
         // TODO: Load stats from disk
         this.sessionInProgress = false;
-        this.sessionNumber = 0;
-        this.sessionData = [];
-        this.totalTime = 0;
-        this.dataPromise = new Promise((resolve, reject) => {
+        this.data = {sessionNumber: 0, sessionData: [], totalTime: 0, dynamicList: []}; // Default values
+        this.dataPromise = new Promise((resolve, reject) => { // Statistics loading code 
             // TODO actually load from a file instead of this
-            resolve([])
+            let storagePath = cordova.file.dataDirectory + "storage/;" // TODO make this a constant of some sort.
+            let readFile = function(): void {
+                let statsFile = 'stats.json'; // TODO make this some kind of constant
+                File.checkFile(storagePath, statsFile).then((fileExists: boolean) => {
+                    console.log("Found existing stat file.");
+                    File.readAsText(storagePath, statsFile).then((contents: string) => {
+                        resolve(JSON.parse(contents));
+                    }, (error: any) => {
+                        console.log("Error reading stats file: " + JSON.stringify(error));
+                    });
+                }, (error: any) => {
+                    if(error.code === 1 || error.code === 13) {
+                        console.log("No previous stat file found.");
+                        resolve({sessionNumber: 0, sessionData: [], totalTime: 0}); // Resolve with new statistics data
+                    } else {
+                        console.log("Error checking for stats file: " + JSON.stringify(error));
+                    }
+                });
+            } // readFile
+            File.checkDir(cordova.file.dataDirectory, "storage").then((dirExists: boolean) => {
+                readFile();
+            }, (error: any) => {
+                if(error.code === 1) { // Directory not found
+                    File.createDir(cordova.file.dataDirectory, "storage", false).then(() => {
+                        console.log("Creating storage director");
+                    }, (error: any) => {
+                        console.log("Error creating storage director: " + JSON.stringify(error));
+                    }).then(readFile); // Read stats file either way
+                } else {
+                    console.log("Error checking director: " + JSON.stringify(error));
+                }
+            });
         });
-        this.dataPromise.then((data: sessionInfo[]) => {
-            this.sessionData = data; // Store data locally for easy of use later
+        this.dataPromise.then((data: statisticsData) => {
+            this.data = data; // Store data in memory for easy of use later
         }, (rejected: any) => {
-            console.log("Error on statistics load: " + rejected);
+            console.log("Error on statistics load: " + JSON.stringify(rejected));
         });
     }
     
@@ -53,11 +90,23 @@ export class Statistics
         return Statistics.instance; // Return the static instance 
     }
 
+    public StoreData(): void {
+        this.dataPromise.then(() => {
+            let storagePath = cordova.file.dataDirectory + "storage/;" // TODO make this a constant of some sort.
+            let statsFile = 'stats.json'; // TODO make this some kind of constant
+            File.writeFile(storagePath, statsFile, JSON.stringify(this.data), true).then(()=>{
+                console.log("Stats successfully written!");
+            }, (error: any) => {
+                console.log("Error writting statistics: " + JSON.stringify(error));
+            }); // Overwrite existing stats
+        });
+    }
+
     // Call before each session starts, supply the phonemeID and the lessonType
     public StartSession(phonemeID: number, type: LessonType, level: number): void
     {
         if(this.sessionInProgress) {
-            // TODO: ERROR Message
+            console.log("Error! Tried to start a session while one was already in progress!");
             return;
         }
         this.sessionInProgress = true; // Set the session in progress flag
@@ -76,27 +125,29 @@ export class Statistics
     public EndSession(): void
     {
         if(!this.sessionInProgress) {
-            // TODO: Error Message
+            console.log("Error! Tried to end a session while none were in progress!");
             return;
         }
         this.sessionInProgress = false; // Mark the session as off
         let sessionTime = this.sessionStart.getTime() - new Date().getTime(); // Calculate the session time
         this.curSessionInfo.sessionTime = sessionTime; // Update session time.
-        this.totalTime = this.totalTime + sessionTime; // Update total time
-        this.sessionNumber += 1; // Update the sessionNumber.
+        this.data.totalTime = this.data.totalTime + sessionTime; // Update total time
+        this.data.sessionNumber += 1; // Update the sessionNumber.
         this.dataPromise.then(() => { // Only push after we have finished loading
-            this.sessionData.push(this.curSessionInfo); // Store the current session
+            this.data.sessionData.push(this.curSessionInfo); // Store the current session
         });
     }
 
     // Records a single screenUnit result, on each attempt
     public Record(unit: screenUnit, correct: Boolean): void
     {
-        // TODO: Update the dynamic list. 
         this.curSessionInfo.sessionTotal += 1; // Update the currentSession attempts
         if(correct) {
             this.curSessionInfo.sessionCorrect += 1; // Update the currentSession corrects
         }
+        /*if(!this.data.dynamicList.find((otherUnit: screenUnit) => { return unit.id === otherUnit.id;})) {
+            this.data.dynamicList.push(unit); // Add the word to the dynamic list
+        }*/
     }
 
     private GetStatsInternal(data: sessionInfo[], groupBy: number): [number, number][]
@@ -105,7 +156,7 @@ export class Statistics
             return [];
         }
         if(groupBy <= 0) { // If groupBy is less than 0 then just average over all data points
-            groupBy = this.sessionNumber;
+            groupBy = this.data.sessionNumber;
         } // if
         let head: number = 0;
         let phonemeStats: [number, number][] = [];
@@ -126,7 +177,7 @@ export class Statistics
 
     public GetSessionCount(): number
     {
-        return this.sessionNumber;
+        return this.data.sessionNumber;
     }
 
     // Returns an array of accuracy points. Each point will be the accuracy averaged over groupBy sessions.
@@ -136,7 +187,7 @@ export class Statistics
     {
         return new Promise((resolve, reject) => {
             this.dataPromise.then(() => {
-                let filteredStats = this.sessionData.filter(filterFunction);
+                let filteredStats = this.data.sessionData.filter(filterFunction);
                 resolve(this.GetStatsInternal(filteredStats, groupBy));
             });
         });
@@ -178,6 +229,22 @@ export class Statistics
     // Returns the total time the user has spent practicing. 
     public GetTotalTime(): number
     {
-        return this.totalTime;
+        return this.data.totalTime;
+    }
+
+    // Returns the current dynamic list
+    public GetDynamicList(): Promise<screenUnit[]>
+    {
+        return new Promise((resolve, reject) =>{
+            this.dataPromise.then(() => {
+                resolve(this.data.dynamicList);
+            });
+        });
+    }
+
+    // Returns the current session info
+    public GetCurrentSessionInfo(): sessionInfo
+    {
+        return this.curSessionInfo;
     }
 }

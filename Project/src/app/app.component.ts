@@ -4,6 +4,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 import { PhonemeList } from '../pages/PhonemeList/PhonemeList';
 import { ProfileSetup } from '../pages/ProfileSetup/ProfileSetup';
 import { StatisticsTesting } from '../pages/StatisticsTesting/StatisticsTesting';
+import { Statistics } from '../stats';
 import { ProfileInfo } from '../profileInfo';
 
 @Component({
@@ -48,7 +49,8 @@ export class Phonetics {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-
+      let stats = Statistics.GetStatistics(); // Start loading statistics`
+      this.platform.pause.subscribe(() => {stats.StoreData()}); // Also set it up to write on pause
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
