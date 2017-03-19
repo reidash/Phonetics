@@ -1,11 +1,6 @@
 import { Platform } from 'ionic-angular';
 import { NativeStorage } from 'ionic-native';
-
-export interface profileData {
-    name: string, // Username
-    img: string, // Path to user image
-    nativeLang: string // User's native language
-}
+import { profileData } from '../interfaces';
 
 // Class for loading and storing profileData. 
 export class ProfileInfo {

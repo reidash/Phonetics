@@ -3,7 +3,7 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { PhonemeList } from '../pages/PhonemeList/PhonemeList';
 import { ProfileSetup } from '../pages/ProfileSetup/ProfileSetup';
-import { ProfileInfo } from '../profileInfo';
+import { ProfileInfo } from '../loaders/profileInfo';
 
 @Component({
   templateUrl: 'app.html'
@@ -24,7 +24,11 @@ export class Phonetics {
         this.user = data; // If it is there then use it
 
         if (this.user) {
-          this.rootPage = PhonemeList;
+          let params = {
+            user: this.user
+          };
+
+          this.nav.setRoot(PhonemeList, params);
         } else {
           this.rootPage = ProfileSetup;
         }
@@ -53,7 +57,7 @@ export class Phonetics {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     let params;
-    if (page.component == ProfileSetup) {
+    if (page.component === ProfileSetup || page.component === PhonemeList) {
       if (this.user) {
         params = {
           user: this.user

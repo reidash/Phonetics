@@ -12,6 +12,7 @@ declare var cordova: any;
     templateUrl: 'ListeningMode.html'
 })
 export class ListeningMode {
+    private lessonsList: any;
     private loaded: boolean = false;
     private title: string; // Title of the session
     private currUnit: screenUnit; // Current screenUnit
@@ -34,6 +35,7 @@ export class ListeningMode {
             audioPaths: []
         };
 
+        this.lessonsList = navParams.get('navParams');
         this.title = navParams.get('sessionTitle');
         let tempUnits: Promise<screenUnit>[] = navParams.get('screenUnits');
 
@@ -78,7 +80,8 @@ export class ListeningMode {
     };
 
     goToLessons = function () {
-        this.navCtrl.setRoot(PhonemeList);
+        console.log(this.lessonsList);
+        this.navCtrl.setRoot(PhonemeList, this.lessonsList);
     }
 
     playAudio = function () {

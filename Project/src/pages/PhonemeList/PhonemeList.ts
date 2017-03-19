@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, Platform } from 'ionic-angular';
-import { File } from 'ionic-native';
+import { NavController, Platform, NavParams } from 'ionic-angular';
 import { ListeningMode } from '../ListeningMode/ListeningMode';
 import { SpeakingMode } from '../SpeakingMode/SpeakingMode';
-import { Util } from '../../util';
-import * as config from '../../assets/screenUnits/Japanese/config.json';
+import { LessonsLoader } from '../../loaders/lessonsLoader';
+import { lesson } from '../../interfaces';
 
 declare var cordova: any;
 
@@ -13,52 +12,45 @@ declare var cordova: any;
   templateUrl: 'PhonemeList.html'
 })
 export class PhonemeList {
+  private language: string;
+  private lessonsLoader: any;
   private loaded: boolean = false;
-  private lessons: any;
+  private lessons: lesson[];
   private mode: any = {
     listening: ListeningMode,
     speaking: SpeakingMode
   };
 
-  constructor(public plt: Platform, public navCtrl: NavController) {
-    this.lessons = config.lessons;
+  constructor(public plt: Platform, public navCtrl: NavController, public params: NavParams) {
+    this.language =  params.get('user').nativeLang;
+
     this.plt.ready().then(() => {
+      this.lessonsLoader = new LessonsLoader();
+      this.lessonsLoader.getLessons(this.language)
+        .then(resp => {
+          this.lessons = resp.lessons;
+        })
+        .catch(e => console.log(e.message));
       this.loaded = true;
     });
   }
 
-  startLevel3 = function (index: number, mode: any) {
+  startLevel3 = function (index: number, mode = SpeakingMode) {
     //generate array of randomized screenUnits
     //and navigate to ListeningMode, passing the array and lessons[index].name as title
-    let util = new Util();
-    this.plt.ready().then(() => {
-      let path = cordova.file.applicationDirectory + 'www/';
-      let lessonFolder = this.lessons[index].path;
+    let numUnits = 20;
+    let lessonFolder = this.lessons[index].path + '3';
 
-      File.listDir(path, lessonFolder)
-        .then((files) => {
-          let temparray = [];
-          files.forEach((file, ind) => {
-            temparray.push(
-              File.readAsText(path + lessonFolder, file.name)
-                .then(text => {
-                  if (typeof text === 'string') {
-                    return JSON.parse(text);
-                  }
-                })
-                .catch(err => console.log(err.message))
-            );
-          });
-
-          let params = {
-            sessionTitle: this.lessons[index].name,
-            screenUnits: util.shuffle(temparray)
-          };
-
-          this.navCtrl.setRoot(SpeakingMode, params);
-        })
-        .catch(err => console.log("listdir error " + err.message));
-    });
+    this.lessonsLoader.getScreenUnits(numUnits, lessonFolder)
+      .then((screenUnits) =>
+        startSession(
+          this,
+          {
+            title: this.lessons[index].name,
+            screenUnits: screenUnits
+          },
+          mode)
+      );
   };
 
   startLevel1 = function (index: number, mode: any) {
@@ -71,7 +63,7 @@ export class PhonemeList {
     let numUnits = 1;
     let lessonFolder = this.lessons[index].path + '1'; //todo: make a "constants" file for the random magic strings and numbers like this '1'
 
-    getScreenUnits(numUnits, lessonFolder)
+    this.lessonsLoader.getScreenUnits(numUnits, lessonFolder)
       .then((screenUnits) =>
         startSession(
           this,
@@ -91,7 +83,7 @@ export class PhonemeList {
     let numUnits = 20;
     let lessonFolder = this.lessons[index].path + '2';
 
-    getScreenUnits(numUnits, lessonFolder)
+    this.lessonsLoader.getScreenUnits(numUnits, lessonFolder)
       .then((screenUnits) =>
         startSession(
           this,
@@ -112,36 +104,6 @@ function getRandomIndex(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-function getScreenUnits(numUnits: number, sourceFolder: string) {
-  let path = cordova.file.applicationDirectory + 'www/';
-  return (
-
-    File.listDir(path, sourceFolder)
-      .then((files) => {
-        let util = new Util();
-        files = util.shuffle(files);
-        let screenUnits = [];
-        for (let i = 0; i < numUnits; i++) {
-          screenUnits.push(
-            File.readAsText(path + sourceFolder, files[i].name)
-              .then(text => {
-                if (typeof text === 'string') {
-                  return JSON.parse(text);
-                }
-              })
-              .catch(err => console.log("err: " + err.message))
-          );
-        }
-
-        return screenUnits;
-      })
-      .catch(err => {
-        console.log("listdir error " + err.message);
-        return null;
-      })
-  );
-}
-
 function startSession(scope: PhonemeList, params: any, mode: any) {
   if (!scope) {
     console.log("Err: " + "Tried to start session with no scope");
@@ -157,6 +119,6 @@ function startSession(scope: PhonemeList, params: any, mode: any) {
     console.log("Err: " + "Tried to start session with no mode");
     return;
   }
-
+  params.navParams = scope.params;
   scope.navCtrl.setRoot(mode, params);
 }

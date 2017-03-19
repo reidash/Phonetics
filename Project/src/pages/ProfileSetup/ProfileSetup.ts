@@ -1,20 +1,17 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
 import { PhonemeList } from '../PhonemeList/PhonemeList'; 
-import { profileData, ProfileInfo } from '../../profileInfo';
+import { ProfileInfo } from '../../loaders/profileInfo';
+import { profileData } from '../../interfaces';
 
 @Component({
   selector: 'page-ProfileSetup',
   templateUrl: 'ProfileSetup.html'
 })
 export class ProfileSetup {
-  private selectedItem: any;
-  private icons: string[];
-  private items: Array<{ title: string, note: string, icon: string }>;
   private title: string = 'Profile Setup';
   private user: profileData;
   private langs: string[] = ['Japanese', 'Mandarin']; //todo: replace this with actual data
-  private nativeLang: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform) {
     this.user = navParams.get('user');
@@ -35,7 +32,7 @@ export class ProfileSetup {
 
   setupDone = function() {
     // setRoot to avoid back button showing up. Can't go back to profile creation (instead there should be some edit profile page or something).
-    this.navCtrl.setRoot(PhonemeList, {}); // TODO fill in navParams with whatever PhonemeList needs.
+    this.navCtrl.setRoot(PhonemeList, {user: this.user}); // TODO fill in navParams with whatever PhonemeList needs.
   }
 
   createUser = function () {
