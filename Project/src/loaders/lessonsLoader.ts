@@ -7,7 +7,7 @@ export class LessonsLoader {
     getLessons = function (lang: string) {
         let configPath = cordova.file.applicationDirectory + 'www/assets/screenUnits/Japanese/';
         let fileName = 'config.json';
-        console.log(configPath + fileName);
+        
         return new Promise<any>((resolve, reject) => {
             File.readAsText(configPath, fileName)
                 .then(text => {

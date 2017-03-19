@@ -32,7 +32,7 @@ export class ProfileSetup {
 
   setupDone = function() {
     // setRoot to avoid back button showing up. Can't go back to profile creation (instead there should be some edit profile page or something).
-    this.navCtrl.setRoot(PhonemeList, {user: this.user}); // TODO fill in navParams with whatever PhonemeList needs.
+    this.navCtrl.setRoot(PhonemeList, {user: this.user});
   }
 
   createUser = function () {
