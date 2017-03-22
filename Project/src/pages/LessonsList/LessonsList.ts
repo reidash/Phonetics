@@ -22,7 +22,7 @@ export class LessonsList {
   };
 
   constructor(public plt: Platform, public navCtrl: NavController, public params: NavParams) {
-    this.language =  params.get('user').nativeLang;
+    this.language = params.get('user').nativeLang;
 
     this.plt.ready().then(() => {
       this.lessonsLoader = new LessonsLoader();
@@ -35,7 +35,7 @@ export class LessonsList {
     });
   }
 
-  startLevel3 = function (index: number, mode = SpeakingController) {
+  startLevel3(index: number, mode = SpeakingController) {
     //generate array of randomized screenUnits
     //and navigate to ListeningMode, passing the array and lessons[index].name as title
     let numUnits = 20;
@@ -53,7 +53,7 @@ export class LessonsList {
       );
   };
 
-  startLevel1 = function (index: number, mode: any) {
+  startLevel1(index: number, mode: any) {
     if (!mode) {
       return;
     }
@@ -75,7 +75,7 @@ export class LessonsList {
       );
   };
 
-  startLevel2 = function (index: number, mode: any) {
+  startLevel2(index: number, mode: any) {
     if (!mode) {
       return;
     }
@@ -95,7 +95,7 @@ export class LessonsList {
       );
   };
 
-  goToStats = function () {
+  goToStats() {
     //todo
   };
 }

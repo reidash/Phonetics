@@ -29,7 +29,7 @@ export class ListeningController extends PracticeMode {
         this.currAudio = new MediaPlugin(path + this.currUnit.audioPaths[randomIndex]);
     };
 
-    playAudio () {
+    playAudio() {
         if (this.currAudio) { // Only play audio if it actually exists
             this.currAudio.play(); // Restart audio from the beginning
         }

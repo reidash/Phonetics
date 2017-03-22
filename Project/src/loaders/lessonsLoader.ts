@@ -4,10 +4,10 @@ import { Util } from '../util';
 declare var cordova: any;
 
 export class LessonsLoader {
-    getLessons = function (lang: string) {
+    getLessons(lang: string) {
         let configPath = cordova.file.applicationDirectory + 'www/assets/screenUnits/Japanese/';
         let fileName = 'config.json';
-        
+
         return new Promise<any>((resolve, reject) => {
             File.readAsText(configPath, fileName)
                 .then(text => {
@@ -19,7 +19,7 @@ export class LessonsLoader {
         });
     };
 
-    getScreenUnits = function (numUnits: number, sourceFolder: string) {
+    getScreenUnits(numUnits: number, sourceFolder: string) {
         let path = cordova.file.applicationDirectory + 'www/';
         return (
             File.listDir(path, sourceFolder)

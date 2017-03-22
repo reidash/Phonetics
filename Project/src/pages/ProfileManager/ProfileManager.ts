@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
-import { LessonsList } from '../LessonsList/LessonsList'; 
+import { LessonsList } from '../LessonsList/LessonsList';
 import { ProfileInfo } from '../../loaders/profileInfo';
 import { profileData } from '../../interfaces';
 
@@ -15,7 +15,7 @@ export class ProfileManager {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform) {
     this.user = navParams.get('user');
-    if(!this.user) {
+    if (!this.user) {
       this.user = this.user = this.createUser(); // Create default values
     }
   } // constructor
@@ -24,19 +24,19 @@ export class ProfileManager {
     // TODO
   }
 
-  submitUser = function() {
+  submitUser() {
     let profileLoader = new ProfileInfo();
     profileLoader.storeInfo(this.user, this.plt);
     this.setupDone();
   } // submitUser
 
-  setupDone = function() {
+  setupDone() {
     // setRoot to avoid back button showing up. Can't go back to profile creation (instead there should be some edit profile page or something).
-    this.navCtrl.setRoot(LessonsList, {user: this.user});
+    this.navCtrl.setRoot(LessonsList, { user: this.user });
   }
 
-  createUser = function () {
-  // Default user info, they will fill this stuff in.
+  createUser() {
+    // Default user info, they will fill this stuff in.
     return {
       name: '',
       img: 'assets/images/defaultprofile.png',

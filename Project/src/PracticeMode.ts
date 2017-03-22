@@ -45,36 +45,36 @@ export class PracticeMode {
         });
     }
 
-    initUnit () {
+    initUnit() {
         // Logic for setting up a new screenUnit
         // Maybe add statisitics tracking here?
         this.currState = this.state.init; // Go to initial state
         this.currUnit = this.screenUnits[this.currIndex]; // Set current screenUnit
     };
 
-    chooseCorrect () {
+    chooseCorrect() {
         // Logic for getting a correct answer
         // Add statistics tracking here later
         this.currState = this.state.right;
     };
 
-    chooseIncorrect () {
+    chooseIncorrect() {
         // Logic for getting an incorrect answer
         // Add statistics tracking here later
         this.currState = this.state.wrong;
     };
 
-    endSession () {
+    endSession() {
         // Logic for ending a session
         // Add statistics/goal tracking here
         this.currState = this.state.end;
     };
 
-    goToLessons () {
+    goToLessons() {
         this.navCtrl.setRoot(LessonsList, this.lessonsList);
     }
 
-    chooseOption (chosen: string) {
+    chooseOption(chosen: string) {
         if (this.currUnit.word !== chosen) {
             this.chooseIncorrect();
             return;
@@ -84,7 +84,7 @@ export class PracticeMode {
         this.autoAdvance();
     };
 
-    autoAdvance () {
+    autoAdvance() {
         let util = new Util();
         let ind = util.getNext(this.currIndex, this.screenUnits.length);
 
