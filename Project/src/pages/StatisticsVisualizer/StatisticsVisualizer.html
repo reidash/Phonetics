@@ -8,7 +8,13 @@
 </ion-header>
 
 <ion-content>
-    <ion-card class="content-container">
-        <canvas #donut></canvas>
+    <ion-card class="content-container stat-container" *ngFor="let stat of stats">
+        <span class="stat-heading">Level {{stat.level}}</span>
+        <div class="stat-row">
+            <div class="donut-wrapper" *ngFor="let data of stat.data">
+                <component-donut [value]="data.value"></component-donut>
+                <span class="stat-type-label">{{data.type}}</span>
+            </div>
+        </div>
     </ion-card>
 </ion-content>

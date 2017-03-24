@@ -1,0 +1,15 @@
+component-donut {
+    .donut-container {
+        position: relative;
+        display: inline-block;
+    }
+    .donut-label {
+        float: left;
+        margin-left: 35%;
+        margin-top: -60%;
+        font-size: 4rem;
+        position: relative;
+        z-index: 999; 
+        text-align: center;
+    }
+}

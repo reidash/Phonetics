@@ -1,0 +1,23 @@
+page-StatisticsVisualizer {
+    .stat-heading {
+        font-size: map-get($font-sizes, large);
+        text-transform: uppercase;
+        color: map-get($colors, medium);
+    }
+    .stat-row {
+        text-align: center;
+    }
+
+    .donut-wrapper{
+        display: inline-block;
+        text-align: center;
+        margin-right: map-get($spacings, medium);
+        width: 40%;
+    }
+
+    component-donut {
+        position: relative;
+        display: block;
+        margin-bottom: map-get($spacings, medium);
+    }
+}
