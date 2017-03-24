@@ -20,7 +20,7 @@
 		
 		{{currUnit.word}}
 		
-		<button ion-button color="primary" (click) = "SpeechToText()">
+		<button ion-button color="primary" (click) = "speechToText()">
     <ion-icon name="mic"></ion-icon>
   </button>
     </ion-card>
@@ -61,5 +61,8 @@
         <p class="screenUnit-instruction">
             You've completed this session!
         </p>
+        <div class="button-group-container">
+            <button ion-button (click)="goToLessons()">Return to Lessons</button>
+        </div>
     </ion-card>
 </ion-content>

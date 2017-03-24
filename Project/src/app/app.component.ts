@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
-import { PhonemeList } from '../pages/PhonemeList/PhonemeList';
-import { ProfileSetup } from '../pages/ProfileSetup/ProfileSetup';
-import { ProfileInfo } from '../profileInfo';
+import { LessonsList } from '../pages/LessonsList/LessonsList';
+import { ProfileManager } from '../pages/ProfileManager/ProfileManager';
+import { ProfileInfo } from '../loaders/profileInfo';
 
 @Component({
   templateUrl: 'app.html'
@@ -24,18 +24,22 @@ export class Phonetics {
         this.user = data; // If it is there then use it
 
         if (this.user) {
-          this.rootPage = PhonemeList;
+          let params = {
+            user: this.user
+          };
+
+          this.nav.setRoot(LessonsList, params);
         } else {
-          this.rootPage = ProfileSetup;
+          this.rootPage = ProfileManager;
         }
       })
-      .catch(err => this.rootPage = ProfileSetup);
+      .catch(err => this.rootPage = ProfileManager);
 
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Lessons', component: PhonemeList },
-      { title: 'Edit Profile', component: ProfileSetup }
+      { title: 'Lessons', component: LessonsList },
+      { title: 'Edit Profile', component: ProfileManager }
     ];
   }
 
@@ -53,7 +57,7 @@ export class Phonetics {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     let params;
-    if (page.component == ProfileSetup) {
+    if (page.component === ProfileManager || page.component === LessonsList) {
       if (this.user) {
         params = {
           user: this.user
