@@ -6,6 +6,7 @@ import { ProfileSetup } from '../pages/ProfileSetup/ProfileSetup';
 import { Goals } from '../pages/Goals/Goals';
 import { ListeningMode } from '../pages/ListeningMode/ListeningMode';
 import { SpeakingMode } from '../pages/SpeakingMode/SpeakingMode';
+import { StatisticsVisualizer } from '../pages/StatisticsVisualizer/StatisticsVisualizer';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { SpeakingMode } from '../pages/SpeakingMode/SpeakingMode';
     ProfileSetup,
     Goals,
     ListeningMode,
-    SpeakingMode
+    SpeakingMode,
+    StatisticsVisualizer
   ],
   imports: [
     IonicModule.forRoot(Phonetics)
@@ -26,7 +28,8 @@ import { SpeakingMode } from '../pages/SpeakingMode/SpeakingMode';
     ProfileSetup,
     Goals,
     ListeningMode,
-    SpeakingMode
+    SpeakingMode,
+    StatisticsVisualizer
   ],
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }]
 })
