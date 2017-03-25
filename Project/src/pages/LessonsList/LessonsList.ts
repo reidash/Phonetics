@@ -46,6 +46,7 @@ export class LessonsList {
         startSession(
           this,
           {
+            phonemeId: this.lessons[index].id,
             title: this.lessons[index].name,
             screenUnits: screenUnits
           },
@@ -68,6 +69,7 @@ export class LessonsList {
         startSession(
           this,
           {
+            phonemeId: this.lessons[index].id,
             title: this.lessons[index].name,
             screenUnits: screenUnits
           },
@@ -88,6 +90,7 @@ export class LessonsList {
         startSession(
           this,
           {
+            phonemeId: this.lessons[index].id,
             title: this.lessons[index].name,
             screenUnits: screenUnits
           },

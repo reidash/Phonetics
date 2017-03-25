@@ -3,6 +3,7 @@ import { NavController, NavParams, Platform } from 'ionic-angular';
 import { Util } from './util';
 import { screenUnit } from './interfaces';
 import { LessonsList } from './pages/LessonsList/LessonsList';
+import { StatisticsVisualizer } from './pages/StatisticsVisualizer/StatisticsVisualizer';
 
 declare var cordova: any;
 
@@ -10,6 +11,7 @@ export class PracticeMode {
     protected lessonsList: any;
     protected loaded: boolean = false;
     protected title: string; // Title of the session
+    protected phonemeId: number;
     protected currUnit: screenUnit; // Current screenUnit
     protected currState: number; // Current state of UI
     protected state: any = {
@@ -31,6 +33,7 @@ export class PracticeMode {
 
         this.lessonsList = navParams.get('navParams');
         this.title = navParams.get('sessionTitle');
+        this.phonemeId = navParams.get('phonemeId');
         let tempUnits: Promise<screenUnit>[] = navParams.get('screenUnits');
 
         Promise.all(tempUnits).then((values) => {
@@ -72,6 +75,10 @@ export class PracticeMode {
 
     goToLessons() {
         this.navCtrl.setRoot(LessonsList, this.lessonsList);
+    }
+
+    goToStats() {
+        this.navCtrl.setRoot(StatisticsVisualizer, this.phonemeId);
     }
 
     chooseOption(chosen: string) {

@@ -58,6 +58,7 @@ export class LineComponent implements AfterViewInit {
         let lastAdded = this.colours.background;
         let currColour = '';
         let labels: string[] = [];
+        let dataPoints: number[] = [];
 
         for (let i = 0; i < this.values.length; i++) {
             if (this.values[i] < this.thresholds.moderate) {
@@ -73,7 +74,7 @@ export class LineComponent implements AfterViewInit {
                 lastAdded = currColour;
             }
 
-            this.values[i] *= 100;
+            dataPoints.push(this.values[i] * 100);
             labels.push((i * 20).toString());
         }
 
@@ -99,7 +100,7 @@ export class LineComponent implements AfterViewInit {
                     pointHoverBorderWidth: 2,
                     pointRadius: 1,
                     pointHitRadius: 10,
-                    data: this.values,
+                    data: dataPoints,
                     spanGaps: true
                 }]
         };
