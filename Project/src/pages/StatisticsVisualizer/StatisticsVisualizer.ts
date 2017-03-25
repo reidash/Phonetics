@@ -10,6 +10,12 @@ import { NavController, NavParams, Platform } from 'ionic-angular';
 export class StatisticsVisualizer implements AfterViewInit {
     private title: String = 'Statistics';
     private loaded: boolean = false;
+    private viewModes: any = {
+        overview: 0,
+        detail: 1
+    };
+    private view: number = this.viewModes.overview;
+    private detailsObj: any = null;
     private stats: any[];
     private totalStats: number[];
 
@@ -53,6 +59,18 @@ export class StatisticsVisualizer implements AfterViewInit {
         ];
     }
 
+    getDetailsView(phonemeId: number, type: string, level: number) {
+        this.detailsObj = {
+            title: 'Level 1 Accuracy - Listening Mode',
+            data: [0.35, 0.4, 0.37, 0.49, 0.5, 0.6, 0.75, 0.8]
+        }
+
+        this.view = this.viewModes.details;
+    }
+
+    getOverview() {
+        this.view = this.viewModes.overview;
+    }
     ngAfterViewInit() {
     }
 }
