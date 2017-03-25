@@ -8,13 +8,19 @@ page-StatisticsVisualizer {
         text-align: center;
     }
 
-    .donut-wrapper{
+    .graph-wrapper{
         display: inline-block;
         text-align: center;
         margin-right: map-get($spacings, medium);
         width: 40%;
     }
 
+    component-line {
+        position: relative;
+        display: block;
+        margin-top: map-get($spacings, medium);
+    }
+    
     component-donut {
         position: relative;
         display: block;

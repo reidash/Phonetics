@@ -11,9 +11,11 @@ export class StatisticsVisualizer implements AfterViewInit {
     private title: String = 'Statistics';
     private loaded: boolean = false;
     private stats: any[];
+    private totalStats: number[];
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform, elRef: ElementRef) {
-       //fake data for testing
+        //fake data for testing
+        this.totalStats = [0.35, 0.4, 0.5, 0.6, 0.5, 0.7, 0.75, 0.8];
         this.stats = [
             {
                 phonemeId: 0,

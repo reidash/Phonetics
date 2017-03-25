@@ -7,7 +7,7 @@ import { NavController, NavParams, Platform } from 'ionic-angular';
     templateUrl: 'donut.component.html'
 })
 
-export class Donut implements AfterViewInit {
+export class DonutComponent implements AfterViewInit {
     @Input() public value: number;
 
     private type: string = 'doughnut';
