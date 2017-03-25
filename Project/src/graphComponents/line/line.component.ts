@@ -1,6 +1,5 @@
 import { Chart } from 'chart.js';
 import { Input, ViewChild, Component, AfterViewInit, ElementRef } from '@angular/core';
-import { NavController, NavParams, Platform } from 'ionic-angular';
 
 @Component({
     selector: 'component-line',
@@ -16,22 +15,18 @@ export class LineComponent implements AfterViewInit {
         moderate: .5,
         bad: 0
     };
-
     private colours: any = {
         good: '#77ae79',
         moderate: '#ff8000',
         bad: '#b30000',
         background: '#f4f4f4'
     };
-
     private options: any = {
         'animation': {
             'animateScale': true,
             'animateRotate': false
         }
     };
-
-    private charColours: string[] = [this.colours.background];
 
     @ViewChild('line') line: ElementRef;
 

@@ -4,6 +4,7 @@ import { ListeningController } from '../ListeningController/ListeningController'
 import { SpeakingController } from '../SpeakingController/SpeakingController';
 import { LessonsLoader } from '../../loaders/lessonsLoader';
 import { lesson } from '../../interfaces';
+import { StatisticsVisualizer } from '../StatisticsVisualizer/StatisticsVisualizer';
 
 declare var cordova: any;
 
@@ -52,7 +53,7 @@ export class LessonsList {
           },
           mode)
       );
-  };
+  }
 
   startLevel1(index: number, mode: any) {
     if (!mode) {
@@ -75,7 +76,7 @@ export class LessonsList {
           },
           mode)
       );
-  };
+  }
 
   startLevel2(index: number, mode: any) {
     if (!mode) {
@@ -95,16 +96,17 @@ export class LessonsList {
             screenUnits: screenUnits
           },
           mode)
-      );
+      )
   };
 
-  goToStats() {
-    //todo
-  };
-}
+  goToStats(phonemeId: number, title: string) {
+    let params = {
+      phonemeId: phonemeId,
+      lessonTitle: title
+    };
 
-function getRandomIndex(min, max) {
-  return Math.floor(Math.random() * (max - min) + min);
+    this.navCtrl.setRoot(StatisticsVisualizer, params);
+  }
 }
 
 function startSession(scope: LessonsList, params: any, mode: any) {

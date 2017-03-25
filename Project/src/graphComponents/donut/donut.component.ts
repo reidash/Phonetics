@@ -1,6 +1,5 @@
 import { Chart } from 'chart.js';
 import { Input, ViewChild, Component, AfterViewInit, ElementRef } from '@angular/core';
-import { NavController, NavParams, Platform } from 'ionic-angular';
 
 @Component({
     selector: 'component-donut',

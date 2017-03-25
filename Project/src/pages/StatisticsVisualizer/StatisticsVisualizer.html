@@ -6,8 +6,10 @@
         <ion-title>{{title}}</ion-title>
     </ion-navbar>
 </ion-header>
-
-<ion-content>
+<ion-content *ngIf="!loaded">
+  <div class="loader">Loading...</div>
+</ion-content>
+<ion-content *ngIf="loaded">
     <div *ngIf="view === viewModes.overview">
         <ion-card class="content-container stat-container">
             <span class="stat-heading">Overall Accuracy</span>

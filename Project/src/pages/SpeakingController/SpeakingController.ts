@@ -1,8 +1,6 @@
 import { Component, NgZone } from '@angular/core';
 import { NavController, NavParams, Platform, ToastController } from 'ionic-angular';
-import { Util } from '../../util';
 import { MediaPlugin } from 'ionic-native';
-import { screenUnit } from '../../interfaces';
 import { PracticeMode } from '../../PracticeMode';
 
 declare var cordova: any;
@@ -15,7 +13,6 @@ declare var SpeechRecognition: any;
 
 export class SpeakingController extends PracticeMode {
     private recognition: any;
-    private listening: boolean = false;
     private isCorrect: boolean;
     private currAudio: MediaPlugin; // Current audio file
 

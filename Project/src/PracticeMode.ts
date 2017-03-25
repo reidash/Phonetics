@@ -1,4 +1,3 @@
-import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
 import { Util } from './util';
 import { screenUnit } from './interfaces';

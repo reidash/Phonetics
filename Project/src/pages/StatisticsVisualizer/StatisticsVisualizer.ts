@@ -1,5 +1,4 @@
-import { Chart } from 'chart.js';
-import { ViewChild, Component, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, AfterViewInit } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
 
 @Component({
@@ -20,6 +19,8 @@ export class StatisticsVisualizer implements AfterViewInit {
     private totalStats: number[];
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform, elRef: ElementRef) {
+        plt.ready().then(() => this.loaded = true);
+        
         console.log(navParams);
         //todo check navParams for phonemeId and load data for only that phonemeId
         if(navParams && navParams.get('phonemeId')) {
