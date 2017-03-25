@@ -32,7 +32,7 @@ export class PracticeMode {
         };
 
         this.lessonsList = navParams.get('navParams');
-        this.title = navParams.get('sessionTitle');
+        this.title = navParams.get('title');
         this.phonemeId = navParams.get('phonemeId');
         let tempUnits: Promise<screenUnit>[] = navParams.get('screenUnits');
 
@@ -78,7 +78,12 @@ export class PracticeMode {
     }
 
     goToStats() {
-        this.navCtrl.setRoot(StatisticsVisualizer, this.phonemeId);
+        let params = {
+            phonemeId: this.phonemeId,
+            lessonTitle: this.navParams.get('title')
+        };
+
+        this.navCtrl.setRoot(StatisticsVisualizer, params);
     }
 
     chooseOption(chosen: string) {

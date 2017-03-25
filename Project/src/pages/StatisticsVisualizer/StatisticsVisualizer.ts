@@ -20,10 +20,14 @@ export class StatisticsVisualizer implements AfterViewInit {
     private totalStats: number[];
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform, elRef: ElementRef) {
-        
+        console.log(navParams);
         //todo check navParams for phonemeId and load data for only that phonemeId
         if(navParams && navParams.get('phonemeId')) {
             console.log(navParams.get('phonemeId'));
+        }
+
+        if(navParams && navParams.get('lessonTitle')) {
+            this.title = navParams.get('lessonTitle');
         }
 
         //fake data for testing
