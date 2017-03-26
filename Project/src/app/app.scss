@@ -113,3 +113,15 @@ a {
 .card p {
     font-size: map-get($font-sizes, normal);
 }
+
+.menu-pic {
+    width: map-get($font-sizes, larger);
+    height: map-get($font-sizes, larger);
+    border-radius: 250px;
+    vertical-align: middle;
+    margin-right: map-get($spacings, narrow);
+}
+
+.menu-title {
+    vertical-align: middle;
+}

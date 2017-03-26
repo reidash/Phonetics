@@ -3,6 +3,10 @@ page-lessonsList {
         color: map-get($colors, dark);
     }
 
+    ion-icon {
+        vertical-align: middle;
+    }
+
     .card {
         padding: 0;
     }
@@ -31,12 +35,23 @@ page-lessonsList {
         margin-bottom: map-get($spacings, medium);
     }
 
+    .session-link-group {
+        background-color: rgba(0,0,0,0.1);
+        border-radius: 3px;
+        margin: map-get($spacings, narrow) auto;
+        padding: map-get($spacings, narrow);
+        text-align: center;
+    }
+    
     .session-link {
-        text-transform: lowercase;
-        font-size: map-get($font-sizes, normal);
+        font-size: map-get($font-sizes, small);
         margin-right: map-get($spacings, medium);
     }
-
+    
+    .session-link:last-child {
+        margin-right: 0;
+    }
+    
     .lesson-description {
         margin-bottom: map-get($spacings, medium);
     }
