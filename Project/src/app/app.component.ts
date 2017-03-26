@@ -1,22 +1,20 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
-import { PhonemeList } from '../pages/PhonemeList/PhonemeList';
-import { ProfileSetup } from '../pages/ProfileSetup/ProfileSetup';
+import { StatisticsVisualizer } from '../pages/StatisticsVisualizer/StatisticsVisualizer';
+import { LessonsList } from '../pages/LessonsList/LessonsList';
+import { ProfileManager } from '../pages/ProfileManager/ProfileManager';
+import { ProfileInfo } from '../loaders/profileInfo';
 import { StatisticsTesting } from '../pages/StatisticsTesting/StatisticsTesting';
 import { Statistics } from '../stats';
-import { ProfileInfo } from '../profileInfo';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class Phonetics {
   @ViewChild(Nav) nav: Nav;
-
   rootPage: any;
-
   pages: Array<{ title: string, component: any }>;
-
   user: any;
 
   constructor(public platform: Platform) {
@@ -29,18 +27,23 @@ export class Phonetics {
         this.user = data; // If it is there then use it
 
         if (this.user) {
-          this.rootPage = PhonemeList;
+          let params = {
+            user: this.user
+          };
+
+          this.nav.setRoot(LessonsList, params);
         } else {
-          this.rootPage = ProfileSetup;
+          this.rootPage = ProfileManager;
         }
       })
-      .catch(err => this.rootPage = ProfileSetup);
+      .catch(err => this.rootPage = ProfileManager);
 
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Lessons', component: PhonemeList },
-      { title: 'Edit Profile', component: ProfileSetup },
+      { title: 'Lessons', component: LessonsList },
+      { title: 'Edit Profile', component: ProfileManager },
+      { title: 'Statistics', component: StatisticsVisualizer },
       { title: 'Statistics Testing', component: StatisticsTesting}
     ];
   }
@@ -51,7 +54,6 @@ export class Phonetics {
       // Here you can do any higher level native things you might need.
       let stats = Statistics.GetStatistics(); // Start loading statistics
       document.addEventListener('resume', () => {let stats = Statistics.GetStatistics()}); // Load stats on resume
-      //document.addEventListener('pause', () => {stats.StoreData()}, false); // Store stats on pause
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
@@ -61,7 +63,7 @@ export class Phonetics {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     let params;
-    if (page.component == ProfileSetup) {
+    if (page.component === ProfileManager || page.component === LessonsList) {
       if (this.user) {
         params = {
           user: this.user

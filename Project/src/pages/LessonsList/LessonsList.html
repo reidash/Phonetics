@@ -21,7 +21,7 @@
           <p class="lesson-description">
             {{lesson.description}}
           </p>
-          <a class="lesson-stats-link" href="javascript:void(0);" role="button" title="View Performance Statistics" (click)="goToStats()">
+          <a class="lesson-stats-link" href="javascript:void(0);" role="button" title="View Performance Statistics" (click)="goToStats(lesson.id, lesson.name)">
           View Performance Statistics
           </a>
           <hr />

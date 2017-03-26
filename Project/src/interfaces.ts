@@ -5,7 +5,20 @@ export interface screenUnit {
     audioPaths: string [] //paths to audio files for this screen unit
 }
 
-export const enum LessonType {
+export interface lesson {
+    id: number;
+    name: string;
+    description: string;
+    path: string;
+};
+
+export interface profileData {
+    name: string, // Username
+    img: string, // Path to user image
+    nativeLang: string // User's native language
+}
+
+export const enum LessonType { 
     Listening = 0,
     Speaking = 1
 }
