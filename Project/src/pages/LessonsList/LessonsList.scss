@@ -44,10 +44,14 @@ page-lessonsList {
     }
     
     .session-link {
-        font-size: map-get($font-sizes, normal);
+        font-size: map-get($font-sizes, small);
         margin-right: map-get($spacings, medium);
     }
-
+    
+    .session-link:last-child {
+        margin-right: 0;
+    }
+    
     .lesson-description {
         margin-bottom: map-get($spacings, medium);
     }
