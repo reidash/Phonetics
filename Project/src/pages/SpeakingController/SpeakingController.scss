@@ -25,6 +25,27 @@ page-SpeakingController {
             margin-left: 0;
         }
     }
+	
+	.screenUnit-video {
+        width: 100px;
+        height: 100px;
+        font-size: 40px;
+        text-align: center;
+        border-radius: 250px;
+        border: 2px solid map-get($colors, medium);
+        padding-top: 25px;
+        margin: map-get($spacings, wide) auto;
+
+        ion-icon {
+            color: map-get($colors, medium);
+            margin-left: 8px;
+        }
+
+        ion-icon[name=checkmark] {
+            color: map-get($colors, secondary);
+            margin-left: 0;
+        }
+    }
 
     .button {
         font-size: map-get($font-sizes, larger);
