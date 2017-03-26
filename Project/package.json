@@ -20,7 +20,8 @@
     "ionic-plugin-keyboard",
     "cordova-plugin-statusbar",
     "cordova-plugin-nativestorage",
-    "https://github.com/macdonst/SpeechRecognitionPlugin"
+    "https://github.com/macdonst/SpeechRecognitionPlugin",
+	"https://github.com/moust/cordova-plugin-videoplayer"
   ],
   "dependencies": {
     "@angular/common": "2.2.1",

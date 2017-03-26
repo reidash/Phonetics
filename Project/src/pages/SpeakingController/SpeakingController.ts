@@ -28,8 +28,8 @@ export class SpeakingController extends PracticeMode {
         public navParams: NavParams,
         public plt: Platform,
         private toastCtrl: ToastController,
-        private zone: NgZone,
-		private videoPlayer: VideoPlayer
+		private videoPlayer: VideoPlayer,
+        private zone: NgZone
     ) {		
         super(navCtrl, navParams, plt);	
         plt.ready().then(() => {
