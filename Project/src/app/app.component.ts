@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, Events } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { LessonsList } from '../pages/LessonsList/LessonsList';
 import { ProfileManager } from '../pages/ProfileManager/ProfileManager';
@@ -16,7 +16,7 @@ export class Phonetics {
   menuTitle: string = 'Menu';
   menuPic: string = 'assets/images/defaultprofile.png';
 
-  constructor(public platform: Platform) {
+  constructor(public platform: Platform, private events: Events) {
     this.initializeApp();
     let profileLoader = new ProfileInfo();
 
@@ -53,6 +53,12 @@ export class Phonetics {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
 
+      this.events.subscribe('profileUpdated', (user) => {
+        this.user = user;
+        this.menuPic = user.img;
+        this.menuTitle = user.name;
+      });
+
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
@@ -72,8 +78,8 @@ export class Phonetics {
         return;
       }
 
-      let profileLoader = new ProfileInfo();
-      profileLoader.getInfo(this.platform).then((data) => { // Try to get the profile data
+    let profileLoader = new ProfileInfo();
+    profileLoader.getInfo(this.platform).then((data) => { // Try to get the profile data
         this.user = data; // If it is there then use it
         params = {
           user: this.user
@@ -81,8 +87,8 @@ export class Phonetics {
         this.nav.setRoot(page.component, params);
       });
 
-    } else {
-      this.nav.setRoot(page.component, params);
-    }
+      } else {
+        this.nav.setRoot(page.component, params);
+      }
   }
 }

@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import { NavController, NavParams, Platform } from 'ionic-angular';
+import { NavController, NavParams, Platform, Events } from 'ionic-angular';
 import { LessonsList } from '../LessonsList/LessonsList';
 import { ProfileInfo } from '../../loaders/profileInfo';
 import { profileData } from '../../interfaces';
@@ -21,7 +21,8 @@ export class ProfileManager {
     public navCtrl: NavController,
     public navParams: NavParams,
     public plt: Platform,
-    private zone: NgZone
+    private zone: NgZone,
+    private events: Events
   ) {
     this.user = navParams.get('user');
     if (!this.user) {
@@ -29,8 +30,6 @@ export class ProfileManager {
     } else {
       this.showMenu = true;
     }
-
-    plt.ready().then(() => console.log(navigator));
   } // constructor
 
   changePicture() {
@@ -69,6 +68,7 @@ export class ProfileManager {
   submitUser() {
     let profileLoader = new ProfileInfo();
     profileLoader.storeInfo(this.user, this.plt);
+    this.events.publish('profileUpdated', this.user);
     this.setupDone();
   } // submitUser
 
