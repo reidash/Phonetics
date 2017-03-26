@@ -12,7 +12,8 @@
     <div class="profile-image-container">
       <div class="profile-image-preview" [ngStyle]="{'background-image': 'url(' + user.img + ')'}">
       </div>
-      <a href="javascript:void(0);" (click)="changePicture()" role="button">Change Profile Picture</a>
+      <a href="javascript:void(0);" (click)="takePicture()" role="button">Take Profile Picture</a>
+      <a href="javascript:void(0);" (click)="choosePicture()" role="button">Choose Profile Picture</a>
     </div>
 
     <div class="profile-settings-container">

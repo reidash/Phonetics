@@ -19,7 +19,8 @@ page-ProfileManager {
         box-shadow: $box-shadow;
         margin: map-get($spacings, medium) auto;
         margin-top: 0;
-        background-size: contain;
+        background-size: cover;
+        background-repeat: no-repeat;
     }
 
     .profile-settings-container {
