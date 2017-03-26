@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.ionicframework.phonetics480021" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>phonetics</name>
-  <description>An awesome Ionic/Cordova app.</description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+  <name>Phonetics</name>
+  <description>An accent-reduction app.</description>
+  <author href="https://github.com/reidash/Phonetics">Team Kennedy</author>
   <content src="index.html"/>
+  <icon src="resources/logo.png"/>
   <access origin="*"/>
   <allow-navigation href="http://ionic.local/*"/>
   <allow-intent href="http://*/*"/>
@@ -14,10 +15,12 @@
   <allow-intent href="geo:*"/>
   <platform name="android">
     <allow-intent href="market:*"/>
+    <splash src="resources/android/splash/splash.png" density="port-hdpi"/>
   </platform>
   <platform name="ios">
     <allow-intent href="itms:*"/>
     <allow-intent href="itms-apps:*"/>
+    <splash src="resources/android/splash/splash.png"/>
   </platform>
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
