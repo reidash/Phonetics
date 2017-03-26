@@ -6,7 +6,7 @@ import { LessonsList } from '../pages/LessonsList/LessonsList';
 import { ProfileManager } from '../pages/ProfileManager/ProfileManager';
 import { ProfileInfo } from '../loaders/profileInfo';
 import { StatisticsTesting } from '../pages/StatisticsTesting/StatisticsTesting';
-import { Statistics } from '../stats';
+import { Statistics } from '../StatisticsModel';
 
 @Component({
   templateUrl: 'app.html'

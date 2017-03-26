@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { Statistics } from '../../stats';
+import { Statistics } from '../../StatisticsModel';
 import { LessonType } from '../../interfaces';
 
 
@@ -16,7 +16,7 @@ export class StatisticsTesting {
   }
   // Actual Statistics stuff
   public myStats: Statistics;
-  public myAverages: [number, number][];
+  public myAverages: number[];
   public myNumStats: number;
 
   // A whole bunch of variables for user input
@@ -49,7 +49,7 @@ export class StatisticsTesting {
   public LogStatistics(groupBy: number, phonemeID: number, type: LessonType, level: number) {
       this.myNumStats = this.myStats.GetSessionCount();
       console.log("Num Sessions: " + this.myNumStats);
-      let promise: Promise<[number, number][]>;
+      let promise: Promise<number[]>;
       //console.log("Filterning stats with: groupBy="+groupBy+", phonemeID="+phonemeID+", type="+type+", level="+level);
       if(this.useLevel) {
         console.log("Filtering by level");
@@ -64,10 +64,10 @@ export class StatisticsTesting {
         console.log("No Filtering");
         promise = this.myStats.GetFilteredStats(() => {return true;}, groupBy);
       }
-      promise.then((data: [number, number][]) => {
+      promise.then((data: number[]) => {
           this.myAverages = data;
           for(let val of this.myAverages) {
-              console.log("(" + val[0] +", " + val[1] +")");
+              console.log(val);
           }
       });
   }

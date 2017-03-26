@@ -3,7 +3,7 @@ import { Util } from './util';
 import { screenUnit } from './interfaces';
 import { LessonsList } from './pages/LessonsList/LessonsList';
 import { StatisticsVisualizer } from './pages/StatisticsVisualizer/StatisticsVisualizer';
-import { Statistics } from './stats';
+import { Statistics } from './StatisticsModel';
 
 declare var cordova: any;
 

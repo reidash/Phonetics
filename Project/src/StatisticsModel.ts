@@ -16,7 +16,7 @@ interface statisticsData {
     sessionNumber: number; // The number of session attempts made so far
     sessionData: sessionInfo[]; // All session data ever recorded
     totalTime: number; // Is this a number?
-    dynamicList: screenUnit[]; // Words in the dynamicList
+    dynamicList: [screenUnit[], screenUnit[]]; // Words in the dynamicList one for speaking one for listening
 }
 
 // A class that stores session statistics.
@@ -37,7 +37,7 @@ export class Statistics
     {
         // TODO: Load stats from disk
         this.sessionInProgress = false;
-        this.data = {sessionNumber: 0, sessionData: [], totalTime: 0, dynamicList: []}; // Default values
+        this.data = {sessionNumber: 0, sessionData: [], totalTime: 0, dynamicList: [[],[]]}; // Default values
         this.dataPromise = new Promise((resolve, reject) => { // Statistics loading code 
             let storagePath = cordova.file.dataDirectory; // TODO make this a constant of some sort.
             let statsFile = 'stats.json'; // TODO make this some kind of constant
@@ -51,7 +51,7 @@ export class Statistics
             }, (error: any) => {
                 if(error.code === 1 || error.code === 13) {
                     console.log("No previous stat file found.");
-                    resolve({sessionNumber: 0, sessionData: [], totalTime: 0, dynamicList: []}); // Resolve with new statistics data
+                    resolve({sessionNumber: 0, sessionData: [], totalTime: 0, dynamicList: [[],[]]}); // Resolve with new statistics data
                 } else {
                     console.log("Error checking for stats file: " + JSON.stringify(error));
                 }
@@ -148,12 +148,12 @@ export class Statistics
         if(correct) {
             this.curSessionInfo.sessionCorrect += 1; // Update the currentSession corrects
         }
-        if(!this.data.dynamicList.find((otherUnit: screenUnit) => { return unit.id === otherUnit.id;})) {
-            this.data.dynamicList.push(unit); // Add the word to the dynamic list
+        if(!this.data.dynamicList[this.curSessionInfo.sessionType].find((otherUnit: screenUnit) => { return unit.id === otherUnit.id;})) {
+            this.data.dynamicList[this.curSessionInfo.sessionType].push(unit); // Add the word to the dynamic list
         }
     }
 
-    private GetStatsInternal(data: sessionInfo[], groupBy: number): [number, number][]
+    private GetStatsInternal(data: sessionInfo[], groupBy: number): number[]
     {
         if(data.length === 0) { // Early out for empty
             return [];
@@ -162,7 +162,7 @@ export class Statistics
             groupBy = this.data.sessionNumber;
         } // if
         let head: number = 0;
-        let phonemeStats: [number, number][] = [];
+        let phonemeStats:number[] = [];
         let correctSum: number = 0;
         let totalSum: number = 0;
         while((head < data.length) && (head < groupBy)) {
@@ -170,14 +170,14 @@ export class Statistics
             totalSum += data[head].sessionTotal;
             head += 1;
         } // while
-        phonemeStats.push([0, (correctSum/totalSum)]); // Average of sessions
+        phonemeStats.push(correctSum/totalSum); // Average of sessions
         while(head < data.length) {
             correctSum -= data[head - groupBy].sessionCorrect;
             correctSum += data[head].sessionCorrect;
             totalSum -= data[head - groupBy].sessionTotal;
             totalSum += data[head].sessionTotal;
             head += 1; // update head
-            phonemeStats.push([head - groupBy, correctSum/totalSum]) // average of sessions
+            phonemeStats.push(correctSum/totalSum) // average of sessions
         } // while
         return phonemeStats;
     }
@@ -190,7 +190,7 @@ export class Statistics
     // Returns an array of accuracy points. Each point will be the accuracy averaged over groupBy sessions.
     // filterFunction: A function to filter the statistics by, will only average statistics that pass the filter
     // groupBy: An integer that specifies how many sessions should be averaged for each data point
-    public GetFilteredStats(filterFunction: (val: sessionInfo, index: number, array: sessionInfo[])=>any, groupBy: number): Promise<[number, number][]>
+    public GetFilteredStats(filterFunction: (val: sessionInfo, index: number, array: sessionInfo[])=>any, groupBy: number): Promise<number[]>
     {
         return new Promise((resolve, reject) => {
             this.dataPromise.then(() => {
@@ -205,7 +205,7 @@ export class Statistics
     // Type: Specifies either listening, speaking, or both
     // level: Specifies the lesson level [1-3]
     // groupBy: An integer that specifies how many sessions should be averaged for each data point
-    public GetPhonemeStatsByLevel(phonemeID: number, type: LessonType, level: number, groupBy: number): Promise<[number, number][]>
+    public GetPhonemeStatsByLevel(phonemeID: number, type: LessonType, level: number, groupBy: number): Promise<number[]>
     {
         return this.GetFilteredStats((val: sessionInfo) => { 
             return (val.sessionID === phonemeID && val.sessionType === type && val.lessonLevel === level);
@@ -216,7 +216,7 @@ export class Statistics
     // Phoneme-id: The unique id for the phoneme pair you want the stats for.
     // Type: Specifies either listening, speaking, or both
     // groupBy: An integer that specifies how many sessions should be averaged for each data point
-    public GetPhonemeStatsByType(phonemeID: number, type: LessonType, groupBy: number): Promise<[number, number][]>
+    public GetPhonemeStatsByType(phonemeID: number, type: LessonType, groupBy: number): Promise<number[]>
     {
         return this.GetFilteredStats((val: sessionInfo) => {
             return (val.sessionID === phonemeID && val.sessionType === type);
@@ -226,7 +226,7 @@ export class Statistics
     // Returns an array of accuracy points. Each point will be the accuracy averaged over groupBy sessions. 
     // Type: Specifies either listening, speaking, or both
     // groupBy: An integer that specifies how many sessions should be averaged for each data point
-    public GetTotalStatsByType(type: LessonType, groupBy: number): Promise<[number, number][]>
+    public GetTotalStatsByType(type: LessonType, groupBy: number): Promise<number[]>
     {
         return this.GetFilteredStats((val: sessionInfo) => {
             return val.sessionType === type;
@@ -240,12 +240,20 @@ export class Statistics
     }
 
     // Returns the current dynamic list
-    public GetDynamicList(): Promise<screenUnit[]>
+    public GetDynamicList(type: LessonType): Promise<screenUnit[]>
     {
         return new Promise((resolve, reject) =>{
             this.dataPromise.then(() => {
-                resolve(this.data.dynamicList);
+                resolve(this.data.dynamicList[type]);
             });
+        });
+    }
+
+    // Allows someone to set the dynamic list to remove correct screenUnits
+    public SetDynamicList(type: LessonType, list: screenUnit[]): void 
+    {
+        this.dataPromise.then(() => {
+            this.data.dynamicList[type] = list; 
         });
     }
 

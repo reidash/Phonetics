@@ -5,7 +5,7 @@ import { SpeakingController } from '../SpeakingController/SpeakingController';
 import { LessonsLoader } from '../../loaders/lessonsLoader';
 import { lesson, LessonType } from '../../interfaces';
 import { StatisticsVisualizer } from '../StatisticsVisualizer/StatisticsVisualizer';
-import { Statistics } from '../../stats';
+import { Statistics } from '../../StatisticsModel';
 
 declare var cordova: any;
 

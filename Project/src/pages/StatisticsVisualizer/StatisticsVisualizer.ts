@@ -1,5 +1,7 @@
 import { Component, ElementRef, AfterViewInit } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
+import { Statistics } from '../../StatisticsModel';
+import { LessonType } from '../../interfaces';
 
 @Component({
     selector: 'page-StatisticsVisualizer',
@@ -19,55 +21,103 @@ export class StatisticsVisualizer implements AfterViewInit {
     private totalStats: number[];
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform, elRef: ElementRef) {
-        plt.ready().then(() => this.loaded = true);
-        
         console.log(navParams);
+
         //todo check navParams for phonemeId and load data for only that phonemeId
+        let phonemeId: number = 0;
         if(navParams && navParams.get('phonemeId')) {
             console.log(navParams.get('phonemeId'));
+        } else {
+            console.log("Error: phonemeId not provided as navParam for StatisticsVisualizer");
         }
 
         if(navParams && navParams.get('lessonTitle')) {
             this.title = navParams.get('lessonTitle');
+        } else {
+            console.log("Error: lessonTitle not provided as navParam for StatisticsVisualizer");
         }
 
-        //fake data for testing
-        this.totalStats = [0.35, 0.4, 0.5, 0.6, 0.5, 0.7, 0.75, 0.8];
+        //Default values 
+        let statsModel = Statistics.GetStatistics();
+        this.totalStats = [0, 0, 0, 0, 0, 0, 0, 0];
         this.stats = [
-            {
-                phonemeId: 0,
-                level: 1,
-                data: [{
-                    type: 'Listening',
-                    value: 0.85
-                },
                 {
-                    type: 'Speaking',
-                    value: 0.75
-                }]
-            },
-            {
-                phonemeId: 0,
-                level: 2,
-                data: [{
-                    type: 'Listening',
-                    value: 0.72
-                },
-                {
-                    type: 'Speaking',
-                    value: 0.60
-                }],
-            },
-            {
-                phonemeId: 0,
-                level: 3,
-                data: [
+                    phonemeId: phonemeId,
+                    level: 1,
+                    data: [{
+                        type: 'Listening',
+                        value: 0.4
+                    },
                     {
                         type: 'Speaking',
-                        value: 0.25
+                        value: 0
                     }]
-            }
-        ];
+                },
+                {
+                    phonemeId: 0,
+                    level: 2,
+                    data: [{
+                        type: 'Listening',
+                        value: 0
+                    },
+                    {
+                        type: 'Speaking',
+                        value: 0
+                    }],
+                },
+                {
+                    phonemeId: 0,
+                    level: 3,
+                    data: [
+                        {
+                            type: 'Speaking',
+                            value: 0
+                        }]
+                }
+        ]; // stats
+        statsModel.GetFilteredStats(() => {return true;}, Math.floor(statsModel.GetSessionCount()/20)).then((data) => {
+            console.log(JSON.stringify(data));
+            this.totalStats = data;
+        }).then(() => {
+            return statsModel.GetPhonemeStatsByLevel(phonemeId, LessonType.Listening, 1, 0).then((data) => {
+                console.log(data);
+                if(data.length > 0) {
+                    this.stats[0].data[0].value = data[0];
+                }
+            })
+        }).then(() => {
+            let type: LessonType = LessonType.Speaking;
+            return statsModel.GetPhonemeStatsByLevel(phonemeId, LessonType.Speaking, 1, 0).then((data) => {
+                console.log(data);
+                if(data.length > 0) {
+                    this.stats[0].data[1].value = data[0];
+                }
+            })
+        }).then(() => {
+            let type: LessonType = LessonType.Listening;
+            return statsModel.GetPhonemeStatsByLevel(phonemeId, LessonType.Listening, 2, 0).then((data) => {
+                console.log(data);
+                if(data.length > 0) {
+                    this.stats[1].data[0].value = data[0];
+                }
+            })
+        }).then(() => {
+            let type: LessonType = LessonType.Speaking;
+            return statsModel.GetPhonemeStatsByLevel(phonemeId, LessonType.Speaking, 2, 0).then((data) => {
+                console.log(data);
+                if(data.length > 0) {
+                    this.stats[1].data[1].value = data[0];
+                }
+            })
+        }).then(() => {
+            let type: LessonType = LessonType.Speaking;
+            return statsModel.GetPhonemeStatsByLevel(phonemeId, LessonType.Speaking, 3, 0).then((data) => {
+                console.log(data);
+                if(data.length > 0) {
+                    this.stats[2].data[0].value = data[0];
+                }
+            })
+        }).then(() => {this.loaded = true});
     }
 
     getDetailsView(phonemeId: number, type: string, level: number) {
