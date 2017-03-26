@@ -71,4 +71,29 @@ page-SpeakingController {
     .screenUnit-incorrect {
         background-color: map-get($colors, incorrect);
     }
+
+    .screenUnit-word {
+        padding: map-get($spacings, wide) 0;
+        border-radius: 3px;
+        color: map-get($colors, medium);
+        font-size: map-get($font-sizes, largest);
+        margin: map-get($spacings, medium);
+        text-align: center;
+    }
+
+    .screenUnit-record {
+        background-color: map-get($colors, medium);
+        border-radius: 200%;
+        color: map-get($colors, light);
+        font-size: map-get($font-sizes, larger);
+        height: auto;
+        padding: map-get($spacings, medium);
+        margin: auto;
+    }
+
+    .screenUnit-record > .button-inner,
+    .screenUnit-record > .button-inner > ion-icon {
+        height: map-get($font-sizes, larger);
+        width: map-get($font-sizes, larger);
+    }
 }
