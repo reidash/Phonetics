@@ -11,6 +11,7 @@ declare var navigator: any;
   templateUrl: 'ProfileManager.html'
 })
 export class ProfileManager {
+  private showMenu: boolean = false;
   private title: string = 'Profile Setup';
   private user: profileData;
   private langs: string[] = ['Japanese', 'Mandarin']; //todo: replace this with actual data
@@ -25,6 +26,8 @@ export class ProfileManager {
     this.user = navParams.get('user');
     if (!this.user) {
       this.user = this.user = this.createUser(); // Create default values
+    } else {
+      this.showMenu = true;
     }
 
     plt.ready().then(() => console.log(navigator));
