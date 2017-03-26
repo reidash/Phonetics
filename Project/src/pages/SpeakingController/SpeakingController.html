@@ -42,13 +42,19 @@
             Not quite...
         </h1>
         <p class="screenUnit-instruction">
-            The correct word was "{{currUnit.word}}." Tap the play button to hear the word again.
+            The correct word was "{{currUnit.word}}." Tap the play button to hear the word again or tap the video
+			button to see how to pronounce the word.
         </p>
         <div class="screenUnit-play">
              <a href="javascript:void(0)" role="button" title="Play Recording" (click)="playAudio()">
                 <ion-icon name="play"></ion-icon>
             </a>
         </div>
+		<div class="screenUnit-video">
+			<a href="javascript:void(0)" role="button" title="Play Video" (click)="playVideo()">
+                <ion-icon name="videocam"></ion-icon>
+            </a>
+		</div>
         <div class="button-group-container">
             <button ion-button (click)="autoAdvance()">Next</button>
         </div>

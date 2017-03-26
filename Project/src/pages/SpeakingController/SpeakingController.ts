@@ -4,11 +4,14 @@ import { Util } from '../../util';
 import { MediaPlugin } from 'ionic-native';
 import { screenUnit } from '../../interfaces';
 import { PracticeMode } from '../../PracticeMode';
+import { VideoPlayer } from '@ionic-native/video-player';
+
 
 declare var cordova: any;
 declare var SpeechRecognition: any;
 
 @Component({
+	providers: [VideoPlayer],
     selector: 'page-SpeakingController',
     templateUrl: 'SpeakingController.html'
 })
@@ -18,15 +21,17 @@ export class SpeakingController extends PracticeMode {
     private listening: boolean = false;
     private isCorrect: boolean;
     private currAudio: MediaPlugin; // Current audio file
+	
 
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
         public plt: Platform,
         private toastCtrl: ToastController,
-        private zone: NgZone
-    ) {
-        super(navCtrl, navParams, plt);
+        private zone: NgZone,
+		private videoPlayer: VideoPlayer
+    ) {		
+        super(navCtrl, navParams, plt);	
         plt.ready().then(() => {
             this.recognition = new SpeechRecognition();
             this.recognition.lang = 'en-US';
@@ -78,6 +83,16 @@ export class SpeakingController extends PracticeMode {
             };
         });
     }
+	
+	playVideo() {
+		var path = this.plt.is('android') ? cordova.file.applicationDirectory + 'www/' + 'assets/video/sample.mp4' : '' ; //might be a hack...
+		// Playing a video.
+		this.videoPlayer.play(path, {scalingMode: 2}).then(() => {
+			console.log('video completed');
+		}).catch(err => {
+			console.log('Error: ' + err);
+		});
+	}
 
     speechToText() {
         this.isCorrect = false;
