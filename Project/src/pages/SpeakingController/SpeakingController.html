@@ -7,7 +7,7 @@
     </ion-navbar>
 </ion-header>
 <ion-content *ngIf="!loaded">
-  <div class="loader">Loading...</div>
+    <div class="loader">Loading...</div>
 </ion-content>
 <ion-content *ngIf="loaded">
     <ion-card class="content-container" *ngIf="currState === state.init">
@@ -15,14 +15,15 @@
             Speaking Skills
         </h1>
         <p class="screenUnit-instruction">
-            Tap the microphone button to pronounce the given word. 
+            Tap the record button to pronounce the given word.
         </p>
-		
-		{{currUnit.word}}
-		
-		<button ion-button color="primary" (click) = "speechToText()">
-    <ion-icon name="mic"></ion-icon>
-  </button>
+
+        <p class="screenUnit-word">{{currUnit.word}}</p>
+        <div class="button-group-container">
+            <button ion-button class="screenUnit-record" (click)="speechToText()">
+                <ion-icon name="mic"></ion-icon>
+            </button>
+        </div>
     </ion-card>
 
     <ion-card class="content-container screenUnit-correct" *ngIf="currState === state.right">
@@ -45,7 +46,7 @@
             The correct word was "{{currUnit.word}}." Tap the play button to hear the word again.
         </p>
         <div class="screenUnit-play">
-             <a href="javascript:void(0)" role="button" title="Play Recording" (click)="playAudio()">
+            <a href="javascript:void(0)" role="button" title="Play Recording" (click)="playAudio()">
                 <ion-icon name="play"></ion-icon>
             </a>
         </div>
