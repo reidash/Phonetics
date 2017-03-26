@@ -14,7 +14,7 @@ export class ProfileManager {
   private title: string = 'Profile Setup';
   private user: profileData;
   private langs: string[] = ['Japanese', 'Mandarin']; //todo: replace this with actual data
-
+  private showMenuOverlay: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -30,15 +30,15 @@ export class ProfileManager {
     plt.ready().then(() => console.log(navigator));
   } // constructor
 
+  changePicture() {
+    this.showMenuOverlay = true;
+  }
+
+  closeMenu() {
+    this.showMenuOverlay = false;
+  }
+
   takePicture() {
-    let success = (imageData) => {
-      this.user.img = 'data:image/jpeg;base64,' + imageData;
-    }
-
-    let error = (err) => {
-      console.log("err " + err.message);
-    }
-
     navigator.camera.getPicture(this.cameraSuccess, this.cameraError, {
       sourceType: navigator.camera.PictureSourceType.CAMERA,
       destinationType: navigator.camera.DestinationType.DATA_URL
@@ -55,6 +55,7 @@ export class ProfileManager {
   cameraSuccess = (imageData) => {
     this.zone.run(() => {
       this.user.img = 'data:image/jpeg;base64,' + imageData;
+      this.closeMenu();
     })
   }
 

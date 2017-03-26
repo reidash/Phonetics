@@ -26,4 +26,35 @@ page-ProfileManager {
     .profile-settings-container {
         padding: map-get($spacings, medium);
     }
+
+    .shim {
+        background-color: rgba(0,0,0, 0.3);
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 999;
+    }
+    .menu-overlay {
+        background-color: rgba(255,255,255, 0.9);
+        border-radius: 3px;
+        display: block;
+        margin: auto;
+        left: 10%;
+        padding: 60px 20px;
+        padding-top: 8px;
+        position: absolute;
+        right: 10%;
+        top: 5%;
+        z-index: 1000;
+
+        .button-clear {
+            font-size: 30px;
+            margin-bottom: 20px;
+            padding: 0;
+        }
+    }
+
+    
 }
