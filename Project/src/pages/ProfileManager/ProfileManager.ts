@@ -32,34 +32,34 @@ export class ProfileManager {
 
   takePicture() {
     let success = (imageData) => {
-      this.user.img = imageData;
+      this.user.img = 'data:image/jpeg;base64,' + imageData;
     }
 
     let error = (err) => {
       console.log("err " + err.message);
     }
 
-    navigator.camera.getPicture(success, error, {
+    navigator.camera.getPicture(this.cameraSuccess, this.cameraError, {
       sourceType: navigator.camera.PictureSourceType.CAMERA,
-      destinationType: navigator.camera.DestinationType.NATIVE_URI
+      destinationType: navigator.camera.DestinationType.DATA_URL
     });
   }
 
   choosePicture() {
-    let success = (imageData) => {
-      this.zone.run(() => {
-        this.user.img = imageData;
-      });
-    }
-
-    let error = (err) => {
-      console.log("err " + err.message);
-    }
-
-    navigator.camera.getPicture(success, error, {
+    navigator.camera.getPicture(this.cameraSuccess, this.cameraError, {
       sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
-      destinationType: navigator.camera.DestinationType.NATIVE_URI
+      destinationType: navigator.camera.DestinationType.DATA_URL
     });
+  }
+
+  cameraSuccess = (imageData) => {
+    this.zone.run(() => {
+      this.user.img = 'data:image/jpeg;base64,' + imageData;
+    })
+  }
+
+  cameraError(err) {
+    console.log("err " + err.message);
   }
 
   submitUser() {
