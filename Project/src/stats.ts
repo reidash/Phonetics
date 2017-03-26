@@ -39,37 +39,21 @@ export class Statistics
         this.sessionInProgress = false;
         this.data = {sessionNumber: 0, sessionData: [], totalTime: 0, dynamicList: []}; // Default values
         this.dataPromise = new Promise((resolve, reject) => { // Statistics loading code 
-            // TODO actually load from a file instead of this
-            let storagePath = cordova.file.dataDirectory + "storage/;" // TODO make this a constant of some sort.
-            let readFile = function(): void {
-                let statsFile = 'stats.json'; // TODO make this some kind of constant
-                File.checkFile(storagePath, statsFile).then((fileExists: boolean) => {
-                    console.log("Found existing stat file.");
-                    File.readAsText(storagePath, statsFile).then((contents: string) => {
-                        resolve(JSON.parse(contents));
-                    }, (error: any) => {
-                        console.log("Error reading stats file: " + JSON.stringify(error));
-                    });
+            let storagePath = cordova.file.dataDirectory; // TODO make this a constant of some sort.
+            let statsFile = 'stats.json'; // TODO make this some kind of constant
+            File.checkFile(storagePath, statsFile).then((fileExists: boolean) => {
+                console.log("Found existing stat file.");
+                File.readAsText(storagePath, statsFile).then((contents: string) => {
+                    resolve(JSON.parse(contents));
                 }, (error: any) => {
-                    if(error.code === 1 || error.code === 13) {
-                        console.log("No previous stat file found.");
-                        resolve({sessionNumber: 0, sessionData: [], totalTime: 0}); // Resolve with new statistics data
-                    } else {
-                        console.log("Error checking for stats file: " + JSON.stringify(error));
-                    }
+                    console.log("Error reading stats file: " + JSON.stringify(error));
                 });
-            } // readFile
-            File.checkDir(cordova.file.dataDirectory, "storage").then((dirExists: boolean) => {
-                readFile();
             }, (error: any) => {
-                if(error.code === 1) { // Directory not found
-                    File.createDir(cordova.file.dataDirectory, "storage", false).then(() => {
-                        console.log("Creating storage director");
-                    }, (error: any) => {
-                        console.log("Error creating storage director: " + JSON.stringify(error));
-                    }).then(readFile); // Read stats file either way
+                if(error.code === 1 || error.code === 13) {
+                    console.log("No previous stat file found.");
+                    resolve({sessionNumber: 0, sessionData: [], totalTime: 0, dynamicList: []}); // Resolve with new statistics data
                 } else {
-                    console.log("Error checking director: " + JSON.stringify(error));
+                    console.log("Error checking for stats file: " + JSON.stringify(error));
                 }
             });
         });
@@ -91,14 +75,32 @@ export class Statistics
     }
 
     public StoreData(): void {
+        console.log("Trying to store statistics to disk");
         this.dataPromise.then(() => {
-            let storagePath = cordova.file.dataDirectory + "storage/;" // TODO make this a constant of some sort.
-            let statsFile = 'stats.json'; // TODO make this some kind of constant
-            File.writeFile(storagePath, statsFile, JSON.stringify(this.data), true).then(()=>{
-                console.log("Stats successfully written!");
-            }, (error: any) => {
-                console.log("Error writting statistics: " + JSON.stringify(error));
-            }); // Overwrite existing stats
+            let storagePath = cordova.file.dataDirectory;
+            let statsFile = 'stats.json';
+            let writeFile = function(data: statisticsData) {
+                File.writeFile(storagePath, statsFile, JSON.stringify(data), true).then(()=>{
+                    console.log("Stats successfully written!");
+                }, (error: any) => {
+                    console.log("Error writting statistics: " + JSON.stringify(error));
+                }); // Overwrite existing stats
+            };
+            File.checkFile(storagePath, statsFile).then((fileExists:boolean) => {
+                console.log("Removing existing stats file.");
+                return File.removeFile(storagePath, statsFile).then(()=>{},(error:any) => {
+                    console.log("Error removing previous stats file: " + JSON.stringify(error));
+                });
+            }).then(() => {
+                writeFile(this.data); // Write file
+            }, (error) => {
+                if(error.code === 1 || error.code === 13) {
+                    console.log("No previous stats file");
+                    writeFile(this.data); // Either way
+                } else {
+                    console.log("Error checking stats file for write: " + JSON.stringify(error));
+                }
+            });
         });
     }
 
@@ -136,6 +138,7 @@ export class Statistics
         this.dataPromise.then(() => { // Only push after we have finished loading
             this.data.sessionData.push(this.curSessionInfo); // Store the current session
         });
+        this.StoreData(); // Store data at the end of each session
     }
 
     // Records a single screenUnit result, on each attempt
@@ -145,9 +148,9 @@ export class Statistics
         if(correct) {
             this.curSessionInfo.sessionCorrect += 1; // Update the currentSession corrects
         }
-        /*if(!this.data.dynamicList.find((otherUnit: screenUnit) => { return unit.id === otherUnit.id;})) {
+        if(!this.data.dynamicList.find((otherUnit: screenUnit) => { return unit.id === otherUnit.id;})) {
             this.data.dynamicList.push(unit); // Add the word to the dynamic list
-        }*/
+        }
     }
 
     private GetStatsInternal(data: sessionInfo[], groupBy: number): [number, number][]
@@ -160,17 +163,21 @@ export class Statistics
         } // if
         let head: number = 0;
         let phonemeStats: [number, number][] = [];
-        let sum: number = 0;
+        let correctSum: number = 0;
+        let totalSum: number = 0;
         while((head < data.length) && (head < groupBy)) {
-            sum += data[head].sessionCorrect/data[head].sessionTotal; // Add averages
+            correctSum += data[head].sessionCorrect;
+            totalSum += data[head].sessionTotal;
             head += 1;
         } // while
-        phonemeStats.push([0, sum/head]); // Average of averages
+        phonemeStats.push([0, (correctSum/totalSum)]); // Average of sessions
         while(head < data.length) {
-            sum -= data[head - groupBy].sessionCorrect/data[head - groupBy].sessionTotal; // Remove oldest average
-            sum += data[head].sessionCorrect/data[head].sessionTotal; // Add newest average
+            correctSum -= data[head - groupBy].sessionCorrect;
+            correctSum += data[head].sessionCorrect;
+            totalSum -= data[head - groupBy].sessionTotal;
+            totalSum += data[head].sessionTotal;
             head += 1; // update head
-            phonemeStats.push([head - groupBy, sum/groupBy]) // average of averages
+            phonemeStats.push([head - groupBy, correctSum/totalSum]) // average of sessions
         } // while
         return phonemeStats;
     }

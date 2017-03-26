@@ -73,12 +73,12 @@ export class ListeningMode {
 
     endSession = function () {
         // Logic for ending a session
-        Statistics.GetStatistics().EndSession();
         this.currState = this.state.end;
     };
 
     goToLessons = function () {
         this.navCtrl.setRoot(PhonemeList);
+        Statistics.GetStatistics().EndSession();
     }
 
     playAudio = function () {

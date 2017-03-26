@@ -49,8 +49,9 @@ export class Phonetics {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      let stats = Statistics.GetStatistics(); // Start loading statistics`
-      this.platform.pause.subscribe(() => {stats.StoreData()}); // Also set it up to write on pause
+      let stats = Statistics.GetStatistics(); // Start loading statistics
+      document.addEventListener('resume', () => {let stats = Statistics.GetStatistics()}); // Load stats on resume
+      //document.addEventListener('pause', () => {stats.StoreData()}, false); // Store stats on pause
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
