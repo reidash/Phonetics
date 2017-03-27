@@ -25,6 +25,27 @@ page-SpeakingController {
             margin-left: 0;
         }
     }
+	
+	.screenUnit-video {
+        width: 100px;
+        height: 100px;
+        font-size: 40px;
+        text-align: center;
+        border-radius: 250px;
+        border: 2px solid map-get($colors, medium);
+        padding-top: 25px;
+        margin: map-get($spacings, wide) auto;
+
+        ion-icon {
+            color: map-get($colors, medium);
+            margin-left: 8px;
+        }
+
+        ion-icon[name=checkmark] {
+            color: map-get($colors, secondary);
+            margin-left: 0;
+        }
+    }
 
     .button {
         font-size: map-get($font-sizes, larger);
@@ -49,5 +70,30 @@ page-SpeakingController {
 
     .screenUnit-incorrect {
         background-color: map-get($colors, incorrect);
+    }
+
+    .screenUnit-word {
+        padding: map-get($spacings, wide) 0;
+        border-radius: 3px;
+        color: map-get($colors, medium);
+        font-size: map-get($font-sizes, largest);
+        margin: map-get($spacings, medium);
+        text-align: center;
+    }
+
+    .screenUnit-record {
+        background-color: map-get($colors, medium);
+        border-radius: 200%;
+        color: map-get($colors, light);
+        font-size: map-get($font-sizes, larger);
+        height: auto;
+        padding: map-get($spacings, medium);
+        margin: auto;
+    }
+
+    .screenUnit-record > .button-inner,
+    .screenUnit-record > .button-inner > ion-icon {
+        height: map-get($font-sizes, larger);
+        width: map-get($font-sizes, larger);
     }
 }

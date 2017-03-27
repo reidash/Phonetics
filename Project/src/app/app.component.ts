@@ -16,6 +16,8 @@ export class Phonetics {
   rootPage: any;
   pages: Array<{ title: string, component: any }>;
   user: any;
+  menuTitle: string = 'Menu';
+  menuPic: string = 'assets/images/defaultprofile.png';
 
   constructor(public platform: Platform) {
     this.initializeApp();
@@ -30,6 +32,9 @@ export class Phonetics {
           let params = {
             user: this.user
           };
+
+          this.menuTitle = this.user.name;
+          this.menuPic = this.user.img;
 
           this.nav.setRoot(LessonsList, params);
         } else {
