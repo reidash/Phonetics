@@ -79,7 +79,7 @@ export class StatisticsTesting {
       for(let i: number = 0; i < amount; i+=1) {
           stats.StartSession(phonemeID, type, level, true);
           for(let j: number = 0; j < 20; ++j) {
-              stats.Record({id: j, word: "foo", wordOptions: [], audioPaths: []}, Math.random()*100 < successWeight);
+              stats.Record({id: j, word: "lock", wordOptions: ["lock", "rock"], audioPaths: ["assets/audio/00-lock-0.m4a"]}, Math.random()*100 < successWeight);
           }
           stats.EndSession();
       }
