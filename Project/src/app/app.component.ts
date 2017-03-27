@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, Events } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
-import { StatisticsVisualizer } from '../pages/StatisticsVisualizer/StatisticsVisualizer';
 import { LessonsList } from '../pages/LessonsList/LessonsList';
 import { ProfileManager } from '../pages/ProfileManager/ProfileManager';
 import { ProfileInfo } from '../loaders/profileInfo';
@@ -48,7 +47,6 @@ export class Phonetics {
     this.pages = [
       { title: 'Lessons', component: LessonsList },
       { title: 'Edit Profile', component: ProfileManager },
-      { title: 'Statistics', component: StatisticsVisualizer },
       { title: 'Statistics Testing', component: StatisticsTesting}
     ];
   }
