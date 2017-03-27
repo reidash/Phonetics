@@ -99,7 +99,7 @@ export class LessonsList {
     let lessonFolder = this.lessons[index].path + '1'; //todo: make a "constants" file for the random magic strings and numbers like this '1'
 
     this.lessonsLoader.getScreenUnits(numUnits, lessonFolder)
-      .then((screenUnits) =>
+      .then((screenUnits) => 
         startSession(
           this,
           {
@@ -161,6 +161,12 @@ function startSession(scope: LessonsList, params: any, mode: any, level: number)
     console.log("Err: " + "Tried to start session with no mode");
     return;
   }
+
+  if(params.screenUnits.length < 1) {
+    console.log("Err: Tried to start session with no screen units");
+    return;
+  }
+
   params.navParams = scope.params;
   let lessonType: LessonType = LessonType.Speaking;
   if (mode === ListeningController) {
