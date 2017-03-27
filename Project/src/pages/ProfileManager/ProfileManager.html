@@ -9,13 +9,26 @@
 <ion-content>
   <div *ngIf="!loaded" class="loader">Loading...</div>
   <div *ngIf="loaded">
+    <div class="shim" *ngIf="showMenuOverlay">
+      <div class="menu-overlay">
+        <button ion-button clear (click)="closeMenu()"><ion-icon name="close"></ion-icon></button>
+        <button ion-button block (click)="takePicture()">New Profile Photo</button>
+        <button ion-button block (click)="choosePicture()">Choose Photo from Library</button>
+      </div>
+    </div>
     <ion-card>
       <div class="profile-image-container">
         <div class="profile-image-preview" [ngStyle]="{'background-image': 'url(' + user.img + ')'}">
         </div>
         <a href="javascript:void(0);" (click)="changePicture()" role="button">Change Profile Picture</a>
       </div>
-
+    </ion-card>
+    <ion-card>
+      <div class="profile-image-container">
+        <div class="profile-image-preview" [ngStyle]="{'background-image': 'url(' + user.img + ')'}">
+        </div>
+        <a href="javascript:void(0);" (click)="changePicture()" role="button" title="Change Picture">Change Picture</a>
+      </div>
       <div class="profile-settings-container">
         <ion-list>
           <ion-item>
