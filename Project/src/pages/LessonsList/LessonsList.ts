@@ -32,6 +32,7 @@ export class LessonsList {
       this.lessonsLoader.getLessons(this.language)
         .then(resp => {
           this.lessons = resp;
+          this.loaded = true;
         })
         .catch(e => console.log(e.message));
 
@@ -45,9 +46,6 @@ export class LessonsList {
           this.hasDynamicList = true;
         }
       });
-        //todo: check if a dynamic list exists; if so, set this.hasDynamicList = true
-
-      this.loaded = true;
     });
   }
 
@@ -55,6 +53,7 @@ export class LessonsList {
     let type: LessonType = mode === this.mode.listening ? LessonType.Listening : LessonType.Speaking;
     Statistics.GetStatistics().GetDynamicList(type)
       .then((screenUnits) => {
+        console.log(screenUnits);
         startSession(
           this,
           {
@@ -65,8 +64,7 @@ export class LessonsList {
           },
           mode,
           0)
-      })
-
+      });
   }
 
   startLevel3(index: number, mode = SpeakingController) {

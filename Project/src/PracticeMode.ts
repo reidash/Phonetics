@@ -42,13 +42,8 @@ export class PracticeMode {
         Promise.all(tempUnits).then((values) => {
             this.screenUnits = values;
             this.initUnit();
+            this.loaded = true;
         }).catch(err => console.log("err: " + err.message));
-
-        this.plt.ready().then((readySource) => { // Make sure the platform is ready before we try to use native components
-            if (readySource !== 'dom') {
-                this.loaded = true;
-            }
-        });
     }
 
     initUnit() {
