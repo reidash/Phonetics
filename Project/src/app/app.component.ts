@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, Events } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { StatisticsVisualizer } from '../pages/StatisticsVisualizer/StatisticsVisualizer';
 import { LessonsList } from '../pages/LessonsList/LessonsList';
@@ -19,7 +19,7 @@ export class Phonetics {
   menuTitle: string = 'Menu';
   menuPic: string = 'assets/images/defaultprofile.png';
 
-  constructor(public platform: Platform) {
+  constructor(public platform: Platform, private events: Events) {
     this.initializeApp();
     let profileLoader = new ProfileInfo();
 
@@ -59,6 +59,12 @@ export class Phonetics {
       // Here you can do any higher level native things you might need.
       let stats = Statistics.GetStatistics(); // Start loading statistics
       document.addEventListener('resume', () => {let stats = Statistics.GetStatistics()}); // Load stats on resume
+      this.events.subscribe('profileUpdated', (user) => {
+        this.user = user;
+        this.menuPic = user.img;
+        this.menuTitle = user.name;
+      });
+
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
@@ -78,8 +84,8 @@ export class Phonetics {
         return;
       }
 
-      let profileLoader = new ProfileInfo();
-      profileLoader.getInfo(this.platform).then((data) => { // Try to get the profile data
+    let profileLoader = new ProfileInfo();
+    profileLoader.getInfo(this.platform).then((data) => { // Try to get the profile data
         this.user = data; // If it is there then use it
         params = {
           user: this.user
@@ -87,8 +93,8 @@ export class Phonetics {
         this.nav.setRoot(page.component, params);
       });
 
-    } else {
-      this.nav.setRoot(page.component, params);
-    }
+      } else {
+        this.nav.setRoot(page.component, params);
+      }
   }
 }
