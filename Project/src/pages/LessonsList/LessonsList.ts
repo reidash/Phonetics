@@ -142,7 +142,7 @@ export class LessonsList {
       lessonTitle: title
     };
 
-    this.navCtrl.setRoot(StatisticsVisualizer, params);
+    this.navCtrl.push(StatisticsVisualizer, params);
   }
 }
 
@@ -170,5 +170,5 @@ function startSession(scope: LessonsList, params: any, mode: any, level: number)
   
   Statistics.GetStatistics().StartSession(params.phonemeId, lessonType, level, params.isDynamic);
 
-  scope.navCtrl.setRoot(mode, params);
+  scope.navCtrl.push(mode, params);
 }
