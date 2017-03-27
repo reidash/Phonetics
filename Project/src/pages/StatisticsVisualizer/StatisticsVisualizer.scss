@@ -25,5 +25,6 @@ page-StatisticsVisualizer {
         position: relative;
         display: block;
         margin-bottom: map-get($spacings, medium);
+        margin-top: map-get($spacings, narrow);
     }
 }

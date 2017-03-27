@@ -22,6 +22,13 @@ export class LineComponent implements AfterViewInit {
         background: '#f4f4f4'
     };
     private options: any = {
+        'legend': {
+            'display': true,
+            'position': 'bottom'
+        },
+        'tooltips': {
+            'enabled': false
+        },
         'animation': {
             'animateScale': true,
             'animateRotate': false
@@ -70,14 +77,14 @@ export class LineComponent implements AfterViewInit {
             }
 
             dataPoints.push(this.values[i] * 100);
-            labels.push((i).toString());
+            labels.push((i + 1).toString());
         }
 
         return {
             labels: labels,
             datasets: [
                 {
-                    label: "accuracy per attempt",
+                    label: "accuracy per set of 20 attempts",
                     fill: true,
                     lineTension: 0.1,
                     backgroundColor: this.colours.background,

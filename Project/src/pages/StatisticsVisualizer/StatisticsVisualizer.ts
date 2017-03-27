@@ -1,4 +1,4 @@
-import { Component, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
 import { Statistics } from '../../StatisticsModel';
 import { LessonType } from '../../interfaces';
@@ -8,7 +8,7 @@ import { LessonType } from '../../interfaces';
     templateUrl: 'StatisticsVisualizer.html'
 })
 
-export class StatisticsVisualizer implements AfterViewInit {
+export class StatisticsVisualizer {
     private title: String = 'Statistics';
     private loaded: boolean = false;
     private viewModes: any = {
@@ -21,8 +21,6 @@ export class StatisticsVisualizer implements AfterViewInit {
     private totalStats: number[];
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform, elRef: ElementRef) {
-        console.log(navParams);
-
         //todo check navParams for phonemeId and load data for only that phonemeId
         let phonemeId: number = 0;
         if(navParams && navParams.get('phonemeId')) {
@@ -124,6 +122,12 @@ export class StatisticsVisualizer implements AfterViewInit {
     getOverview() {
         this.view = this.viewModes.overview;
     }
-    ngAfterViewInit() {
+    
+    getType(type: number) {
+        if(type === 0) {
+            return 'Listening';
+        } 
+
+        return 'Speaking';
     }
 }

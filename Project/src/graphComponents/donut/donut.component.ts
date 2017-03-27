@@ -24,6 +24,12 @@ export class DonutComponent implements AfterViewInit {
     };
 
     private options: any = {
+        'legend': {
+            'display': false
+        },
+        'tooltips': {
+            'enabled': false
+        },
         'cutoutPercentage': 90,
         'animation': {
             'animateScale': true,
@@ -71,4 +77,7 @@ export class DonutComponent implements AfterViewInit {
         this.label.nativeElement.style.color = this.charColours[1];
     }
 
+    getDisplayValue(value: number) {
+        return Math.trunc(value * 100);
+    }
 }

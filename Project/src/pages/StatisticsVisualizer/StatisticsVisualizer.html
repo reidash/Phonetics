@@ -22,7 +22,7 @@
             <div class="stat-row">
                 <div class="graph-wrapper" *ngFor="let data of stat.data">
                     <component-donut [value]="data.value" (click)="getDetailsView(stat.phonemeId, data.type, stat.level)"></component-donut>
-                    <span class="stat-type-label">{{data.type}}</span>
+                    <span class="stat-type-label">{{getType(data.type)}}</span>
                 </div>
             </div>
         </ion-card>
