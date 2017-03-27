@@ -3,6 +3,7 @@ import { NavController, NavParams, Platform, Events } from 'ionic-angular';
 import { LessonsList } from '../LessonsList/LessonsList';
 import { ProfileInfo } from '../../loaders/profileInfo';
 import { profileData } from '../../interfaces';
+import { LessonsLoader } from '../../loaders/lessonsLoader';
 
 declare var navigator: any;
 
@@ -11,10 +12,12 @@ declare var navigator: any;
   templateUrl: 'ProfileManager.html'
 })
 export class ProfileManager {
+  private loaded = false;
   private showMenu: boolean = false;
   private title: string = 'Profile Setup';
   private user: profileData;
-  private langs: string[] = ['Japanese', 'Mandarin']; //todo: replace this with actual data
+  private langs: string[];
+  private lessonsLoader: LessonsLoader;
   private showMenuOverlay: boolean = false;
 
   constructor(
@@ -30,7 +33,14 @@ export class ProfileManager {
     } else {
       this.showMenu = true;
     }
-  } // constructor
+
+    this.lessonsLoader = new LessonsLoader();
+    this.lessonsLoader.getLanguages()
+      .then((langs) => {
+        this.langs = langs;
+        this.loaded = true;
+      });
+  } 
 
   changePicture() {
     this.showMenuOverlay = true;

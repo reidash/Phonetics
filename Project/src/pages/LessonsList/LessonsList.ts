@@ -13,7 +13,7 @@ declare var cordova: any;
 })
 export class LessonsList {
   private language: string;
-  private lessonsLoader: any;
+  private lessonsLoader: LessonsLoader;
   private loaded: boolean = false;
   private lessons: lesson[];
   private mode: any = {
