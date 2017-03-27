@@ -1,14 +1,30 @@
 import { File } from 'ionic-native';
 import { Util } from '../util';
+import { lesson } from '../interfaces';
 
 declare var cordova: any;
 
 export class LessonsLoader {
+    getLanguages() {
+        let configPath = cordova.file.applicationDirectory;
+        let folderPath = 'www/assets/screenUnits/';
+        return new Promise<string[]>((resolve, reject) => {
+            File.listDir(configPath, folderPath)
+                .then((files) => {
+                    let langs: string[] = files
+                        .filter(val => val.isDirectory)
+                        .map(val => val.name);
+                    resolve(langs);
+                })
+                .catch(err => reject(err));
+        });
+    }
+
     getLessons(lang: string) {
-        let configPath = cordova.file.applicationDirectory + 'www/assets/screenUnits/Japanese/';
+        let configPath = cordova.file.applicationDirectory + 'www/assets/screenUnits/' + lang;
         let fileName = 'config.json';
 
-        return new Promise<any>((resolve, reject) => {
+        return new Promise<lesson[]>((resolve, reject) => {
             File.readAsText(configPath, fileName)
                 .then(text => {
                     if (typeof text === 'string') {
