@@ -31,7 +31,8 @@ export class SpeakingController extends PracticeMode {
         plt.ready().then(() => {
             this.recognition = new SpeechRecognition();
             this.recognition.lang = 'en-US';
-            this.recognition.continuous = false;
+            this.recognition.continuous = true;
+            this.recognition.interimResults = true;
 
             //the voice recognition doesn't id what you are speaking -> rarely comes here
             this.recognition.onnomatch = event => {
@@ -48,6 +49,8 @@ export class SpeakingController extends PracticeMode {
 
             //able to pick up what you are saying
             this.recognition.onresult = event => {
+                this.recognition.stop(true);
+                console.log("Got result");
                 zone.run(() => { //need to run in zone for view to refresh properly
                     var i = 0;
                     if (event.results.length > 0) {
@@ -91,6 +94,7 @@ export class SpeakingController extends PracticeMode {
     }
 
     speechToText() {
+        console.log("Starting speech recognition");
         this.isCorrect = false;
         this.recognition.start();
     }
