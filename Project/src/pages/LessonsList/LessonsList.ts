@@ -22,7 +22,8 @@ export class LessonsList {
     listening: ListeningController,
     speaking: SpeakingController
   };
-  private hasDynamicList: boolean = false;
+  private hasListeningDynamicList: boolean = false;
+  private hasSpeakingDynamicList: boolean = false;
 
   constructor(public plt: Platform, public navCtrl: NavController, public params: NavParams) {
     this.language = params.get('user').nativeLang;
@@ -38,12 +39,12 @@ export class LessonsList {
 
       Statistics.GetStatistics().GetDynamicList(LessonType.Listening).then((dynamicList: screenUnit[]) => {
         if(dynamicList.length > 0) {
-          this.hasDynamicList = true;
+          this.hasListeningDynamicList = true;
         }
       });
       Statistics.GetStatistics().GetDynamicList(LessonType.Speaking).then((dynamicList: screenUnit[]) => {
         if(dynamicList.length > 0) {
-          this.hasDynamicList = true;
+          this.hasSpeakingDynamicList = true;
         }
       });
     });
@@ -53,7 +54,6 @@ export class LessonsList {
     let type: LessonType = mode === this.mode.listening ? LessonType.Listening : LessonType.Speaking;
     Statistics.GetStatistics().GetDynamicList(type)
       .then((screenUnits) => {
-        console.log(screenUnits);
         startSession(
           this,
           {

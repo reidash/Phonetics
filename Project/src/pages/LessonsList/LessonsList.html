@@ -77,11 +77,11 @@
                   There are currently no words in your challenge list. Either you have not completed a regular session or you have cleared
                   your list!
                 </p>
-                <div class="session-link-group" *ngIf="hasDynamicList">
-                  <a class="session-link" (click)="startDynamic(mode.listening)" href="javascript:void(0);" role="button" title="Start Challenge List Listening Session">
+                <div class="session-link-group" *ngIf="hasListeningDynamicList || hasSpeakingDynamicList">
+                  <a class="session-link" *ngIf="hasListeningDynamicList" (click)="startDynamic(mode.listening)" href="javascript:void(0);" role="button" title="Start Challenge List Listening Session">
                     <ion-icon name="headset"></ion-icon> Listening Skills
                   </a>
-                  <a class="session-link" (click)="startDynamic(mode.speaking)" href="javascript:void(0);" role="button" title="Start Challenge List Speaking Session">
+                  <a class="session-link" *ngIf="hasSpeakingDynamicList" (click)="startDynamic(mode.speaking)" href="javascript:void(0);" role="button" title="Start Challenge List Speaking Session">
                     <ion-icon name="microphone"></ion-icon> Speaking Skills
                   </a>
                 </div>
