@@ -43,7 +43,7 @@
           </ion-item>
         </ion-list>
         <div class="button-group-container">
-          <button ion-button (click)="submitUser()">Submit</button>
+          <button ion-button [disabled]="!user.name || !user.nativeLang" (click)="submitUser()">Submit</button>
         </div>
       </div>
     </ion-card>

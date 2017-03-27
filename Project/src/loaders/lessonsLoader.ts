@@ -21,7 +21,7 @@ export class LessonsLoader {
     }
 
     getLessons(lang: string) {
-        let configPath = cordova.file.applicationDirectory + 'www/assets/screenUnits/Japanese/';
+        let configPath = cordova.file.applicationDirectory + 'www/assets/screenUnits/' + lang;
         let fileName = 'config.json';
 
         return new Promise<lesson[]>((resolve, reject) => {
