@@ -84,7 +84,7 @@ export class LineComponent implements AfterViewInit {
             labels: labels,
             datasets: [
                 {
-                    label: "accuracy per set of 20 attempts",
+                    label: "accuracy over sessions",
                     fill: true,
                     lineTension: 0.1,
                     backgroundColor: this.colours.background,
