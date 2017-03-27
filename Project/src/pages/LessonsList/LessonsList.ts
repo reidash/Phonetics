@@ -22,6 +22,7 @@ export class LessonsList {
     listening: ListeningController,
     speaking: SpeakingController
   };
+  private hasDynamicList: boolean = false;
 
   constructor(public plt: Platform, public navCtrl: NavController, public params: NavParams) {
     this.language = params.get('user').nativeLang;
@@ -33,8 +34,27 @@ export class LessonsList {
           this.lessons = resp;
         })
         .catch(e => console.log(e.message));
+
+        //todo: check if a dynamic list exists; if so, set this.hasDynamicList = true
+
       this.loaded = true;
     });
+  }
+
+  startDynamic(mode: any) {
+    let type: LessonType = mode === this.mode.listening ? LessonType.Listening : LessonType.Speaking;
+    Statistics.GetStatistics().GetDynamicList(type)
+      .then((screenUnits) => {
+        startSession(
+          this,
+          {
+            isDynamic: true,
+            title: 'Challenge List',
+            screenUnits: screenUnits
+          },
+          mode)
+      })
+
   }
 
   startLevel3(index: number, mode = SpeakingController) {
@@ -113,7 +133,7 @@ export class LessonsList {
   }
 }
 
-function startSession(scope: LessonsList, params: any, mode: any, level: number) {
+function startSession(scope: LessonsList, params: any, mode: any, level?: number) {
   if (!scope) {
     console.log("Err: " + "Tried to start session with no scope");
     return;
@@ -130,10 +150,14 @@ function startSession(scope: LessonsList, params: any, mode: any, level: number)
   }
   params.navParams = scope.params;
   let lessonType: LessonType = LessonType.Speaking;
-  if(mode === ListeningController) {
+  if (mode === ListeningController) {
     lessonType = LessonType.Listening;
   }
-  console.log("Beginning statistics session for {phonemeId: ", params.phonemeId, ", type: ", lessonType, ", level:" , level);
-  Statistics.GetStatistics().StartSession(params.phonemeId, lessonType, level);
+  console.log("Beginning statistics session for {phonemeId: ", params.phonemeId, ", type: ", lessonType, ", level:", level);
+  
+  if(level) {
+    Statistics.GetStatistics().StartSession(params.phonemeId, lessonType, level);
+  }
+
   scope.navCtrl.setRoot(mode, params);
 }

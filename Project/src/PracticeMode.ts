@@ -22,6 +22,7 @@ export class PracticeMode {
     };
     protected currIndex: number = 0; //index of currently displayed screenUnit
     protected screenUnits: screenUnit[] = []; // Array of all screen units in the session
+    protected isDynamic: boolean = false;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform) {
         this.currUnit = {
@@ -34,6 +35,8 @@ export class PracticeMode {
         this.lessonsList = navParams.get('navParams');
         this.title = navParams.get('title');
         this.phonemeId = navParams.get('phonemeId');
+        this.isDynamic = navParams.get('isDynamic') ? true : false;
+        
         let tempUnits: Promise<screenUnit>[] = navParams.get('screenUnits');
 
         Promise.all(tempUnits).then((values) => {

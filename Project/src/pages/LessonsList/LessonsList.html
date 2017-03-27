@@ -62,5 +62,32 @@
         </div>
       </ion-card>
     </li>
+
+    <li>
+      <ion-card class="content-container">
+        <div class="lesson-container">
+          <h2>Challege List</h2>
+          <p class="lesson-description">
+            This is a dynamically-curated list of words that you have struggled with.
+          </p>
+          <hr />
+          <ul class="sessions-list">
+            <li>
+              <p *ngIf="!hasDynamicList">
+                There are currently no words in your challenge list. Either you have not completed a regular session or you have cleared your list!
+              </p>
+              <div class="session-link-group" *ngIf="hasDynamicList">
+                <a class="session-link" (click)="startDynamic(mode.listening)" href="javascript:void(0);" role="button" title="Start Challenge List Listening Session">
+          Listening Skills
+              </a>
+                <a class="session-link" (click)="startDynamic(mode.speaking)" href="javascript:void(0);" role="button" title="Start Challenge List Speaking Session">
+          Speaking Skills
+              </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </ion-card>
+    </li>
   </ul>
 </ion-content>
