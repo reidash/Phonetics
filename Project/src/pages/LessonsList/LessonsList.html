@@ -73,7 +73,7 @@
             </p>
             <ul class="sessions-list">
               <li>
-                <p *ngIf="!hasDynamicList">
+                <p *ngIf="!(hasListeningDynamicList || hasSpeakingDynamicList)">
                   There are currently no words in your challenge list. Either you have not completed a regular session or you have cleared
                   your list!
                 </p>
