@@ -27,6 +27,7 @@ export class StatisticsVisualizer implements AfterViewInit {
         let phonemeId: number = 0;
         if(navParams && navParams.get('phonemeId')) {
             console.log(navParams.get('phonemeId'));
+            phonemeId = navParams.get('phonemeId');
         } else {
             console.log("Error: phonemeId not provided as navParam for StatisticsVisualizer");
         }
@@ -45,88 +46,79 @@ export class StatisticsVisualizer implements AfterViewInit {
                     phonemeId: phonemeId,
                     level: 1,
                     data: [{
-                        type: 'Listening',
-                        value: 0.4
+                        type: LessonType.Listening,
+                        value: 0
                     },
                     {
-                        type: 'Speaking',
+                        type: LessonType.Speaking,
                         value: 0
                     }]
                 },
                 {
-                    phonemeId: 0,
+                    phonemeId: phonemeId,
                     level: 2,
                     data: [{
-                        type: 'Listening',
+                        type: LessonType.Listening,
                         value: 0
                     },
                     {
-                        type: 'Speaking',
+                        type: LessonType.Speaking,
                         value: 0
                     }],
                 },
                 {
-                    phonemeId: 0,
+                    phonemeId: phonemeId,
                     level: 3,
                     data: [
                         {
-                            type: 'Speaking',
+                            type: LessonType.Speaking,
                             value: 0
                         }]
                 }
         ]; // stats
-        statsModel.GetFilteredStats(() => {return true;}, Math.floor(statsModel.GetSessionCount()/20)).then((data) => {
-            console.log(JSON.stringify(data));
+        statsModel.GetFilteredStats(() => {return true;}, 20).then((data) => {
             this.totalStats = data;
         }).then(() => {
             return statsModel.GetPhonemeStatsByLevel(phonemeId, LessonType.Listening, 1, 0).then((data) => {
-                console.log(data);
                 if(data.length > 0) {
-                    this.stats[0].data[0].value = data[0];
+                    this.stats[0].data[0].value = Math.ceil(data[0]*100)/100;
                 }
             })
         }).then(() => {
-            let type: LessonType = LessonType.Speaking;
             return statsModel.GetPhonemeStatsByLevel(phonemeId, LessonType.Speaking, 1, 0).then((data) => {
-                console.log(data);
                 if(data.length > 0) {
-                    this.stats[0].data[1].value = data[0];
+                    this.stats[0].data[1].value = Math.ceil(data[0]*100)/100;
                 }
             })
         }).then(() => {
-            let type: LessonType = LessonType.Listening;
             return statsModel.GetPhonemeStatsByLevel(phonemeId, LessonType.Listening, 2, 0).then((data) => {
-                console.log(data);
                 if(data.length > 0) {
-                    this.stats[1].data[0].value = data[0];
+                    this.stats[1].data[0].value = Math.ceil(data[0]*100)/100;
                 }
             })
         }).then(() => {
-            let type: LessonType = LessonType.Speaking;
             return statsModel.GetPhonemeStatsByLevel(phonemeId, LessonType.Speaking, 2, 0).then((data) => {
-                console.log(data);
                 if(data.length > 0) {
-                    this.stats[1].data[1].value = data[0];
+                    this.stats[1].data[1].value = Math.ceil(data[0]*100)/100;
                 }
             })
         }).then(() => {
-            let type: LessonType = LessonType.Speaking;
             return statsModel.GetPhonemeStatsByLevel(phonemeId, LessonType.Speaking, 3, 0).then((data) => {
-                console.log(data);
                 if(data.length > 0) {
-                    this.stats[2].data[0].value = data[0];
+                    this.stats[2].data[0].value = Math.ceil(data[0]*100)/100;
                 }
             })
         }).then(() => {this.loaded = true});
     }
 
-    getDetailsView(phonemeId: number, type: string, level: number) {
-        this.detailsObj = {
-            title: 'Level 1 Accuracy - Listening Mode',
-            data: [0.35, 0.4, 0.37, 0.49, 0.5, 0.6, 0.75, 0.8]
-        }
-
-        this.view = this.viewModes.details;
+    getDetailsView(phonemeId: number, type: LessonType, level: number) {
+        Statistics.GetStatistics().GetPhonemeStatsByLevel(phonemeId, type, level, 1).then((stats) => {
+            this.detailsObj = {
+                title: 'Level ' + level + ' Accuracy - ' + (type === LessonType.Listening ? 'Listening Mode' : 'Speaking Mode'),
+                data: stats
+            }
+            this.view = this.viewModes.details;
+        });
     }
 
     getOverview() {

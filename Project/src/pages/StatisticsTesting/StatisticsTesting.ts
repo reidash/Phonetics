@@ -77,7 +77,7 @@ export class StatisticsTesting {
       //console.log("Generating Stats with: amount="+amount+", successWeight="+successWeight+", phonemeID="+phonemeID+", type="+type+", level="+level);
       let stats: Statistics = Statistics.GetStatistics();
       for(let i: number = 0; i < amount; i+=1) {
-          stats.StartSession(phonemeID, type, level);
+          stats.StartSession(phonemeID, type, level, true);
           for(let j: number = 0; j < 20; ++j) {
               stats.Record({id: j, word: "foo", wordOptions: [], audioPaths: []}, Math.random()*100 < successWeight);
           }

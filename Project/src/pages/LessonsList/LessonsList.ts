@@ -3,7 +3,7 @@ import { NavController, Platform, NavParams } from 'ionic-angular';
 import { ListeningController } from '../ListeningController/ListeningController';
 import { SpeakingController } from '../SpeakingController/SpeakingController';
 import { LessonsLoader } from '../../loaders/lessonsLoader';
-import { lesson, LessonType } from '../../interfaces';
+import { lesson, LessonType, screenUnit } from '../../interfaces';
 import { StatisticsVisualizer } from '../StatisticsVisualizer/StatisticsVisualizer';
 import { Statistics } from '../../StatisticsModel';
 
@@ -35,6 +35,16 @@ export class LessonsList {
         })
         .catch(e => console.log(e.message));
 
+      Statistics.GetStatistics().GetDynamicList(LessonType.Listening).then((dynamicList: screenUnit[]) => {
+        if(dynamicList.length > 0) {
+          this.hasDynamicList = true;
+        }
+      });
+      Statistics.GetStatistics().GetDynamicList(LessonType.Speaking).then((dynamicList: screenUnit[]) => {
+        if(dynamicList.length > 0) {
+          this.hasDynamicList = true;
+        }
+      });
         //todo: check if a dynamic list exists; if so, set this.hasDynamicList = true
 
       this.loaded = true;
@@ -48,11 +58,13 @@ export class LessonsList {
         startSession(
           this,
           {
+            phonemeId: 0,
             isDynamic: true,
             title: 'Challenge List',
             screenUnits: screenUnits
           },
-          mode)
+          mode,
+          0)
       })
 
   }
@@ -69,6 +81,7 @@ export class LessonsList {
           this,
           {
             phonemeId: this.lessons[index].id,
+            isDynamic: false,
             title: this.lessons[index].name,
             screenUnits: screenUnits
           },
@@ -93,6 +106,7 @@ export class LessonsList {
           this,
           {
             phonemeId: this.lessons[index].id,
+            isDynamic: false,
             title: this.lessons[index].name,
             screenUnits: screenUnits
           },
@@ -115,6 +129,7 @@ export class LessonsList {
           this,
           {
             phonemeId: this.lessons[index].id,
+            isDynamic: false,
             title: this.lessons[index].name,
             screenUnits: screenUnits
           },
@@ -133,7 +148,7 @@ export class LessonsList {
   }
 }
 
-function startSession(scope: LessonsList, params: any, mode: any, level?: number) {
+function startSession(scope: LessonsList, params: any, mode: any, level: number) {
   if (!scope) {
     console.log("Err: " + "Tried to start session with no scope");
     return;
@@ -155,9 +170,7 @@ function startSession(scope: LessonsList, params: any, mode: any, level?: number
   }
   console.log("Beginning statistics session for {phonemeId: ", params.phonemeId, ", type: ", lessonType, ", level:", level);
   
-  if(level) {
-    Statistics.GetStatistics().StartSession(params.phonemeId, lessonType, level);
-  }
+  Statistics.GetStatistics().StartSession(params.phonemeId, lessonType, level, params.isDynamic);
 
   scope.navCtrl.setRoot(mode, params);
 }

@@ -8,8 +8,9 @@ interface sessionInfo {
     sessionType: LessonType, // Lesson type, either Speaking or Listening
     lessonLevel: number, // the level of the lesson [1-3]
     sessionCorrect: number, // Number of correct screenUnits in the session
-    sessionTotal: number // Number of total screenUnits in the session
-    sessionTime: number // How long this session took
+    sessionTotal: number, // Number of total screenUnits in the session
+    sessionTime: number, // How long this session took
+    sessionIsDynamic: boolean
 }
 
 interface statisticsData {
@@ -105,7 +106,7 @@ export class Statistics
     }
 
     // Call before each session starts, supply the phonemeID and the lessonType
-    public StartSession(phonemeID: number, type: LessonType, level: number): void
+    public StartSession(phonemeID: number, type: LessonType, level: number, isDynamic: boolean): void
     {
         if(this.sessionInProgress) {
             console.log("Error! Tried to start a session while one was already in progress!");
@@ -119,7 +120,8 @@ export class Statistics
             lessonLevel: level, 
             sessionCorrect: 0, 
             sessionTotal: 0,
-            sessionTime: 0
+            sessionTime: 0,
+            sessionIsDynamic: isDynamic
         }; // this.curSessionInfo
     }
 
@@ -147,9 +149,15 @@ export class Statistics
         this.curSessionInfo.sessionTotal += 1; // Update the currentSession attempts
         if(correct) {
             this.curSessionInfo.sessionCorrect += 1; // Update the currentSession corrects
-        }
-        if(!this.data.dynamicList[this.curSessionInfo.sessionType].find((otherUnit: screenUnit) => { return unit.id === otherUnit.id;})) {
-            this.data.dynamicList[this.curSessionInfo.sessionType].push(unit); // Add the word to the dynamic list
+            if(this.curSessionInfo.sessionIsDynamic) {
+                this.data.dynamicList[this.curSessionInfo.sessionType] = this.data.dynamicList[this.curSessionInfo.sessionType].filter((otherUnit: screenUnit) => {
+                    return unit.id !== otherUnit.id; // Keep everything except for this screenUnit
+                });
+            }
+        } else {
+            if(!this.data.dynamicList[this.curSessionInfo.sessionType].find((otherUnit: screenUnit) => { return unit.id === otherUnit.id;})) {
+                this.data.dynamicList[this.curSessionInfo.sessionType].push(unit); // Add the word to the dynamic list
+            }
         }
     }
 
@@ -254,6 +262,13 @@ export class Statistics
     {
         this.dataPromise.then(() => {
             this.data.dynamicList[type] = list; 
+        });
+    }
+
+    public ResetStatistics(): void
+    {
+        this.dataPromise.then(() => {
+            this.data = {sessionNumber: 0, sessionData: [], totalTime: 0, dynamicList: [[],[]]}; // Default values
         });
     }
 

@@ -70,7 +70,7 @@ export class LineComponent implements AfterViewInit {
             }
 
             dataPoints.push(this.values[i] * 100);
-            labels.push((i * 20).toString());
+            labels.push((i).toString());
         }
 
         return {
