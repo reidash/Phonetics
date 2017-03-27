@@ -6,31 +6,33 @@
     <ion-title>{{title}}</ion-title>
   </ion-navbar>
 </ion-header>
-
 <ion-content>
-  <ion-card>
-    <div class="profile-image-container">
-      <div class="profile-image-preview" [ngStyle]="{'background-image': 'url(' + user.img + ')'}">
+  <div *ngIf="!loaded" class="loader">Loading...</div>
+  <div *ngIf="loaded">
+    <ion-card>
+      <div class="profile-image-container">
+        <div class="profile-image-preview" [ngStyle]="{'background-image': 'url(' + user.img + ')'}">
+        </div>
+        <a href="javascript:void(0);" (click)="changePicture()" role="button">Change Profile Picture</a>
       </div>
-      <a href="javascript:void(0);" (click)="changePicture()" role="button">Change Profile Picture</a>
-    </div>
 
-    <div class="profile-settings-container">
-      <ion-list>
-        <ion-item>
-          <ion-label floating>Profile Name</ion-label>
-          <ion-input type="text" [(ngModel)]="user.name" value="{{user.name}}"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Native Language</ion-label>
-          <ion-select [(ngModel)]="user.nativeLang">
-            <ion-option *ngFor="let lang of langs">{{lang}}</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-list>
-      <div class="button-group-container">
-        <button ion-button (click)="submitUser()">Submit</button>
+      <div class="profile-settings-container">
+        <ion-list>
+          <ion-item>
+            <ion-label floating>Profile Name</ion-label>
+            <ion-input type="text" [(ngModel)]="user.name" value="{{user.name}}"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Native Language</ion-label>
+            <ion-select [(ngModel)]="user.nativeLang">
+              <ion-option *ngFor="let lang of langs">{{lang}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <div class="button-group-container">
+          <button ion-button (click)="submitUser()">Submit</button>
+        </div>
       </div>
-    </div>
-  </ion-card>
+    </ion-card>
+  </div>
 </ion-content>
