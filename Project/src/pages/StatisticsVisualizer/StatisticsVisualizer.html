@@ -7,21 +7,23 @@
     </ion-navbar>
 </ion-header>
 <ion-content *ngIf="!loaded">
-  <div class="loader">Loading...</div>
+    <div class="loader">Loading...</div>
 </ion-content>
 <ion-content *ngIf="loaded">
     <div *ngIf="view === viewModes.overview">
         <ion-card class="content-container stat-container">
             <span class="stat-heading">Overall Accuracy</span>
             <div class="stat-row">
-                <component-line [values]="totalStats"></component-line>
+                <component-line *ngIf="totalStats.length > 0" [values]="totalStats"></component-line>
+                <p class="graph-no-data" *ngIf="totalStats.length === 0">No Data</p>
             </div>
         </ion-card>
         <ion-card class="content-container stat-container" *ngFor="let stat of stats">
             <span class="stat-heading">Level {{stat.level}}</span>
             <div class="stat-row">
                 <div class="graph-wrapper" *ngFor="let data of stat.data">
-                    <component-donut [value]="data.value" (click)="getDetailsView(stat.phonemeId, data.type, stat.level)"></component-donut>
+                    <component-donut *ngIf="data.value > -1" [value]="data.value" (click)="getDetailsView(stat.phonemeId, data.type, stat.level)"></component-donut>
+                    <p class="graph-no-data" *ngIf="data.value < 0">No Data</p>
                     <span class="stat-type-label">{{getType(data.type)}}</span>
                 </div>
             </div>

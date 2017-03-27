@@ -15,6 +15,13 @@ page-StatisticsVisualizer {
         width: 40%;
     }
 
+    .graph-no-data {
+        margin: map-get($spacings, medium) 0;
+        text-transform: uppercase;
+        font-size: map-get($font-sizes, large);
+        color: map-get($colors, medium);
+    }
+
     component-line {
         position: relative;
         display: block;

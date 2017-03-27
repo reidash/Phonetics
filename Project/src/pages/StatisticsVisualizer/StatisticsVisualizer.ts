@@ -24,7 +24,6 @@ export class StatisticsVisualizer {
         //todo check navParams for phonemeId and load data for only that phonemeId
         let phonemeId: number = 0;
         if(navParams && navParams.get('phonemeId')) {
-            console.log(navParams.get('phonemeId'));
             phonemeId = navParams.get('phonemeId');
         } else {
             console.log("Error: phonemeId not provided as navParam for StatisticsVisualizer");
@@ -38,18 +37,18 @@ export class StatisticsVisualizer {
 
         //Default values 
         let statsModel = Statistics.GetStatistics();
-        this.totalStats = [0, 0, 0, 0, 0, 0, 0, 0];
+        this.totalStats = [];
         this.stats = [
                 {
                     phonemeId: phonemeId,
                     level: 1,
                     data: [{
                         type: LessonType.Listening,
-                        value: 0
+                        value: -1
                     },
                     {
                         type: LessonType.Speaking,
-                        value: 0
+                        value: -1
                     }]
                 },
                 {
@@ -57,11 +56,11 @@ export class StatisticsVisualizer {
                     level: 2,
                     data: [{
                         type: LessonType.Listening,
-                        value: 0
+                        value: -1
                     },
                     {
                         type: LessonType.Speaking,
-                        value: 0
+                        value: -1
                     }],
                 },
                 {
@@ -70,7 +69,7 @@ export class StatisticsVisualizer {
                     data: [
                         {
                             type: LessonType.Speaking,
-                            value: 0
+                            value: -1
                         }]
                 }
         ]; // stats
