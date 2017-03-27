@@ -1,0 +1,37 @@
+page-StatisticsVisualizer {
+    .stat-heading {
+        font-size: map-get($font-sizes, large);
+        text-transform: uppercase;
+        color: map-get($colors, medium);
+    }
+    .stat-row {
+        text-align: center;
+    }
+
+    .graph-wrapper{
+        display: inline-block;
+        text-align: center;
+        margin-right: map-get($spacings, medium);
+        width: 40%;
+    }
+
+    .graph-no-data {
+        margin: map-get($spacings, medium) 0;
+        text-transform: uppercase;
+        font-size: map-get($font-sizes, large);
+        color: map-get($colors, medium);
+    }
+
+    component-line {
+        position: relative;
+        display: block;
+        margin-top: map-get($spacings, medium);
+    }
+    
+    component-donut {
+        position: relative;
+        display: block;
+        margin-bottom: map-get($spacings, medium);
+        margin-top: map-get($spacings, narrow);
+    }
+}

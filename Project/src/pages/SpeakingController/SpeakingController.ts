@@ -1,8 +1,6 @@
 import { Component, NgZone } from '@angular/core';
 import { NavController, NavParams, Platform, ToastController } from 'ionic-angular';
-import { Util } from '../../util';
 import { MediaPlugin } from 'ionic-native';
-import { screenUnit } from '../../interfaces';
 import { PracticeMode } from '../../PracticeMode';
 import { VideoPlayer } from '@ionic-native/video-player';
 
@@ -18,7 +16,6 @@ declare var SpeechRecognition: any;
 
 export class SpeakingController extends PracticeMode {
     private recognition: any;
-    private listening: boolean = false;
     private isCorrect: boolean;
     private currAudio: MediaPlugin; // Current audio file
 
@@ -34,7 +31,8 @@ export class SpeakingController extends PracticeMode {
         plt.ready().then(() => {
             this.recognition = new SpeechRecognition();
             this.recognition.lang = 'en-US';
-            this.recognition.continuous = false;
+            this.recognition.continuous = true;
+            this.recognition.interimResults = true;
 
             //the voice recognition doesn't id what you are speaking -> rarely comes here
             this.recognition.onnomatch = event => {
@@ -51,6 +49,8 @@ export class SpeakingController extends PracticeMode {
 
             //able to pick up what you are saying
             this.recognition.onresult = event => {
+                this.recognition.stop(true);
+                console.log("Got result");
                 zone.run(() => { //need to run in zone for view to refresh properly
                     var i = 0;
                     if (event.results.length > 0) {
@@ -94,6 +94,7 @@ export class SpeakingController extends PracticeMode {
     }
 
     speechToText() {
+        console.log("Starting speech recognition");
         this.isCorrect = false;
         this.recognition.start();
     }

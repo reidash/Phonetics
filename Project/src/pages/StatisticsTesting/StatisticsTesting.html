@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Statistics Testing</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <div class="Statistics-Option-Selection">
+      <ion-list>
+
+        <ion-list-header>
+            Phoneme ID
+        </ion-list-header>
+        <ion-item>
+          <ion-label floating>Use Phoneme ID?</ion-label>
+          <ion-toggle checked="usePhonemeID" [(ngModel)]="usePhonemeID"></ion-toggle>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Value:</ion-label>
+          <ion-input type="number" [(ngModel)]="phonemeID"></ion-input>
+        </ion-item>
+
+        <ion-list-header>
+            Type
+        </ion-list-header>
+        <ion-item>
+          <ion-label floating>Use Type?</ion-label>
+          <ion-toggle checked="useType" [(ngModel)]="useType"></ion-toggle>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Value:</ion-label>
+          <ion-select [(ngModel)]="myType">
+              <ion-option value="0">Listening</ion-option>
+              <ion-option value="1">Speaking</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-list-header>
+            Level
+        </ion-list-header>
+        <ion-item>
+          <ion-label floating>Use Level?</ion-label>
+          <ion-toggle checked="useLevel" [(ngModel)]="useLevel"></ion-toggle>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Value:</ion-label>
+          <ion-range min="1" max="3" pin="true" step="1" [(ngModel)]="level">
+            <ion-label range-left>1</ion-label>
+            <ion-label range-right>3</ion-label>
+          </ion-range>
+        </ion-item>
+
+        <ion-list-header>
+            Group By
+        </ion-list-header>
+        <ion-item>
+          <ion-label floating>Value:</ion-label>
+          <ion-range min="0" max="myNumStats" pin="true" step="1" [(ngModel)]="groupBy">
+            <ion-label range-left>0</ion-label>
+            <ion-label range-right>{{myNumStats}}</ion-label>
+          </ion-range>
+        </ion-item>
+
+        <ion-list-header>
+            Amount to Generate
+        </ion-list-header>
+        <ion-item>
+          <ion-label floating>Value:</ion-label>
+          <ion-input type="number" [(ngModel)]="amount"></ion-input>
+        </ion-item>
+
+        <ion-list-header>
+            Success Chance
+        </ion-list-header>
+        <ion-item>
+          <ion-label floating>Value:</ion-label>
+          <ion-range min="0" max="100" pin="true" step="1"[(ngModel)]="successWeight" color="secondary">
+            <ion-label range-left>0</ion-label>
+            <ion-label range-right>1</ion-label>
+          </ion-range>
+        </ion-item>
+
+      </ion-list>
+
+      <div class="button-group-container">
+        <button ion-button (click)="GenerateStatistics(amount,successWeight,phonemeID,myType,level)">Generate Stats</button>
+        <button ion-button (click)="LogStatistics(groupBy,phonemeID,myType,level)">Update Stats</button>
+      </div>
+    </div>
+
+    <ion-card>
+        <ion-card-header>
+            Filtered Stats
+        </ion-card-header>
+        <ion-list>
+            <ion-item *ngFor="let stat of myAverages">({{stat}})</ion-item>
+        </ion-list>
+    </ion-card>
+</ion-content>

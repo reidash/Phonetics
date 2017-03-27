@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
-import { Util } from '../../util';
 import { MediaPlugin } from 'ionic-native';
-import { screenUnit } from '../../interfaces';
-import { PhonemeList } from '../PhonemeList/PhonemeList';
 import { PracticeMode } from '../../PracticeMode';
 
 declare var cordova: any;

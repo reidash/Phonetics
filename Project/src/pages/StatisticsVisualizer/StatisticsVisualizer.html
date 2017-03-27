@@ -1,0 +1,41 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+        <ion-title>{{title}}</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <div class="loader" *ngIf="!loaded">Loading...</div>
+    <div *ngIf="loaded">
+        <div *ngIf="view === viewModes.overview">
+            <ion-card class="content-container stat-container">
+                <span class="stat-heading">Overall Accuracy</span>
+                <div class="stat-row">
+                    <component-line *ngIf="totalStats.length > 0" [values]="totalStats"></component-line>
+                    <p class="graph-no-data" *ngIf="totalStats.length === 0">No Data</p>
+                </div>
+            </ion-card>
+            <ion-card class="content-container stat-container" *ngFor="let stat of stats">
+                <span class="stat-heading">Level {{stat.level}}</span>
+                <div class="stat-row">
+                    <div class="graph-wrapper" *ngFor="let data of stat.data">
+                        <component-donut *ngIf="data.value > -1" [value]="data.value" (click)="getDetailsView(stat.phonemeId, data.type, stat.level)"></component-donut>
+                        <p class="graph-no-data" *ngIf="data.value < 0">No Data</p>
+                        <span class="stat-type-label">{{getType(data.type)}}</span>
+                    </div>
+                </div>
+            </ion-card>
+        </div>
+        <div *ngIf="view === viewModes.details">
+            <ion-card class="content-container stat-container">
+                <span class="stat-heading">{{detailsObj.title}}</span>
+                <div class="stat-row">
+                    <component-line [values]="detailsObj.data"></component-line>
+                </div>
+                <button ion-button color="medium" (click)="getOverview()">Back</button>
+            </ion-card>
+        </div>
+    </div>
+</ion-content>
