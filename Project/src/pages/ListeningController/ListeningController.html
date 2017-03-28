@@ -65,7 +65,7 @@
             </p>
             <div class="button-group-container">
                 <button ion-button (click)="goToLessons()">Return to Lessons</button>
-                <button ion-button (click)="goToStats()">Go to Lesson Statistics</button>
+                <button ion-button *ngIf="!isDynamic" (click)="goToStats()">Go to Lesson Statistics</button>
             </div>
         </ion-card>
     </div>
