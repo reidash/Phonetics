@@ -159,6 +159,11 @@ a {
     margin-left: 40px;
 }
 
+.button-wrapper:only-of-type {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
+
 .hidden {
     position: absolute;
     bottom: 0;
