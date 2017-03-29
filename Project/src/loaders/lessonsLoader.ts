@@ -35,6 +35,49 @@ export class LessonsLoader {
         });
     };
 
+    getPair(sourceFolder: string) {
+        let path = cordova.file.applicationDirectory + 'www/';
+        return (
+            File.listDir(path, sourceFolder)
+                .then((files) => {
+                    let index = Math.floor(Math.random() * files.length);
+                    let screenUnits = [];
+                    screenUnits.push(
+                        File.readAsText(path + sourceFolder, files[index].name)
+                            .then(text => {
+                                if (typeof text === 'string') {
+                                    return JSON.parse(text);
+                                }
+                            })
+                            .catch(err => console.log("err: " + err.message))
+                    );
+
+                    //paired word of even file name always comes after
+                    if(Number(files[index].name.substring(0, files[index].name.indexOf('.'))) % 2 === 0) {
+                        index++;
+                    } else {
+                        index--;
+                    }
+
+                    screenUnits.push(
+                        File.readAsText(path + sourceFolder, files[index].name)
+                            .then(text => {
+                                if (typeof text === 'string') {
+                                    return JSON.parse(text);
+                                }
+                            })
+                            .catch(err => console.log("err: " + err.message))
+                    );
+
+                    return screenUnits;
+                })
+                .catch(err => {
+                    console.log("listdir error " + err.message);
+                    return null;
+                })
+        );
+    }
+
     getScreenUnits(numUnits: number, sourceFolder: string) {
         let path = cordova.file.applicationDirectory + 'www/';
         return (

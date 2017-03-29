@@ -95,11 +95,17 @@ export class LessonsList {
 
     //generate array of randomized screenUnits
     //and navigate to ListeningMode, passing the array and lessons[index].name as title
-    let numUnits = 1;
     let lessonFolder = this.lessons[index].path + '1'; //todo: make a "constants" file for the random magic strings and numbers like this '1'
+    let numUnits = 20;
+    let screenUnits : screenUnit[] = [];
 
-    this.lessonsLoader.getScreenUnits(numUnits, lessonFolder)
-      .then((screenUnits) =>
+    this.lessonsLoader.getPair(lessonFolder)
+      .then((res) => {
+        for(let i = 0; i < numUnits; i++) {
+          let index = Math.floor(Math.random() * res.length);
+          screenUnits.push(res[index]);
+        }
+
         startSession(
           this,
           {
@@ -109,8 +115,9 @@ export class LessonsList {
             screenUnits: screenUnits
           },
           mode,
-          1)
-      );
+          1
+        );
+      });
   }
 
   startLevel2(index: number, mode: any) {
