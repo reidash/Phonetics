@@ -17,7 +17,6 @@ export class Phonetics {
   user: any;
   menuTitle: string = 'Menu';
   menuPic: string = 'assets/images/defaultprofile.png';
-  loaded: boolean = false;
 
   constructor(public platform: Platform, private events: Events) {
     this.initializeApp();
@@ -27,7 +26,6 @@ export class Phonetics {
       .getInfo(this.platform)
       .then((data) => { // Try to get the profile data
         this.user = data; // If it is there then use it
-        this.loaded = true;
 
         if (this.user) {
           let params = {
