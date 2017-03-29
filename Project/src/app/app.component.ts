@@ -48,8 +48,7 @@ export class Phonetics {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Lessons', component: LessonsList },
-      { title: 'Edit Profile', component: ProfileManager },
-      { title: 'Statistics Testing', component: StatisticsTesting }
+      { title: 'Edit Profile', component: ProfileManager }
     ];
   }
 
@@ -71,6 +70,10 @@ export class Phonetics {
         this.menuTitle = user.name;
       });
     });
+  }
+
+  statsTesting() {
+    this.nav.setRoot(StatisticsTesting);
   }
 
   openPage(page) {

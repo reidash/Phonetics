@@ -158,3 +158,11 @@ a {
 .right-button {
     margin-left: 40px;
 }
+
+.hidden {
+    position: absolute;
+    bottom: 0;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    opacity: 0;
+}
