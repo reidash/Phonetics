@@ -118,10 +118,6 @@ export class Statistics {
 
     // Call before each session starts, supply the phonemeID and the lessonType
     public StartSession(phonemeID: number, type: LessonType, level: number, isDynamic: boolean): void {
-        if (this.sessionInProgress) {
-            console.log("Error! Tried to start a session while one was already in progress!");
-            return;
-        }
         this.sessionInProgress = true; // Set the session in progress flag
         this.sessionStart = new Date(); // Record the start time
         this.curSessionInfo = {  // Instantiate new sessionInfo
