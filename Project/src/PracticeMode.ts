@@ -120,9 +120,18 @@ export class PracticeMode {
     }
 
     getAccuracy() {
-        let denom : number = this.currIndex;
-        if(this.currIndex === 0) {
+        let denom : number = this.currIndex + 1;
+        
+        if(this.currState === this.state.init) {
+            denom--;
+        }
+
+        if(denom <= 0) {
             denom = 1;
+        }
+
+        if(denom > this.screenUnits.length) {
+            denom = this.screenUnits.length;
         }
 
         let acc = (this.correctCount / denom) * 100;
