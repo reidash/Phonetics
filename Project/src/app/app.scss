@@ -124,6 +124,7 @@ a {
     margin-right: map-get($spacings, narrow);
     background-size: cover;
     background-repeat: no-repeat;
+    display: inline-block;
 }
 
 .menu-title {
