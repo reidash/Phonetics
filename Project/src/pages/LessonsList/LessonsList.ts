@@ -38,12 +38,12 @@ export class LessonsList {
         .catch(e => console.log(e.message));
 
       Statistics.GetStatistics().GetDynamicList(LessonType.Listening).then((dynamicList: screenUnit[]) => {
-        if(dynamicList.length > 0) {
+        if (dynamicList.length > 0) {
           this.hasListeningDynamicList = true;
         }
       });
       Statistics.GetStatistics().GetDynamicList(LessonType.Speaking).then((dynamicList: screenUnit[]) => {
-        if(dynamicList.length > 0) {
+        if (dynamicList.length > 0) {
           this.hasSpeakingDynamicList = true;
         }
       });
@@ -99,7 +99,7 @@ export class LessonsList {
     let lessonFolder = this.lessons[index].path + '1'; //todo: make a "constants" file for the random magic strings and numbers like this '1'
 
     this.lessonsLoader.getScreenUnits(numUnits, lessonFolder)
-      .then((screenUnits) => 
+      .then((screenUnits) =>
         startSession(
           this,
           {
@@ -162,7 +162,7 @@ function startSession(scope: LessonsList, params: any, mode: any, level: number)
     return;
   }
 
-  if(params.screenUnits.length < 1) {
+  if (params.screenUnits.length < 1) {
     console.log("Err: Tried to start session with no screen units");
     return;
   }
@@ -173,7 +173,7 @@ function startSession(scope: LessonsList, params: any, mode: any, level: number)
     lessonType = LessonType.Listening;
   }
   console.log("Beginning statistics session for {phonemeId: ", params.phonemeId, ", type: ", lessonType, ", level:", level);
-  
+
   Statistics.GetStatistics().StartSession(params.phonemeId, lessonType, level, params.isDynamic);
 
   scope.navCtrl.push(mode, params);

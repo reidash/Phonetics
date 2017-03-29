@@ -2,14 +2,16 @@
   <ion-header>
     <ion-toolbar>
       <ion-title>
-        <img class="menu-pic" src="{{menuPic}}" title="{{menuTitle}}" />
+        <div class="menu-pic" aria-hidden="true" [ngStyle]="{'background-image': 'url(' + menuPic + ')'}">
+        </div>
         <span class="menu-title">{{menuTitle}}</span>
       </ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-content>
-    <ion-list>
+    <div class="loader" *ngIf="!loaded">Loading...</div>
+    <ion-list *ngIf="loaded">
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
       </button>

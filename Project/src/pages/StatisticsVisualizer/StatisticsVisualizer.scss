@@ -1,9 +1,9 @@
 page-StatisticsVisualizer {
     .stat-heading {
-        font-size: map-get($font-sizes, large);
+        font-weight: bold;
         text-transform: uppercase;
-        color: map-get($colors, medium);
     }
+
     .stat-row {
         text-align: center;
     }
@@ -12,14 +12,28 @@ page-StatisticsVisualizer {
         display: inline-block;
         text-align: center;
         margin-right: map-get($spacings, medium);
+        margin-top: map-get($spacings, medium);
         width: 40%;
+        vertical-align: middle;
     }
 
     .graph-no-data {
         margin: map-get($spacings, medium) 0;
         text-transform: uppercase;
-        font-size: map-get($font-sizes, large);
+        font-size: map-get($font-sizes, normal);
         color: map-get($colors, medium);
+    }
+
+    .detailed-view {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+
+        button {
+            padding: 0;
+            margin-right: map-get($spacings, narrow);
+            vertical-align: middle;
+        }
     }
 
     component-line {

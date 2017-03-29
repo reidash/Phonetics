@@ -64,8 +64,18 @@
                 You've completed this session!
             </p>
             <div class="button-group-container">
-                <button ion-button (click)="goToLessons()">Return to Lessons</button>
-                <button ion-button *ngIf="!isDynamic" (click)="goToStats()">Go to Lesson Statistics</button>
+                <a href="javascript:void(0);" *ngIf="!isDynamic" (click)="goToStats()" role="button" class="button-wrapper left-button" title="View Lesson Statistics">
+                    <div class="circle-button" >
+                        <ion-icon name="stats"></ion-icon>
+                    </div>
+                    <div class="circle-button-label">Statistics</div>
+                </a>
+                <a href="javascript:void(0);" (click)="goToLessons()" role="button" class="button-wrapper right-button" title="Return to Lessons">
+                    <div class="circle-button">
+                        <ion-icon name="list"></ion-icon>
+                    </div>
+                    <div class="circle-button-label">Lessons</div>
+                </a>
             </div>
         </ion-card>
     </div>

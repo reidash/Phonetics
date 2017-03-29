@@ -34,6 +34,10 @@ page-ListeningController {
         background-color: map-get($colors, medium);
     }
 
+    .button-outline, .button-clear {
+        background-color: transparent !important;
+    }
+
     .button-group-container {
         margin: 0 auto;
         text-align: center;

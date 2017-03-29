@@ -40,6 +40,7 @@ a {
     transform: translateZ(0);
     -webkit-animation-delay: -0.16s;
     animation-delay: -0.16s;
+    z-index: 999;
 }
 .loader:before,
 .loader:after {
@@ -102,6 +103,7 @@ a {
 }
 
 .button-group-container {
+    text-align: center;
     padding: map-get($spacings, narrow);
     margin: map-get($spacings, narrow) 0;
 }
@@ -120,8 +122,39 @@ a {
     border-radius: 250px;
     vertical-align: middle;
     margin-right: map-get($spacings, narrow);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .menu-title {
     vertical-align: middle;
+}
+
+.button-wrapper {
+    display: inline-block;
+}
+
+.circle-button {
+    display: inline-block;
+    padding: 11px;
+    margin-top: map-get($spacings, wide);
+    margin-bottom: map-get($spacings, medium);
+    background-color: #444444;
+    color: #f4f4f4;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    border-radius: 250px;
+}
+
+.circle-button ion-icon {
+    font-size: map-get($font-sizes, largest);
+}
+
+.left-button {
+    margin-right: 40px;
+}
+
+.right-button {
+    margin-left: 40px;
 }
