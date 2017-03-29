@@ -25,6 +25,12 @@
             <div class="button-group-container">
                 <button ion-button *ngFor="let option of currUnit.wordOptions" (click)="chooseOption(option)">{{option}}</button>
             </div>
+            <div class="session-accuracy">
+                Accuracy: {{getAccuracy()}}%
+            </div>
+            <div class="session-progress">
+                Word: {{currIndex + 1}} / {{screenUnits.length}}
+            </div>
         </ion-card>
 
         <ion-card class="content-container screenUnit-correct" *ngIf="currState === state.right">
@@ -36,6 +42,12 @@
             </p>
             <div class="screenUnit-play">
                 <ion-icon name="checkmark"></ion-icon>
+            </div>
+            <div class="session-accuracy">
+                Accuracy: {{getAccuracy()}}%
+            </div>
+            <div class="session-progress">
+                Word: {{currIndex + 1}} / {{screenUnits.length}}
             </div>
         </ion-card>
 
@@ -54,6 +66,12 @@
             <div class="button-group-container">
                 <button ion-button (click)="autoAdvance()">Next</button>
             </div>
+            <div class="session-accuracy">
+                Accuracy: {{getAccuracy()}}%
+            </div>
+            <div class="session-progress">
+                Word: {{currIndex + 1}} / {{screenUnits.length}}
+            </div>
         </ion-card>
 
         <ion-card class="content-container" *ngIf="currState === state.end">
@@ -61,11 +79,11 @@
                 Good job!
             </h1>
             <p class="screenUnit-instruction">
-                You've completed this session!
+                You've completed this session! Your accuracy for this session was {{getAccuracy()}}%.
             </p>
             <div class="button-group-container">
                 <a href="javascript:void(0);" *ngIf="!isDynamic" (click)="goToStats()" role="button" class="button-wrapper left-button" title="View Lesson Statistics">
-                    <div class="circle-button" >
+                    <div class="circle-button">
                         <ion-icon name="stats"></ion-icon>
                     </div>
                     <div class="circle-button-label">Statistics</div>
