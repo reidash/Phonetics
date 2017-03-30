@@ -1,0 +1,11 @@
+{
+    "id": 1,
+    "word": "fit",
+    "wordOptions": [
+        "feet",
+        "fit"
+    ],
+    "audioPaths": [
+        "assets/audio/00-fit-0.m4a"
+    ]
+}

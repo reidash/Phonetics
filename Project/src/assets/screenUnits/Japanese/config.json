@@ -3,8 +3,26 @@
         {
             "id": 1,
             "name": "R-L Distinction",
-            "description": "A list of vocabulary words designed to help native speakers of Japanese distinguish between R and L",
+            "description": "A list of vocabulary words designed to help you distinguish between R and L",
             "path": "assets/screenUnits/Japanese/RL/"
+        },
+        {
+            "id": 2,
+            "name": "N-Ng Distinction",
+            "description": "A list of vocabulary words designed to help you distinguish between -n and -ng sounds",
+            "path": "assets/screenUnits/Japanese/NNg/"
+        },
+        {
+            "id": 3,
+            "name": "Ut-At Distinction",
+            "description": "A list of vocabulary words designed to help you distinguish between A and U sounds in the middle of words",
+            "path": "assets/screenUnits/Japanese/UtAt/"
+        },
+        {
+            "id": 4,
+            "name": "Eat-It Distinction",
+            "description": "A list of vocabulary words designed to help you distinguish between Eat and It sounds",
+            "path": "assets/screenUnits/Japanese/EatIt/"
         }
     ]
 }

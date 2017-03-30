@@ -1,0 +1,11 @@
+{
+    "id": 8,
+    "word": "bat",
+    "wordOptions": [
+        "bat",
+        "but"
+    ],
+    "audioPaths": [
+        "assets/audio/04-bat-0.m4a"
+    ]
+}

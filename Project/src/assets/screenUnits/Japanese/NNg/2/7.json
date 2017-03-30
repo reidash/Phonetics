@@ -1,0 +1,11 @@
+{
+    "id": 7,
+    "word": "thing",
+    "wordOptions": [
+        "thin",
+        "thing"
+    ],
+    "audioPaths": [
+        "assets/audio/03-thing-0.m4a"
+    ]
+}

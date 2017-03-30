@@ -1,0 +1,11 @@
+{
+    "id": 2,
+    "word": "beat",
+    "wordOptions": [
+        "beat",
+        "bit"
+    ],
+    "audioPaths": [
+        "assets/audio/01-beat-0.m4a"
+    ]
+}

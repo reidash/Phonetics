@@ -1,0 +1,11 @@
+{
+    "id": 12,
+    "word": "seep",
+    "wordOptions": [
+        "seep",
+        "sip"
+    ],
+    "audioPaths": [
+        "assets/audio/06-seep-0.m4a"
+    ]
+}

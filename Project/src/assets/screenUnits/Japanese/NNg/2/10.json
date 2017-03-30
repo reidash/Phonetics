@@ -1,0 +1,11 @@
+{
+    "id": 10,
+    "word": "bin",
+    "wordOptions": [
+        "bin",
+        "bing"
+    ],
+    "audioPaths": [
+        "assets/audio/05-bin-0.m4a"
+    ]
+}

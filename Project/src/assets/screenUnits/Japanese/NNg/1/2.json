@@ -1,0 +1,11 @@
+{
+    "id": 2,
+    "word": "sin",
+    "wordOptions": [
+        "sin",
+        "sing"
+    ],
+    "audioPaths": [
+        "assets/audio/01-sin-0.m4a"
+    ]
+}

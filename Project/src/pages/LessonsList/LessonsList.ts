@@ -70,7 +70,7 @@ export class LessonsList {
   startLevel3(index: number, mode = SpeakingController) {
     //generate array of randomized screenUnits
     //and navigate to ListeningMode, passing the array and lessons[index].name as title
-    let numUnits = 20;
+    let numUnits = 10;
     let lessonFolder = this.lessons[index].path + '3';
 
     this.lessonsLoader.getScreenUnits(numUnits, lessonFolder)
@@ -96,7 +96,7 @@ export class LessonsList {
     //generate array of randomized screenUnits
     //and navigate to ListeningMode, passing the array and lessons[index].name as title
     let lessonFolder = this.lessons[index].path + '1'; //todo: make a "constants" file for the random magic strings and numbers like this '1'
-    let numUnits = 20;
+    let numUnits = 10;
     let screenUnits : screenUnit[] = [];
 
     this.lessonsLoader.getPair(lessonFolder)
@@ -125,7 +125,7 @@ export class LessonsList {
       return;
     }
 
-    let numUnits = 20;
+    let numUnits = 10;
     let lessonFolder = this.lessons[index].path + '2';
 
     this.lessonsLoader.getScreenUnits(numUnits, lessonFolder)
