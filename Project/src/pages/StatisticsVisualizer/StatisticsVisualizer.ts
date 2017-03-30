@@ -73,7 +73,7 @@ export class StatisticsVisualizer {
                         }]
                 }
         ]; // stats
-        statsModel.GetFilteredStats(() => {return true;}, 1).then((data) => {
+        statsModel.GetFilteredStats((val) => {return (val.sessionID === phonemeId)}, 1).then((data) => {
             this.totalStats = data;
         }).then(() => {
             return statsModel.GetPhonemeStatsByLevel(phonemeId, LessonType.Listening, 1, 0).then((data) => {
