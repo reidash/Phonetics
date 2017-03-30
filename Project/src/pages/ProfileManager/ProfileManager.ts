@@ -67,7 +67,7 @@ export class ProfileManager {
       sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
       destinationType: navigator.camera.DestinationType.DATA_URL
     });
-    
+
   }
 
   cameraSuccess = (imageData) => {
@@ -75,11 +75,14 @@ export class ProfileManager {
       this.user.img = 'data:image/jpeg;base64,' + imageData;
       this.photoLoading = false;
     })
-  }
+  };
 
-  cameraError(err) {
-    console.log("err " + err.message);
-  }
+  cameraError = (err) => {
+    this.zone.run(() => {
+      this.photoLoading = false;
+    });
+    console.log("camera err " + err.message);
+  };
 
   submitUser() {
     let profileLoader = new ProfileInfo();
