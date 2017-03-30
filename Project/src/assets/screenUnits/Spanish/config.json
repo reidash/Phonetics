@@ -1,0 +1,40 @@
+{
+    "lessons": [
+        {
+            "id": 21,
+            "name": "Ut-At Distinction",
+            "description": "A list of vocabulary words designed to help you distinguish between A and U sounds in the middle of words",
+            "path": "assets/screenUnits/Spanish/UtAt/"
+        },
+        {
+            "id": 22,
+            "name": "Eat-It Distinction",
+            "description": "A list of vocabulary words designed to help you distinguish between Eat and It sounds",
+            "path": "assets/screenUnits/Spanish/EatIt/"
+        },
+        {
+            "id": 23,
+            "name": "Ale-Ile Distinction",
+            "description": "A list of vocabulary words designed to help you distinguish between -ale and -ile sounds",
+            "path": "assets/screenUnits/Spanish/AleIle/"
+        },
+        {
+            "id": 24,
+            "name": "S-Th Distinction",
+            "description": "A list of vocabulary words designed to help you distinguish between S and Th sounds",
+            "path": "assets/screenUnits/Spanish/STh/"
+        },
+        {
+            "id": 25,
+            "name": "S-Z Distinction",
+            "description": "A list of vocabulary words designed to help you distinguish between S and Z sounds",
+            "path": "assets/screenUnits/Spanish/SZ/"
+        },
+        {
+            "id": 26,
+            "name": "T-D Distinction",
+            "description": "A list of vocabulary words designed to help you distinguish between T and D sounds",
+            "path": "assets/screenUnits/Spanish/TD/"
+        }
+    ]
+}

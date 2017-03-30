@@ -23,6 +23,18 @@
             "name": "Eat-It Distinction",
             "description": "A list of vocabulary words designed to help you distinguish between Eat and It sounds",
             "path": "assets/screenUnits/Japanese/EatIt/"
+        },
+        {
+            "id": 5,
+            "name": "S-Z Distinction",
+            "description": "A list of vocabulary words designed to help you distinguish between S and Z sounds",
+            "path": "assets/screenUnits/Japanese/SZ/"
+        },
+        {
+            "id": 6,
+            "name": "T-D Distinction",
+            "description": "A list of vocabulary words designed to help you distinguish between T and D sounds",
+            "path": "assets/screenUnits/Japanese/TD/"
         }
     ]
 }

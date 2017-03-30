@@ -1,0 +1,11 @@
+{
+    "id": 4,
+    "word": "sick",
+    "wordOptions": [
+        "sick",
+        "thick"
+    ],
+    "audioPaths": [
+        "assets/audio/02-sick-0.m4a"
+    ]
+}

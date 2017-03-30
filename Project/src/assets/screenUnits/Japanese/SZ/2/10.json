@@ -1,0 +1,11 @@
+{
+    "id": 10,
+    "word": "price",
+    "wordOptions": [
+        "price",
+        "prize"
+    ],
+    "audioPaths": [
+        "assets/audio/05-price-0.m4a"
+    ]
+}

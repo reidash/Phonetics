@@ -1,0 +1,11 @@
+{
+    "id": 2,
+    "word": "say",
+    "wordOptions": [
+        "say",
+        "they"
+    ],
+    "audioPaths": [
+        "assets/audio/01-say-0.m4a"
+    ]
+}

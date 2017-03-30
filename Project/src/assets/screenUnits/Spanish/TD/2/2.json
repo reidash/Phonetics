@@ -1,0 +1,11 @@
+{
+    "id": 2,
+    "word": "lid",
+    "wordOptions": [
+        "lid",
+        "lit"
+    ],
+    "audioPaths": [
+        "assets/audio/01-lid-0.m4a"
+    ]
+}

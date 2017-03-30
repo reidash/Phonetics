@@ -1,0 +1,11 @@
+{
+    "id": 11,
+    "word": "time",
+    "wordOptions": [
+        "dime",
+        "time"
+    ],
+    "audioPaths": [
+        "assets/audio/05-time-0.m4a"
+    ]
+}

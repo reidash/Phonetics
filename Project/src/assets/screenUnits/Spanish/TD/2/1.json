@@ -1,0 +1,11 @@
+{
+    "id": 1,
+    "word": "tip",
+    "wordOptions": [
+        "dip",
+        "tip"
+    ],
+    "audioPaths": [
+        "assets/audio/00-tip-0.m4a"
+    ]
+}

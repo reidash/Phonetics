@@ -1,0 +1,11 @@
+{
+    "id": 5,
+    "word": "hut",
+    "wordOptions": [
+        "hat",
+        "hut"
+    ],
+    "audioPaths": [
+        "assets/audio/02-hut-0.m4a"
+    ]
+}

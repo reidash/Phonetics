@@ -1,0 +1,11 @@
+{
+    "id": 1,
+    "word": "rise",
+    "wordOptions": [
+        "rice",
+        "rise"
+    ],
+    "audioPaths": [
+        "assets/audio/00-rise-0.m4a"
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "id": 22,
+    "word": "seat",
+    "wordOptions": [
+        "seat",
+        "sit"
+    ],
+    "audioPaths": [
+        "assets/audio/11-seat-0.m4a"
+    ]
+}

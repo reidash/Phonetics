@@ -1,0 +1,11 @@
+{
+    "id": 8,
+    "word": "bait",
+    "wordOptions": [
+        "bait",
+        "bite"
+    ],
+    "audioPaths": [
+        "assets/audio/04-bait-0.m4a"
+    ]
+}

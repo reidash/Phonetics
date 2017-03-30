@@ -1,0 +1,11 @@
+{
+    "id": 6,
+    "word": "green",
+    "wordOptions": [
+        "green",
+        "grin"
+    ],
+    "audioPaths": [
+        "assets/audio/03-green-0.m4a"
+    ]
+}

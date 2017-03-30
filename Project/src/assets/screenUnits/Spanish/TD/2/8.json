@@ -1,0 +1,11 @@
+{
+    "id": 8,
+    "word": "nod",
+    "wordOptions": [
+        "nod",
+        "not"
+    ],
+    "audioPaths": [
+        "assets/audio/04-nod-0.m4a"
+    ]
+}

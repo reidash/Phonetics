@@ -1,0 +1,11 @@
+{
+    "id": 16,
+    "word": "sing",
+    "wordOptions": [
+        "sing",
+        "thing"
+    ],
+    "audioPaths": [
+        "assets/audio/08-sing-0.m4a"
+    ]
+}
