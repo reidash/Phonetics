@@ -10,7 +10,8 @@
             "id": 22,
             "name": "Eat-It Distinction",
             "description": "A list of vocabulary words designed to help you distinguish between Eat and It sounds",
-            "path": "assets/screenUnits/Spanish/EatIt/"
+            "path": "assets/screenUnits/Spanish/EatIt/",
+            "video": "assets/video/beat-bit-video-expln.mp4"
         },
         {
             "id": 23,
@@ -34,7 +35,8 @@
             "id": 26,
             "name": "T-D Distinction",
             "description": "A list of vocabulary words designed to help you distinguish between T and D sounds",
-            "path": "assets/screenUnits/Spanish/TD/"
+            "path": "assets/screenUnits/Spanish/TD/",
+            "video": "assets/video/t-d-video-expln.mp4"
         }
     ]
 }

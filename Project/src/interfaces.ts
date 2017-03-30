@@ -10,6 +10,7 @@ export interface lesson {
     name: string;
     description: string;
     path: string;
+    video?: string;
 };
 
 export interface profileData {

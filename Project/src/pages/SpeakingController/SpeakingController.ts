@@ -18,6 +18,7 @@ export class SpeakingController extends PracticeMode {
     private recognition: any;
     private isCorrect: boolean;
     private currAudio: MediaPlugin; // Current audio file
+    private videoUrl = 'assets/video/sample.mp4';
 
     constructor(
         public navCtrl: NavController,
@@ -28,6 +29,12 @@ export class SpeakingController extends PracticeMode {
         private zone: NgZone
     ) {
         super(navCtrl, navParams, plt);
+
+        if (navParams.get('video')) {
+            this.videoUrl = navParams.get('video');
+            console.log("video " + this.videoUrl);
+        }
+
         plt.ready().then(() => {
             this.recognition = new SpeechRecognition();
             this.recognition.lang = 'en-US';
@@ -84,7 +91,7 @@ export class SpeakingController extends PracticeMode {
     }
 
     playVideo() {
-        var path = this.plt.is('android') ? cordova.file.applicationDirectory + 'www/' + 'assets/video/sample.mp4' : ''; //might be a hack...
+        var path = this.plt.is('android') ? cordova.file.applicationDirectory + 'www/' + this.videoUrl : ''; //might be a hack...
         // Playing a video.
         this.videoPlayer.play(path, { scalingMode: 2 }).then(() => {
             console.log('video completed');

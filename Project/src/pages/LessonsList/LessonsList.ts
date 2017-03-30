@@ -74,18 +74,25 @@ export class LessonsList {
     let lessonFolder = this.lessons[index].path + '3';
 
     this.lessonsLoader.getScreenUnits(numUnits, lessonFolder)
-      .then((screenUnits) =>
+      .then((screenUnits) => {
+        let params = {
+          phonemeId: this.lessons[index].id,
+          isDynamic: false,
+          title: this.lessons[index].name,
+          screenUnits: screenUnits,
+          video: null
+        };
+
+        if (this.lessons[index].video) {
+          params.video = this.lessons[index].video;
+        }
+
         startSession(
           this,
-          {
-            phonemeId: this.lessons[index].id,
-            isDynamic: false,
-            title: this.lessons[index].name,
-            screenUnits: screenUnits
-          },
+          params,
           mode,
-          3)
-      );
+          3);
+      });
   }
 
   startLevel1(index: number, mode: any) {
@@ -97,23 +104,30 @@ export class LessonsList {
     //and navigate to ListeningMode, passing the array and lessons[index].name as title
     let lessonFolder = this.lessons[index].path + '1'; //todo: make a "constants" file for the random magic strings and numbers like this '1'
     let numUnits = 10;
-    let screenUnits : screenUnit[] = [];
+    let screenUnits: screenUnit[] = [];
 
     this.lessonsLoader.getPair(lessonFolder)
       .then((res) => {
-        for(let i = 0; i < numUnits; i++) {
+        for (let i = 0; i < numUnits; i++) {
           let index = Math.floor(Math.random() * res.length);
           screenUnits.push(res[index]);
         }
 
+        let params = {
+          phonemeId: this.lessons[index].id,
+          isDynamic: false,
+          title: this.lessons[index].name,
+          screenUnits: screenUnits,
+          video: null
+        };
+
+        if (this.lessons[index].video) {
+          params.video = this.lessons[index].video;
+        }
+
         startSession(
           this,
-          {
-            phonemeId: this.lessons[index].id,
-            isDynamic: false,
-            title: this.lessons[index].name,
-            screenUnits: screenUnits
-          },
+          params,
           mode,
           1
         );
@@ -129,18 +143,27 @@ export class LessonsList {
     let lessonFolder = this.lessons[index].path + '2';
 
     this.lessonsLoader.getScreenUnits(numUnits, lessonFolder)
-      .then((screenUnits) =>
+      .then((screenUnits) => {
+
+        let params = {
+          phonemeId: this.lessons[index].id,
+          isDynamic: false,
+          title: this.lessons[index].name,
+          screenUnits: screenUnits,
+          video: null
+        };
+
+        if (this.lessons[index].video) {
+          params.video = this.lessons[index].video;
+        }
+
         startSession(
           this,
-          {
-            phonemeId: this.lessons[index].id,
-            isDynamic: false,
-            title: this.lessons[index].name,
-            screenUnits: screenUnits
-          },
+          params,
           mode,
-          2)
-      )
+          2);
+      });
+
   };
 
   goToStats(phonemeId: number, title: string) {
@@ -179,6 +202,7 @@ function startSession(scope: LessonsList, params: any, mode: any, level: number)
   if (mode === ListeningController) {
     lessonType = LessonType.Listening;
   }
+
   console.log("Beginning statistics session for {phonemeId: ", params.phonemeId, ", type: ", lessonType, ", level:", level);
 
   Statistics.GetStatistics().StartSession(params.phonemeId, lessonType, level, params.isDynamic);
