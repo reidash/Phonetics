@@ -1,0 +1,11 @@
+{
+    "id": 7,
+    "word": "lose",
+    "wordOptions": [
+        "loose",
+        "lose"
+    ],
+    "audioPaths": [
+        "assets/audio/03-lose-0.m4a"
+    ]
+}

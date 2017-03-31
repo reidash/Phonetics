@@ -1,0 +1,11 @@
+{
+    "id": 12,
+    "word": "male",
+    "wordOptions": [
+        "male",
+        "mile"
+    ],
+    "audioPaths": [
+        "assets/audio/06-male-0.m4a"
+    ]
+}

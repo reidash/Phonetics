@@ -1,0 +1,11 @@
+{
+    "id": 2,
+    "word": "cat",
+    "wordOptions": [
+        "cat",
+        "cut"
+    ],
+    "audioPaths": [
+        "assets/audio/01-cat-0.m4a"
+    ]
+}

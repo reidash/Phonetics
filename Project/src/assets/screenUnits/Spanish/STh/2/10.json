@@ -1,0 +1,11 @@
+{
+    "id": 10,
+    "word": "sink",
+    "wordOptions": [
+        "sink",
+        "think"
+    ],
+    "audioPaths": [
+        "assets/audio/05-sink-0.m4a"
+    ]
+}

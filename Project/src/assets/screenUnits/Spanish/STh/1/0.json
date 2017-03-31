@@ -1,0 +1,11 @@
+{
+    "id": 0,
+    "word": "mouse",
+    "wordOptions": [
+        "mouse",
+        "mouth"
+    ],
+    "audioPaths": [
+        "assets/audio/00-mouse-0.m4a"
+    ]
+}

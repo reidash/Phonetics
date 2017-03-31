@@ -1,0 +1,11 @@
+{
+    "id": 4,
+    "word": "raid",
+    "wordOptions": [
+        "raid",
+        "rate"
+    ],
+    "audioPaths": [
+        "assets/audio/02-raid-0.m4a"
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "id": 14,
+    "word": "tail",
+    "wordOptions": [
+        "tail",
+        "tile"
+    ],
+    "audioPaths": [
+        "assets/audio/07-tail-0.m4a"
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "id": 10,
+    "word": "nail",
+    "wordOptions": [
+        "nail",
+        "Nile"
+    ],
+    "audioPaths": [
+        "assets/audio/05-nail-0.m4a"
+    ]
+}

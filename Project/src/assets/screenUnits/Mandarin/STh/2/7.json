@@ -1,0 +1,11 @@
+{
+    "id": 7,
+    "word": "bathe",
+    "wordOptions": [
+        "base",
+        "bathe"
+    ],
+    "audioPaths": [
+        "assets/audio/03-bathe-0.m4a"
+    ]
+}

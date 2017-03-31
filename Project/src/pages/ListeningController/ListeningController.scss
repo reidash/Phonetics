@@ -3,6 +3,7 @@ page-ListeningController {
         position: absolute;
         top: 0;
         bottom: 0;
+        overflow: auto;
     }
 
     .screenUnit-play {
@@ -34,6 +35,10 @@ page-ListeningController {
         background-color: map-get($colors, medium);
     }
 
+    .button-outline, .button-clear {
+        background-color: transparent !important;
+    }
+
     .button-group-container {
         margin: 0 auto;
         text-align: center;
@@ -49,5 +54,21 @@ page-ListeningController {
 
     .screenUnit-incorrect {
         background-color: map-get($colors, incorrect);
+    }
+
+        .session-progress {
+        position: absolute;
+        bottom: map-get($spacings, narrow);
+        font-size: map-get($font-sizes, large);
+        color: map-get($colors, medium);
+        right: map-get($spacings, narrow);
+    }
+
+     .session-accuracy {
+        position: absolute;
+        bottom: map-get($spacings, narrow);
+        font-size: map-get($font-sizes, large);
+        color: map-get($colors, medium);
+        left: map-get($spacings, narrow);
     }
 }

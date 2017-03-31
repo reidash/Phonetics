@@ -1,0 +1,11 @@
+{
+    "id": 32,
+    "word": "heard",
+    "wordOptions": [
+        "heard",
+        "hurt"
+    ],
+    "audioPaths": [
+        "assets/audio/16-heard-0.m4a"
+    ]
+}

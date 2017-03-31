@@ -46,8 +46,7 @@ export class Phonetics {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Lessons', component: LessonsList },
-      { title: 'Edit Profile', component: ProfileManager },
-      { title: 'Statistics Testing', component: StatisticsTesting}
+      { title: 'Edit Profile', component: ProfileManager }
     ];
   }
 
@@ -56,16 +55,23 @@ export class Phonetics {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       let stats = Statistics.GetStatistics(); // Start loading statistics
-      document.addEventListener('resume', () => {let stats = Statistics.GetStatistics()}); // Load stats on resume
+      StatusBar.styleDefault();
+
+      setTimeout(() => {
+        Splashscreen.hide(); //otherwise splash screen hides too early
+      }, 200);
+
+      document.addEventListener('resume', () => { let stats = Statistics.GetStatistics() }); // Load stats on resume
       this.events.subscribe('profileUpdated', (user) => {
         this.user = user;
         this.menuPic = user.img;
         this.menuTitle = user.name;
       });
-
-      StatusBar.styleDefault();
-      Splashscreen.hide();
     });
+  }
+
+  statsTesting() {
+    this.nav.setRoot(StatisticsTesting);
   }
 
   openPage(page) {
@@ -82,8 +88,8 @@ export class Phonetics {
         return;
       }
 
-    let profileLoader = new ProfileInfo();
-    profileLoader.getInfo(this.platform).then((data) => { // Try to get the profile data
+      let profileLoader = new ProfileInfo();
+      profileLoader.getInfo(this.platform).then((data) => { // Try to get the profile data
         this.user = data; // If it is there then use it
         params = {
           user: this.user
@@ -91,8 +97,8 @@ export class Phonetics {
         this.nav.setRoot(page.component, params);
       });
 
-      } else {
-        this.nav.setRoot(page.component, params);
-      }
+    } else {
+      this.nav.setRoot(page.component, params);
+    }
   }
 }

@@ -3,6 +3,7 @@ page-SpeakingController {
         position: absolute;
         top: 0;
         bottom: 0;
+        overflow: auto;
     }
 
     .screenUnit-play {
@@ -95,5 +96,21 @@ page-SpeakingController {
     .screenUnit-record > .button-inner > ion-icon {
         height: map-get($font-sizes, larger);
         width: map-get($font-sizes, larger);
+    }
+
+    .session-progress {
+        position: absolute;
+        bottom: map-get($spacings, narrow);
+        font-size: map-get($font-sizes, large);
+        color: map-get($colors, medium);
+        right: map-get($spacings, narrow);
+    }
+
+     .session-accuracy {
+        position: absolute;
+        bottom: map-get($spacings, narrow);
+        font-size: map-get($font-sizes, large);
+        color: map-get($colors, medium);
+        left: map-get($spacings, narrow);
     }
 }

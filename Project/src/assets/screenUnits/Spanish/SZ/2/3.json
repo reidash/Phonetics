@@ -1,0 +1,11 @@
+{
+    "id": 3,
+    "word": "ice",
+    "wordOptions": [
+        "eyes",
+        "ice"
+    ],
+    "audioPaths": [
+        "assets/audio/01-ice-0.m4a"
+    ]
+}

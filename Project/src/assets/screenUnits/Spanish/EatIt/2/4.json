@@ -1,0 +1,11 @@
+{
+    "id": 4,
+    "word": "deep",
+    "wordOptions": [
+        "deep",
+        "dip"
+    ],
+    "audioPaths": [
+        "assets/audio/02-deep-0.m4a"
+    ]
+}

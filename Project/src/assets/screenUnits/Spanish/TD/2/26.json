@@ -1,0 +1,11 @@
+{
+    "id": 26,
+    "word": "bad",
+    "wordOptions": [
+        "bad",
+        "bat"
+    ],
+    "audioPaths": [
+        "assets/audio/13-bad-0.m4a"
+    ]
+}

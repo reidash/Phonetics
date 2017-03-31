@@ -3,8 +3,41 @@
         {
             "id": 1,
             "name": "R-L Distinction",
-            "description": "A list of vocabulary words designed to help native speakers of Japanese distinguish between R and L",
-            "path": "assets/screenUnits/Japanese/RL/"
+            "description": "A list of vocabulary words designed to help you distinguish between R and L",
+            "path": "assets/screenUnits/Japanese/RL/",
+            "video": "assets/video/r-l-video-expln.mp4"
+        },
+        {
+            "id": 2,
+            "name": "N-Ng Distinction",
+            "description": "A list of vocabulary words designed to help you distinguish between -n and -ng sounds",
+            "path": "assets/screenUnits/Japanese/NNg/"
+        },
+        {
+            "id": 3,
+            "name": "Ut-At Distinction",
+            "description": "A list of vocabulary words designed to help you distinguish between A and U sounds in the middle of words",
+            "path": "assets/screenUnits/Japanese/UtAt/"
+        },
+        {
+            "id": 4,
+            "name": "Eat-It Distinction",
+            "description": "A list of vocabulary words designed to help you distinguish between Eat and It sounds",
+            "path": "assets/screenUnits/Japanese/EatIt/",
+            "video": "assets/video/beat-bit-video-expln.mp4"
+        },
+        {
+            "id": 5,
+            "name": "S-Z Distinction",
+            "description": "A list of vocabulary words designed to help you distinguish between S and Z sounds",
+            "path": "assets/screenUnits/Japanese/SZ/"
+        },
+        {
+            "id": 6,
+            "name": "T-D Distinction",
+            "description": "A list of vocabulary words designed to help you distinguish between T and D sounds",
+            "path": "assets/screenUnits/Japanese/TD/",
+            "video": "assets/video/t-d-video-expln.mp4"
         }
     ]
 }

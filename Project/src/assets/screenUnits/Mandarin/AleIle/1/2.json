@@ -1,0 +1,11 @@
+{
+    "id": 2,
+    "word": "fail",
+    "wordOptions": [
+        "fail",
+        "file"
+    ],
+    "audioPaths": [
+        "assets/audio/01-fail-0.m4a"
+    ]
+}

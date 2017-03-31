@@ -12,7 +12,8 @@ declare var navigator: any;
   templateUrl: 'ProfileManager.html'
 })
 export class ProfileManager {
-  private loaded = false;
+  private loaded: boolean = false;
+  private photoLoading: boolean = false;
   private showMenu: boolean = false;
   private title: string = 'Profile Setup';
   private user: profileData;
@@ -40,7 +41,7 @@ export class ProfileManager {
         this.langs = langs;
         this.loaded = true;
       });
-  } 
+  }
 
   changePicture() {
     this.showMenuOverlay = true;
@@ -51,6 +52,8 @@ export class ProfileManager {
   }
 
   takePicture() {
+    this.closeMenu();
+    this.photoLoading = true;
     navigator.camera.getPicture(this.cameraSuccess, this.cameraError, {
       sourceType: navigator.camera.PictureSourceType.CAMERA,
       destinationType: navigator.camera.DestinationType.DATA_URL
@@ -58,22 +61,28 @@ export class ProfileManager {
   }
 
   choosePicture() {
+    this.closeMenu();
+    this.photoLoading = true;
     navigator.camera.getPicture(this.cameraSuccess, this.cameraError, {
       sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
       destinationType: navigator.camera.DestinationType.DATA_URL
     });
+
   }
 
   cameraSuccess = (imageData) => {
     this.zone.run(() => {
       this.user.img = 'data:image/jpeg;base64,' + imageData;
-      this.closeMenu();
+      this.photoLoading = false;
     })
-  }
+  };
 
-  cameraError(err) {
-    console.log("err " + err.message);
-  }
+  cameraError = (err) => {
+    this.zone.run(() => {
+      this.photoLoading = false;
+    });
+    console.log("camera err " + err.message);
+  };
 
   submitUser() {
     let profileLoader = new ProfileInfo();

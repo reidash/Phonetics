@@ -1,0 +1,36 @@
+{
+    "lessons": [
+        {
+            "id": 11,
+            "name": "Ut-At Distinction",
+            "description": "A list of vocabulary words designed to help you distinguish between A and U sounds in the middle of words",
+            "path": "assets/screenUnits/Mandarin/UtAt/"
+        },
+        {
+            "id": 12,
+            "name": "Eat-It Distinction",
+            "description": "A list of vocabulary words designed to help you distinguish between Eat and It sounds",
+            "path": "assets/screenUnits/Mandarin/EatIt/",
+            "video": "assets/video/beat-bit-video-expln.mp4"
+        },
+        {
+            "id": 13,
+            "name": "Ale-Ile Distinction",
+            "description": "A list of vocabulary words designed to help you distinguish between -ale and -ile sounds",
+            "path": "assets/screenUnits/Mandarin/AleIle/"
+        },
+        {
+            "id": 14,
+            "name": "S-Th Distinction",
+            "description": "A list of vocabulary words designed to help you distinguish between S and Th sounds",
+            "path": "assets/screenUnits/Mandarin/STh/"
+        },
+        {
+            "id": 15,
+            "name": "E-Ai Distinction",
+            "description": "A list of vocabulary words designed to help you distinguish between E and Ai sounds, such as in 'smile' and 'smell'",
+            "path": "assets/screenUnits/Mandarin/EAi/",
+            "video": "assets/video/smell-smile-video-expln.mp4"
+        }
+    ]
+}

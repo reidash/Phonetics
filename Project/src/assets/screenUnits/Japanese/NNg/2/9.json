@@ -1,0 +1,11 @@
+{
+    "id": 9,
+    "word": "ping",
+    "wordOptions": [
+        "pin",
+        "ping"
+    ],
+    "audioPaths": [
+        "assets/audio/04-ping-0.m4a"
+    ]
+}

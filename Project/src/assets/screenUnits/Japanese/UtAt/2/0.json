@@ -1,0 +1,11 @@
+{
+    "id": 0,
+    "word": "tack",
+    "wordOptions": [
+        "tack",
+        "tuck"
+    ],
+    "audioPaths": [
+        "assets/audio/00-tack-0.m4a"
+    ]
+}

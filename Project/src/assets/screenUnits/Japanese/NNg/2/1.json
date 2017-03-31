@@ -1,0 +1,11 @@
+{
+    "id": 1,
+    "word": "wing",
+    "wordOptions": [
+        "win",
+        "wing"
+    ],
+    "audioPaths": [
+        "assets/audio/00-wing-0.m4a"
+    ]
+}

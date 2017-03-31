@@ -1,0 +1,11 @@
+{
+    "id": 10,
+    "word": "hash",
+    "wordOptions": [
+        "hash",
+        "hush"
+    ],
+    "audioPaths": [
+        "assets/audio/05-hash-0.m4a"
+    ]
+}

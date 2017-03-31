@@ -2,7 +2,8 @@
   <ion-header>
     <ion-toolbar>
       <ion-title>
-        <img class="menu-pic" src="{{menuPic}}" title="{{menuTitle}}" />
+        <div class="menu-pic" aria-hidden="true" [ngStyle]="{'background-image': 'url(' + menuPic + ')'}">
+        </div>
         <span class="menu-title">{{menuTitle}}</span>
       </ion-title>
     </ion-toolbar>
@@ -14,6 +15,7 @@
         {{p.title}}
       </button>
     </ion-list>
+    <a href="javascript:void(0)" role="button" class="hidden" (click)="statsTesting()">Statistics Testing</a>
   </ion-content>
 
 </ion-menu>

@@ -23,6 +23,7 @@ export class PracticeMode {
     protected currIndex: number = 0; //index of currently displayed screenUnit
     protected screenUnits: screenUnit[] = []; // Array of all screen units in the session
     protected isDynamic: boolean = false;
+    protected correctCount: number = 0;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform) {
         this.currUnit = {
@@ -36,7 +37,7 @@ export class PracticeMode {
         this.title = navParams.get('title');
         this.phonemeId = navParams.get('phonemeId');
         this.isDynamic = navParams.get('isDynamic') ? true : false;
-        
+
         let tempUnits: Promise<screenUnit>[] = navParams.get('screenUnits');
 
         Promise.all(tempUnits).then((values) => {
@@ -57,6 +58,7 @@ export class PracticeMode {
         // Logic for getting a correct answer
         // Add statistics tracking here later
         this.currState = this.state.right;
+        this.correctCount++;
         Statistics.GetStatistics().Record(this.currUnit, true);
     };
 
@@ -115,5 +117,28 @@ export class PracticeMode {
             this.currIndex = ind;
             this.initUnit();
         }, timeout);
-    };
+    }
+
+    getAccuracy() {
+        let denom : number = this.currIndex + 1;
+        
+        if(this.currState === this.state.init) {
+            denom--;
+        }
+
+        if(denom <= 0) {
+            denom = 1;
+        }
+
+        if(denom > this.screenUnits.length) {
+            denom = this.screenUnits.length;
+        }
+
+        let acc = (this.correctCount / denom) * 100;
+        if(acc > 100) {
+            acc = 100;
+        }
+
+        return Math.trunc(acc);
+    }
 }
