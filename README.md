@@ -1,5 +1,8 @@
 # Phonetics
 
+## About
+This accent-reduction app was built as part of CS 446 (Software Architecture and Design) at the University of Waterloo during the Winter 2017 term. It is now available under an MIT license. The authors likely will not be maintaining this project anymore.
+
 ## Project Dependencies
 
 ### For Cordova
